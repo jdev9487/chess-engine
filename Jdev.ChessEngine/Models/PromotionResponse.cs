@@ -4,11 +4,11 @@ using Enums;
 
 public class PromotionResponse(MoveRequest request, bool relocation) : MoveResponse(null)
 {
-    public PromotionRequest CreateSubsequentRequest(PromotionType promotionType) =>
+    public PromotionRequest CreateSubsequentRequest(PieceType pieceType) =>
         new()
         {
             Relocation = relocation,
-            PromotionType = promotionType,
+            PieceType = pieceType,
             Destination = request.Destination,
             PieceToMove = request.PieceToMove
         };

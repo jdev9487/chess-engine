@@ -5,6 +5,7 @@ using Models;
 
 public interface IQuery
 {
+    PieceGroup PieceGroup { get; }
     bool IsInCheck(Colour colour);
     bool IsDestinationIntrinsic(Square destination, IPiece pieceToMove);
     bool DoesRequestUncheckMover(Square proposedDestination, IPiece pieceToMove);

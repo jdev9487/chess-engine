@@ -4,7 +4,7 @@ using Enums;
 using Interfaces;
 using Models;
 
-public class Rook : BasePiece, IPiece
+public class Knight : BasePiece, IPiece
 {
     public IEnumerable<MoveProposition> GetIntrinsicRelocations()
     {
@@ -20,8 +20,4 @@ public class Rook : BasePiece, IPiece
     {
         throw new NotImplementedException();
     }
-
-    public Square CastlingLocation { get; init; } = default!;
-
-    private bool HasMoved { get; set; }
 }

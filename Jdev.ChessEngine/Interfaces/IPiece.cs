@@ -5,7 +5,7 @@ using Models;
 
 public interface IPiece
 {
-    Colour Colour { get; }
+    Colour Colour { get; init; }
     IEnumerable<MoveProposition> GetIntrinsicRelocations();
     IEnumerable<MoveProposition> GetIntrinsicCaptures();
     Square Position { get; set; }

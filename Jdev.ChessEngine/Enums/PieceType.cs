@@ -1,9 +1,11 @@
 namespace Jdev.ChessEngine.Enums;
 
-public enum PromotionType
+public enum PieceType
 {
+    King,
     Queen,
     Rook,
     Bishop,
-    Knight
+    Knight,
+    Pawn
 }

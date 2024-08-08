@@ -1,12 +1,10 @@
 namespace Jdev.ChessEngine.Pieces;
 
-using Enums;
 using Interfaces;
 using Models;
 
 public class King : BasePiece, IPiece
 {
-    public Colour Colour { get; init; }
     public IEnumerable<MoveProposition> GetIntrinsicRelocations()
     {
         throw new NotImplementedException();
@@ -20,6 +18,11 @@ public class King : BasePiece, IPiece
     public List<Square> GetPotentialBlocks(Square destination)
     {
         throw new NotImplementedException();
+    }
+
+    public Rook GetCastlingRook(Square destination)
+    {
+        return KingsideRook;
     }
 
     private bool HasMoved { get; set; }

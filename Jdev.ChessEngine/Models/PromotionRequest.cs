@@ -4,6 +4,6 @@ using Enums;
 
 public class PromotionRequest : MoveRequest
 {
-    public PromotionType PromotionType { get; init; }
+    public PieceType PieceType { get; init; }
     public bool Relocation { get; init; }
 }
