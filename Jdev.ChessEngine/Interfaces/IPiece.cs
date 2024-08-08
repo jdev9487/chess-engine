@@ -1,10 +1,13 @@
 namespace Jdev.ChessEngine.Interfaces;
 
+using Enums;
 using Models;
 
 public interface IPiece
 {
-    IEnumerable<MoveProposition> GetIntrinsicMoves();
+    Colour Colour { get; }
+    IEnumerable<MoveProposition> GetIntrinsicRelocations();
+    IEnumerable<MoveProposition> GetIntrinsicCaptures();
     Square Position { get; set; }
     List<Square> GetPotentialBlocks(Square destination);
     bool IsAlive { get; set; }

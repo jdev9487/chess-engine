@@ -1,11 +1,18 @@
 namespace Jdev.ChessEngine.Pieces;
 
+using Enums;
 using Interfaces;
 using Models;
 
 public class Rook : BasePiece, IPiece
 {
-    public IEnumerable<MoveProposition> GetIntrinsicMoves()
+    public Colour Colour { get; set; }
+    public IEnumerable<MoveProposition> GetIntrinsicRelocations()
+    {
+        throw new NotImplementedException();
+    }
+
+    public IEnumerable<MoveProposition> GetIntrinsicCaptures()
     {
         throw new NotImplementedException();
     }

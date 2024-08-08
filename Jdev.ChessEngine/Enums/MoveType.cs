@@ -2,8 +2,7 @@ namespace Jdev.ChessEngine.Enums;
 
 public enum MoveType
 {
-    Relocation,
-    Capture,
+    Standard,
     Castle,
     Promotion
 }
