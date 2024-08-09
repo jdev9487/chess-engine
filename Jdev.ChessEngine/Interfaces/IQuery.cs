@@ -14,5 +14,5 @@ public interface IQuery
     bool IsPieceBlockedForCapture(Square destination, IPiece pieceToMove);
     bool IsPieceBlockedForRelocation(Square destination, IPiece pieceToMove);
     MoveType GetMoveType(Square destination, IPiece pieceToMove);
-    IPiece PieceAt(Square location);
+    IPiece? PieceAt(Square location);
 }

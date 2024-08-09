@@ -15,7 +15,8 @@ public class Query(PieceGroup pieceGroup) : IQuery
 
     public bool IsDestinationIntrinsic(Square destination, IPiece pieceToMove)
     {
-        return true;
+        var intrinsicMoves = pieceToMove.GetIntrinsicRelocations().Concat(pieceToMove.GetIntrinsicCaptures()).ToArray();
+        return intrinsicMoves.Select(mp => mp.Target).Contains(destination);
     }
 
     public bool DoesRequestUncheckMover(Square proposedDestination, IPiece pieceToMove)
@@ -48,7 +49,7 @@ public class Query(PieceGroup pieceGroup) : IQuery
         return MoveType.Standard;
     }
 
-    public IPiece PieceAt(Square location)
+    public IPiece? PieceAt(Square location)
     {
         return pieceGroup.PieceAt(location.File, location.Rank);
     }
