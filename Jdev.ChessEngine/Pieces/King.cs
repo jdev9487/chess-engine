@@ -26,6 +26,6 @@ public class King : BasePiece, IPiece
     }
 
     private bool HasMoved { get; set; }
-    private Rook KingsideRook { get; init; } = default!;
-    private Rook QueensideRook { get; init; } = default!;
+    public Rook KingsideRook { private get; init; } = default!;
+    public Rook QueensideRook { private get; init; } = default!;
 }

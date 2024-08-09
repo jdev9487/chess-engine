@@ -1,9 +1,8 @@
 namespace Jdev.ChessEngine.Pieces;
 
-using System.IO.IsolatedStorage;
 using Enums;
-using Interfaces;
 using Models;
+using Interfaces;
 
 public class Pawn : BasePiece, IPiece
 {
