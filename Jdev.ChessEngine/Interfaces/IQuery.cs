@@ -15,4 +15,5 @@ public interface IQuery
     bool IsPieceBlockedForRelocation(Square destination, IPiece pieceToMove);
     MoveType GetMoveType(Square destination, IPiece pieceToMove);
     IPiece? PieceAt(Square location);
+    IPiece? PieceAt(File file, Rank rank);
 }

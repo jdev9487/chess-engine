@@ -12,7 +12,7 @@ public class Relocations : Base
     [SetUp]
     public void RelocationsSetUp()
     {
-        _pieceToMove = Legislator.PieceGroup.PieceAt(File.E, Rank.Two)!;
+        _pieceToMove = Query.PieceAt(File.E, Rank.Two)!;
         Legislator.EnactMove(new MoveRequest
         {
             PieceToMove = _pieceToMove,
@@ -23,12 +23,12 @@ public class Relocations : Base
     [Test]
     public void E2ShouldBeFree()
     {
-        Assert.That(Legislator.PieceGroup.PieceAt(File.E, Rank.Two), Is.Null);
+        Assert.That(Query.PieceAt(File.E, Rank.Two), Is.Null);
     }
     
     [Test]
     public void E4ShouldBeOccupiedByPieceThatWasMoved()
     {
-        Assert.That(Legislator.PieceGroup.PieceAt(File.E, Rank.Four), Is.SameAs(_pieceToMove));
+        Assert.That(Query.PieceAt(File.E, Rank.Four), Is.SameAs(_pieceToMove));
     }
 }

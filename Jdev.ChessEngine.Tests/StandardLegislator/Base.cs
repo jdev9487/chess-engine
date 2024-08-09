@@ -6,6 +6,7 @@ using Interfaces;
 public class Base
 {
     private protected ILegislator Legislator = default!;
+    private protected IQuery Query = default!;
     
     [SetUp]
     public void SetUp()
@@ -14,5 +15,6 @@ public class Base
         var legislation = legFac.Create();
         
         Legislator = legislation.Legislator;
+        Query = legislation.Query;
     }
 }

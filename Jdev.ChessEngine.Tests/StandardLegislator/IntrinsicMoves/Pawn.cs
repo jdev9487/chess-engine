@@ -9,7 +9,7 @@ public class Pawn : Base
     [Test]
     public void WhitePawnShouldMoveForwardOneFromStart()
     {
-        var pawnToMove = Legislator.PieceGroup.PieceAt(File.A, Rank.Two)!;
+        var pawnToMove = Query.PieceAt(File.A, Rank.Two)!;
         Legislator.EnactMove(new MoveRequest
         {
             PieceToMove = pawnToMove,
@@ -22,7 +22,7 @@ public class Pawn : Base
     [Test]
     public void WhitePawnShouldMoveForwardTwoFromStart()
     {
-        var pawnToMove = Legislator.PieceGroup.PieceAt(File.A, Rank.Two)!;
+        var pawnToMove = Query.PieceAt(File.A, Rank.Two)!;
         Legislator.EnactMove(new MoveRequest
         {
             PieceToMove = pawnToMove,
@@ -35,7 +35,7 @@ public class Pawn : Base
     [Test]
     public void WhitePawnShouldNotMoveForwardThreeFromStart()
     {
-        var pawnToMove = Legislator.PieceGroup.PieceAt(File.A, Rank.Two)!;
+        var pawnToMove = Query.PieceAt(File.A, Rank.Two)!;
         Legislator.EnactMove(new MoveRequest
         {
             PieceToMove = pawnToMove,

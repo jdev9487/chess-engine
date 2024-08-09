@@ -12,9 +12,9 @@ public class Captures : Base
     [SetUp]
     public void CapturesSetUp()
     {
-        Legislator.PieceGroup.PieceAt(File.E, Rank.Two)!.Position = Square.At(File.E, Rank.Three);
-        _pieceToCapture = Legislator.PieceGroup.PieceAt(File.D, Rank.One)!;
-        _pieceToBeCaptured = Legislator.PieceGroup.PieceAt(File.H, Rank.Seven)!;
+        Query.PieceAt(File.E, Rank.Two)!.Position = Square.At(File.E, Rank.Three);
+        _pieceToCapture = Query.PieceAt(File.D, Rank.One)!;
+        _pieceToBeCaptured = Query.PieceAt(File.H, Rank.Seven)!;
         _pieceToBeCaptured.Position = Square.At(File.H, Rank.Five);
         
         Legislator.EnactMove(new MoveRequest
@@ -27,18 +27,18 @@ public class Captures : Base
     [Test]
     public void D1ShouldBeFree()
     {
-        Assert.That(Legislator.PieceGroup.PieceAt(File.D, Rank.One), Is.Null);
+        Assert.That(Query.PieceAt(File.D, Rank.One), Is.Null);
     }
 
     [Test]
     public void H5ShouldNotBeRook()
     {
-        Assert.That(Legislator.PieceGroup.PieceAt(File.H, Rank.Five), Is.Not.SameAs(_pieceToBeCaptured));
+        Assert.That(Query.PieceAt(File.H, Rank.Five), Is.Not.SameAs(_pieceToBeCaptured));
     }
 
     [Test]
     public void H5ShouldBeQueen()
     {
-        Assert.That(Legislator.PieceGroup.PieceAt(File.H, Rank.Five), Is.SameAs(_pieceToCapture));
+        Assert.That(Query.PieceAt(File.H, Rank.Five), Is.SameAs(_pieceToCapture));
     }
 }

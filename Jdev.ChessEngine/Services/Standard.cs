@@ -7,8 +7,6 @@ using Pieces;
 
 public class Standard(IQuery query, IWorker worker) : ILegislator
 {
-    public PieceGroup PieceGroup => query.PieceGroup;
-
     public MoveResponse EnactMove(MoveRequest request)
     {
         if (query.IsInCheck(request.PieceToMove.Colour))
