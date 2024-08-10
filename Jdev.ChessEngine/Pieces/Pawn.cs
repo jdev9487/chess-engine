@@ -2,11 +2,10 @@ namespace Jdev.ChessEngine.Pieces;
 
 using Enums;
 using Models;
-using Interfaces;
 
-public class Pawn : BasePiece, IPiece
+public class Pawn : BasePiece
 {
-    public IEnumerable<MoveProposition> GetIntrinsicRelocations()
+    public override IEnumerable<MoveProposition> GetIntrinsicRelocations()
     {
         return IsOnPenultimateRank
             ? [new MoveProposition { Target = GetStandardForwardRelocate, SubsequentMove = MoveType.Promotion }]
@@ -19,12 +18,12 @@ public class Pawn : BasePiece, IPiece
                 ];
     }
 
-    public IEnumerable<MoveProposition> GetIntrinsicCaptures()
+    public override IEnumerable<MoveProposition> GetIntrinsicCaptures()
     {
         return Array.Empty<MoveProposition>();
     }
 
-    public List<Square> GetPotentialBlocks(Square destination)
+    public override List<Square> GetPotentialBlocks(Square destination)
     {
         throw new NotImplementedException();
     }

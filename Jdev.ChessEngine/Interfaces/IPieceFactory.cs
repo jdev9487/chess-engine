@@ -6,5 +6,7 @@ using Pieces;
 
 public interface IPieceFactory
 {
-    IPiece Create(PieceType pieceType, Square location, Colour colour, Square? castlingLocation = null, Rook? queenside = null, Rook? kingside = null);
+    T Create<T>(Square location, Colour colour) where T : BasePiece, new();
+    King CreateKing(Square location, Colour colour, Rook queenside, Rook kingside);
+    Rook CreateRook(Square location, Colour colour, Square castlingLocation);
 }

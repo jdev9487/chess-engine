@@ -3,6 +3,7 @@ namespace Jdev.ChessEngine.Services;
 using Enums;
 using Interfaces;
 using Models;
+using Pieces;
 
 public class Query(PieceGroup pieceGroup) : IQuery
 {
@@ -13,18 +14,18 @@ public class Query(PieceGroup pieceGroup) : IQuery
         return false;
     }
 
-    public bool IsDestinationIntrinsic(Square destination, IPiece pieceToMove)
+    public bool IsDestinationIntrinsic(Square destination, BasePiece pieceToMove)
     {
         var intrinsicMoves = pieceToMove.GetIntrinsicRelocations().Concat(pieceToMove.GetIntrinsicCaptures()).ToArray();
         return intrinsicMoves.Select(mp => mp.Target).Contains(destination);
     }
 
-    public bool DoesRequestUncheckMover(Square proposedDestination, IPiece pieceToMove)
+    public bool DoesRequestUncheckMover(Square proposedDestination, BasePiece pieceToMove)
     {
         return false;
     }
 
-    public bool DoesRequestPlaceMoverInCheck(Square proposedDestination, IPiece pieceToMove)
+    public bool DoesRequestPlaceMoverInCheck(Square proposedDestination, BasePiece pieceToMove)
     {
         return false;
     }
@@ -34,27 +35,27 @@ public class Query(PieceGroup pieceGroup) : IQuery
         return pieceGroup.Pieces.Any(p => p.Position == destination);
     }
 
-    public bool IsPieceBlockedForCapture(Square destination, IPiece pieceToMove)
+    public bool IsPieceBlockedForCapture(Square destination, BasePiece pieceToMove)
     {
         return false;
     }
 
-    public bool IsPieceBlockedForRelocation(Square destination, IPiece pieceToMove)
+    public bool IsPieceBlockedForRelocation(Square destination, BasePiece pieceToMove)
     {
         return false;
     }
 
-    public MoveType GetMoveType(Square destination, IPiece pieceToMove)
+    public MoveType GetMoveType(Square destination, BasePiece pieceToMove)
     {
         return MoveType.Standard;
     }
 
-    public IPiece? PieceAt(Square location)
+    public BasePiece? PieceAt(Square location)
     {
         return pieceGroup.PieceAt(location.File, location.Rank);
     }
     
-    public IPiece? PieceAt(File file, Rank rank)
+    public BasePiece? PieceAt(File file, Rank rank)
     {
         return pieceGroup.PieceAt(file, rank);
     }

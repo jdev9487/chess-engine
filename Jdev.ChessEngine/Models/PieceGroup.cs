@@ -1,11 +1,11 @@
 namespace Jdev.ChessEngine.Models;
 
 using Enums;
-using Interfaces;
+using Pieces;
 
 public class PieceGroup
 {
-    public IList<IPiece> Pieces { get; init; } = default!;
+    public IList<BasePiece> Pieces { get; init; } = default!;
 
-    public IPiece? PieceAt(File file, Rank rank) => Pieces.SingleOrDefault(p => p.Position == Square.At(file, rank));
+    public BasePiece? PieceAt(File file, Rank rank) => Pieces.SingleOrDefault(p => p.Position == Square.At(file, rank));
 }

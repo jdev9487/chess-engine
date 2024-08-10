@@ -1,9 +1,9 @@
 namespace Jdev.ChessEngine.Models;
 
-using Interfaces;
+using Pieces;
 
 public class MoveRequest
 {
-    public IPiece PieceToMove { get; init; } = default!;
+    public BasePiece PieceToMove { get; init; } = default!;
     public Square Destination { get; init; } = default!;
 }

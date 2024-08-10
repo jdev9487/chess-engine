@@ -1,22 +1,20 @@
 namespace Jdev.ChessEngine.Pieces;
 
-using Enums;
-using Interfaces;
 using Models;
 
-public class Bishop : BasePiece, IPiece
+public class Bishop : BasePiece
 {
-    public IEnumerable<MoveProposition> GetIntrinsicRelocations()
+    public override IEnumerable<MoveProposition> GetIntrinsicRelocations()
     {
         throw new NotImplementedException();
     }
 
-    public IEnumerable<MoveProposition> GetIntrinsicCaptures()
+    public override IEnumerable<MoveProposition> GetIntrinsicCaptures()
     {
         throw new NotImplementedException();
     }
 
-    public List<Square> GetPotentialBlocks(Square destination)
+    public override List<Square> GetPotentialBlocks(Square destination)
     {
         throw new NotImplementedException();
     }

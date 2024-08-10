@@ -7,18 +7,18 @@ using Pieces;
 
 public class Worker(PieceGroup pieceGroup, IPieceFactory pieceFactory) : IWorker
 {
-    public void KillPiece(IPiece piece)
+    public void KillPiece(BasePiece piece)
     {
         pieceGroup.Pieces.Remove(piece);
     }
 
-    public void SpawnPiece(PieceType pieceType, Square location, Colour colour)
+    public void SpawnPiece<T>(Square location, Colour colour) where T : BasePiece, new()
     {
-        var spawnedPiece = pieceFactory.Create(pieceType, location, colour);
+        var spawnedPiece = pieceFactory.Create<T>(location, colour);
         pieceGroup.Pieces.Add(spawnedPiece);
     }
 
-    public void RelocatePiece(IPiece piece, Square destination)
+    public void RelocatePiece(BasePiece piece, Square destination)
     {
         piece.Position = destination;
     }

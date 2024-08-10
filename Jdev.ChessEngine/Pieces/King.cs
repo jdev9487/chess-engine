@@ -1,21 +1,16 @@
 namespace Jdev.ChessEngine.Pieces;
 
-using Interfaces;
+using Enums;
 using Models;
 
-public class King : BasePiece, IPiece
+public class King : BasePiece
 {
-    public IEnumerable<MoveProposition> GetIntrinsicRelocations()
-    {
-        throw new NotImplementedException();
-    }
+    public override IEnumerable<MoveProposition> GetIntrinsicRelocations() =>
+        GetMoves().Select(s => new MoveProposition { Target = s, SubsequentMove = MoveType.Standard });
 
-    public IEnumerable<MoveProposition> GetIntrinsicCaptures()
-    {
-        throw new NotImplementedException();
-    }
+    public override IEnumerable<MoveProposition> GetIntrinsicCaptures() => GetIntrinsicRelocations();
 
-    public List<Square> GetPotentialBlocks(Square destination)
+    public override List<Square> GetPotentialBlocks(Square destination)
     {
         throw new NotImplementedException();
     }
@@ -25,7 +20,12 @@ public class King : BasePiece, IPiece
         return KingsideRook;
     }
 
-    private bool HasMoved { get; set; }
     public Rook KingsideRook { private get; init; } = default!;
     public Rook QueensideRook { private get; init; } = default!;
+    
+    private IEnumerable<Square> GetMoves() =>
+        Enumerable.Range(FileCoord.Dec, FileCoord.Inc - FileCoord.Dec + 1)
+            .SelectMany(i => Enumerable.Range(RankCoord.Dec, RankCoord.Inc - RankCoord.Dec + 1)
+                .Select(j => Square.At((File)i, (Rank)j)))
+            .Where(s => s != Position);
 }

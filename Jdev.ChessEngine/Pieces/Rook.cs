@@ -2,11 +2,10 @@ namespace Jdev.ChessEngine.Pieces;
 
 using Enums;
 using Models;
-using Interfaces;
 
-public class Rook : BasePiece, IPiece
+public class Rook : BasePiece
 {
-    public IEnumerable<MoveProposition> GetIntrinsicRelocations()
+    public override IEnumerable<MoveProposition> GetIntrinsicRelocations()
     {
         var availableRankSquares = Enum.GetValues<Rank>()
             .Where(r => r != Position.Rank)
@@ -19,14 +18,12 @@ public class Rook : BasePiece, IPiece
         return availableFileSquares.Concat(availableRankSquares).AsEnumerable();
     }
 
-    public IEnumerable<MoveProposition> GetIntrinsicCaptures() => GetIntrinsicRelocations();
+    public override IEnumerable<MoveProposition> GetIntrinsicCaptures() => GetIntrinsicRelocations();
 
-    public List<Square> GetPotentialBlocks(Square destination)
+    public override List<Square> GetPotentialBlocks(Square destination)
     {
         throw new NotImplementedException();
     }
 
     public Square CastlingLocation { get; init; } = default!;
-
-    private bool HasMoved { get; set; }
 }

@@ -28,7 +28,7 @@ public class Standard(IQuery query, IWorker worker) : ILegislator
             switch (query.GetMoveType(request.Destination, request.PieceToMove))
             {
                 case MoveType.Standard:
-                    worker.KillPiece(query.PieceAt(request.Destination));
+                    worker.KillPiece(query.PieceAt(request.Destination)!);
                     worker.RelocatePiece(request.PieceToMove, request.Destination);
                     break;
                 case MoveType.Promotion:
@@ -60,12 +60,12 @@ public class Standard(IQuery query, IWorker worker) : ILegislator
         return new MoveResponse(null);
     }
 
-    public MoveResponse Promote(PromotionRequest request)
+    public MoveResponse Promote<T>(PromotionRequest<T> request) where T : BasePiece, new()
     {
         if (request.Relocation)
             worker.KillPiece(query.PieceAt(request.Destination));
         worker.KillPiece(request.PieceToMove);
-        worker.SpawnPiece(request.PieceType, request.Destination, request.PieceToMove.Colour);
+        worker.SpawnPiece<T>(request.Destination, request.PieceToMove.Colour);
         
         return new MoveResponse(null);
     }
