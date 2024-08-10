@@ -1,17 +1,17 @@
-namespace Jdev.ChessEngine.Tests.Pieces.King.Intrinsic;
+namespace Jdev.ChessEngine.Tests.Pieces.Intrinsic.King;
 
 using Enums;
 using Models;
 
 [TestFixture]
-public class NotOnBorder : Base
+public class NotOnBorder : KingBase
 {
     private Square[] _intrinsic = default!;
     
     [SetUp]
     public void NotOnBorderSetUp()
     {
-        King.Position = Square.At(File.D, Rank.Four);
+        Piece.Position = Square.At(File.D, Rank.Four);
         _intrinsic = Act();
     }
     

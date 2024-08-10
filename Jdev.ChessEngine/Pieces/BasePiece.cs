@@ -7,7 +7,7 @@ public abstract class BasePiece
 {
     public abstract IEnumerable<MoveProposition> GetIntrinsicRelocations();
     public abstract IEnumerable<MoveProposition> GetIntrinsicCaptures();
-    public abstract List<Square> GetPotentialBlocks(Square destination);
+    public abstract IEnumerable<Square> GetPotentialBlocks(Square destination);
     
     private Square _position = default!;
     public Colour Colour { get; init; }

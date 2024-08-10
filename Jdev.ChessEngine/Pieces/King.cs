@@ -10,10 +10,7 @@ public class King : BasePiece
 
     public override IEnumerable<MoveProposition> GetIntrinsicCaptures() => GetIntrinsicRelocations();
 
-    public override List<Square> GetPotentialBlocks(Square destination)
-    {
-        throw new NotImplementedException();
-    }
+    public override IEnumerable<Square> GetPotentialBlocks(Square destination) => GetMoves();
 
     public Rook GetCastlingRook(Square destination)
     {

@@ -26,4 +26,8 @@
       <ProjectReference Include="..\Jdev.ChessEngine\Jdev.ChessEngine.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Pieces\Intrinsic\Queen\" />
+    </ItemGroup>
+
 </Project>

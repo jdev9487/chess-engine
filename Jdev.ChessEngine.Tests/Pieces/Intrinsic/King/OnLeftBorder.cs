@@ -1,26 +1,26 @@
-namespace Jdev.ChessEngine.Tests.Pieces.King.Intrinsic;
+namespace Jdev.ChessEngine.Tests.Pieces.Intrinsic.King;
 
 using Enums;
 using Models;
 
 [TestFixture]
-public class OnBottomBorder : Base
+public class OnLeftBorder : KingBase
 {
     private Square[] _intrinsic = default!;
     
     [SetUp]
     public void NotOnBorderSetUp()
     {
-        King.Position = Square.At(File.E, Rank.One);
+        Piece.Position = Square.At(File.A, Rank.Four);
         _intrinsic = Act();
     }
     
     [Test]
-    [TestCase(File.D, Rank.One)]
-    [TestCase(File.D, Rank.Two)]
-    [TestCase(File.E, Rank.Two)]
-    [TestCase(File.F, Rank.Two)]
-    [TestCase(File.F, Rank.One)]
+    [TestCase(File.B, Rank.Three)]
+    [TestCase(File.B, Rank.Four)]
+    [TestCase(File.B, Rank.Five)]
+    [TestCase(File.A, Rank.Three)]
+    [TestCase(File.A, Rank.Five)]
     public void ShouldContainSquares(File file, Rank rank)
     {
         Assert.That(_intrinsic, Contains.Item(Square.At(file, rank)));
