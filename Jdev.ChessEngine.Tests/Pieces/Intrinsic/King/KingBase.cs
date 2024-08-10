@@ -4,9 +4,5 @@ using ChessEngine.Pieces;
 
 public class KingBase : IntrinsicBase
 {
-    [SetUp]
-    public void KingBaseSetUp()
-    {
-        Piece = new King();
-    }
+    [SetUp] public void KingBaseSetUp() => Piece = new King();
 }

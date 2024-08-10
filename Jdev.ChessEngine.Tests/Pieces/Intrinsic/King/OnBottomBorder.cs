@@ -6,13 +6,11 @@ using Models;
 [TestFixture]
 public class OnBottomBorder : KingBase
 {
-    private Square[] _intrinsic = default!;
-    
     [SetUp]
     public void NotOnBorderSetUp()
     {
         Piece.Position = Square.At(File.E, Rank.One);
-        _intrinsic = Act();
+        Act();
     }
     
     [Test]
@@ -21,14 +19,8 @@ public class OnBottomBorder : KingBase
     [TestCase(File.E, Rank.Two)]
     [TestCase(File.F, Rank.Two)]
     [TestCase(File.F, Rank.One)]
-    public void ShouldContainSquares(File file, Rank rank)
-    {
-        Assert.That(_intrinsic, Contains.Item(Square.At(file, rank)));
-    }
+    public void ShouldContainSquares(File file, Rank rank) => AssertContains(file, rank);
 
     [Test]
-    public void ShouldOnlyHave5Squares()
-    {
-        Assert.That(_intrinsic, Has.Length.EqualTo(5));
-    }
+    public void ShouldOnlyHave5Squares() => AssertHasLength(5);
 }
