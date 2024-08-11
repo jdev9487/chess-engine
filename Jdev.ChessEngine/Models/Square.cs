@@ -1,15 +1,13 @@
 namespace Jdev.ChessEngine.Models;
 
-using Enums;
-
 public class Square
 {
     private static Dictionary<Rank, Dictionary<File, Square>>? _squares;
     
     private Square() { }
 
-    public Rank Rank { get; init; }
-    public File File { get; init; }
+    public Rank Rank { get; private init; } = default!;
+    public File File { get; private init; } = default!;
 
     public static Square At(File file, Rank rank)
     {
@@ -19,20 +17,20 @@ public class Square
         return _squares[rank][file];
     }
 
-    public IEnumerable<Square> GetEnclosingRank() => Enum.GetValues<File>().Select(f => At(f, Rank));
-    public IEnumerable<Square> GetEnclosingFile() => Enum.GetValues<Rank>().Select(r => At(File, r));
+    public IEnumerable<Square> GetEnclosingRank() => File.Enumerate.Select(f => At(f, Rank));
+    public IEnumerable<Square> GetEnclosingFile() => Rank.Enumerate.Select(r => At(File, r));
     public IEnumerable<Square> GetEnclosingPositiveDiagonal()
     {
-        var k = (int)Rank - (int)File;
-        return Enum.GetValues<File>()
-            .Where(file => (int)file + k is <= (int)Rank.Eight and >= (int)Rank.One)
-            .Select(file => At(file, (Rank)(int)file + k)).ToList();
+        var k = Rank.Coordinate - File.Coordinate;
+        return File.Enumerate
+            .Where(file => file.Coordinate + k <= Rank.Eight.Coordinate && file.Coordinate + k >= Rank.One.Coordinate)
+            .Select(file => At(file, Rank.At(file.Coordinate + k))).ToList();
     }
     public IEnumerable<Square> GetEnclosingNegativeDiagonal()
     {
-        var k = (int)Rank + (int)File;
-        return Enum.GetValues<File>()
-            .Where(file => k - (int)file is <= (int)File.H and >= (int)File.A)
-            .Select(file => At(file, k - (Rank)(int)file)).ToList();
+        var k = Rank.Coordinate + File.Coordinate;
+        return File.Enumerate
+            .Where(file => k - file.Coordinate <= File.H.Coordinate && k - file.Coordinate >= File.A.Coordinate)
+            .Select(file => At(file, Rank.At(k - file.Coordinate))).ToList();
     }
 }

@@ -26,4 +26,26 @@
       <ProjectReference Include="..\Jdev.ChessEngine\Jdev.ChessEngine.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Pieces\Intrinsic\King\OnA1.cs" />
+      <Compile Remove="Pieces\Intrinsic\King\OnA8.cs" />
+      <Compile Remove="Pieces\Intrinsic\King\OnTopBorder.cs" />
+      <Compile Remove="Pieces\Intrinsic\King\OnLeftBorder.cs" />
+      <Compile Remove="Pieces\Intrinsic\King\OnH8.cs" />
+      <Compile Remove="Pieces\Intrinsic\King\OnH1.cs" />
+      <Compile Remove="Pieces\Intrinsic\King\OnRightBorder.cs" />
+      <Compile Remove="Pieces\Intrinsic\Queen\**" />
+      <Compile Remove="Pieces\Intrinsic\King\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Pieces\Intrinsic\Queen\**" />
+      <EmbeddedResource Remove="Pieces\Intrinsic\King\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Pieces\Intrinsic\Queen\**" />
+      <None Remove="Pieces\Intrinsic\King\**" />
+    </ItemGroup>
+
 </Project>

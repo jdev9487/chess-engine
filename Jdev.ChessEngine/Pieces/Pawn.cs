@@ -44,8 +44,8 @@ public class Pawn : BasePiece
 
     private Square GetStandardForwardRelocate => Colour switch
     {
-        Colour.White => Square.At(Position.File, (Rank)((int)Position.Rank + 1)),
-        Colour.Black => Square.At(Position.File, (Rank)((int)Position.Rank - 1)),
+        Colour.White => Square.At(Position.File, Rank.At(Position.Rank.Coordinate + 1)),
+        Colour.Black => Square.At(Position.File, Rank.At(Position.Rank.Coordinate - 1)),
         _ => throw new ArgumentOutOfRangeException()
     };
 

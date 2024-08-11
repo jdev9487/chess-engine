@@ -7,11 +7,11 @@ public class Rook : BasePiece
 {
     public override IEnumerable<MoveProposition> GetIntrinsicRelocations()
     {
-        var availableRankSquares = Enum.GetValues<Rank>()
+        var availableRankSquares = Rank.Enumerate
             .Where(r => r != Position.Rank)
             .Select(r => new MoveProposition
                 { Target = Square.At(Position.File, r), SubsequentMove = MoveType.Standard });
-        var availableFileSquares = Enum.GetValues<File>()
+        var availableFileSquares = File.Enumerate
             .Where(f => f != Position.File)
             .Select(f => new MoveProposition
                 { Target = Square.At(f, Position.Rank), SubsequentMove = MoveType.Standard });

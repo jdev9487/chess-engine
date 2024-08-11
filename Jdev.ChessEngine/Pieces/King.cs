@@ -12,7 +12,7 @@ public class King : BasePiece
 
     public override IEnumerable<Square> GetPotentialBlocks(Square destination) => GetMoves();
 
-    public Rook GetCastlingRook(Square destination)
+    public Rook? GetCastlingRook(Square destination)
     {
         return KingsideRook;
     }
@@ -21,8 +21,8 @@ public class King : BasePiece
     public Rook QueensideRook { private get; init; } = default!;
     
     private IEnumerable<Square> GetMoves() =>
-        Enumerable.Range(FileCoord.Dec, FileCoord.Inc - FileCoord.Dec + 1)
-            .SelectMany(i => Enumerable.Range(RankCoord.Dec, RankCoord.Inc - RankCoord.Dec + 1)
-                .Select(j => Square.At((File)i, (Rank)j)))
+        Enumerable.Range(Position.File.Dec, Position.File.Inc - Position.File.Dec + 1)
+            .SelectMany(i => Enumerable.Range(Position.Rank.Dec, Position.Rank.Inc - Position.Rank.Dec + 1)
+                .Select(j => Square.At(File.At(i), Rank.At(j))))
             .Where(s => s != Position);
 }
