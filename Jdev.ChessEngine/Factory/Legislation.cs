@@ -1,6 +1,7 @@
 namespace Jdev.ChessEngine.Factory;
 
-using Interfaces;
+using ChessEngine.Legislation;
+using Services;
 
 public class Legislation
 {

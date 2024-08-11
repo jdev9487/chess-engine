@@ -1,7 +1,7 @@
 namespace Jdev.ChessEngine.Factory;
 
+using ChessEngine.Legislation;
 using Models;
-using Interfaces;
 
 public abstract class LegislatorFactory : ILegislatorFactory
 {

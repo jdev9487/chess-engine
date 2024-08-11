@@ -1,4 +1,4 @@
-namespace Jdev.ChessEngine.Enums;
+namespace Jdev.ChessEngine.Legislation;
 
 public enum LegislationType
 {

@@ -1,6 +1,6 @@
 namespace Jdev.ChessEngine.Models;
 
-using Enums;
+using Board;
 using Pieces;
 
 public class PieceGroup

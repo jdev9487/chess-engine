@@ -1,9 +1,10 @@
 namespace Jdev.ChessEngine.Services;
 
+using Board;
 using Enums;
+using Factory;
 using Models;
 using Pieces;
-using Interfaces;
 
 public class Worker(PieceGroup pieceGroup, IPieceFactory pieceFactory) : IWorker
 {

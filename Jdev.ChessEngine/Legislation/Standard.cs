@@ -1,9 +1,8 @@
-namespace Jdev.ChessEngine.Services;
+namespace Jdev.ChessEngine.Legislation;
 
 using Enums;
-using Models;
-using Interfaces;
 using Pieces;
+using Services;
 
 public class Standard(IQuery query, IWorker worker) : ILegislator
 {

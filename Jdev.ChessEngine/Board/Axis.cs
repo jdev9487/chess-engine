@@ -1,13 +1,13 @@
-namespace Jdev.ChessEngine.Models;
+namespace Jdev.ChessEngine.Board;
 
 public abstract class Axis<TAxis> where TAxis : Axis<TAxis>, new()
 {
-    private static int _minValue = 1;
-    private static int _maxValue = 8;
+    private const int MinValue = 1;
+    private const int MaxValue = 8;
     
     private static Dictionary<int, TAxis>? _axes;
 
-    public int Coordinate { get; init; }
+    public int Coordinate { get; private init; }
 
     protected static TAxis GetAxis(int value)
     {
@@ -22,8 +22,8 @@ public abstract class Axis<TAxis> where TAxis : Axis<TAxis>, new()
 
     public static TAxis At(int coordinate) => GetAxis(coordinate);
     
-    public int Inc => Coordinate == _maxValue ? Coordinate : Coordinate + 1;
-    public int Dec => Coordinate == _minValue ? Coordinate : Coordinate - 1;
+    public int Inc => Coordinate == MaxValue ? Coordinate : Coordinate + 1;
+    public int Dec => Coordinate == MinValue ? Coordinate : Coordinate - 1;
 
     protected abstract string Display { get; }
     public override string ToString() => Display;

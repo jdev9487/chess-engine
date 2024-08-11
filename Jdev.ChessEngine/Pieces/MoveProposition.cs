@@ -1,5 +1,6 @@
-namespace Jdev.ChessEngine.Models;
+namespace Jdev.ChessEngine.Pieces;
 
+using Board;
 using Enums;
 
 public class MoveProposition

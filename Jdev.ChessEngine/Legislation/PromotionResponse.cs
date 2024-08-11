@@ -1,4 +1,4 @@
-namespace Jdev.ChessEngine.Models;
+namespace Jdev.ChessEngine.Legislation;
 
 using Enums;
 using Pieces;

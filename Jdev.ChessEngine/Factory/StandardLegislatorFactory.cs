@@ -1,9 +1,10 @@
 namespace Jdev.ChessEngine.Factory;
 
+using Board;
+using ChessEngine.Legislation;
 using Enums;
 using Models;
 using Services;
-using Interfaces;
 using Pieces;
 
 public class StandardLegislatorFactory(IPieceFactory pieceFactory) : LegislatorFactory

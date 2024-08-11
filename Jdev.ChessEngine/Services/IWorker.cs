@@ -1,5 +1,6 @@
-namespace Jdev.ChessEngine.Interfaces;
+namespace Jdev.ChessEngine.Services;
 
+using Board;
 using Enums;
 using Models;
 using Pieces;

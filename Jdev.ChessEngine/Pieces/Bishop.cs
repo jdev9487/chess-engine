@@ -1,5 +1,6 @@
 namespace Jdev.ChessEngine.Pieces;
 
+using Board;
 using Models;
 
 public class Bishop : BasePiece

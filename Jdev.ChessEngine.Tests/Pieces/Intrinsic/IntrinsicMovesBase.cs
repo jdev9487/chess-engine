@@ -1,5 +1,6 @@
 namespace Jdev.ChessEngine.Tests.Pieces.Intrinsic;
 
+using Board;
 using Models;
 using Jdev.ChessEngine.Pieces;
 

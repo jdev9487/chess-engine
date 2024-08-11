@@ -1,6 +1,8 @@
-namespace Jdev.ChessEngine.Models;
+namespace Jdev.ChessEngine.Legislation;
 
+using Board;
 using Pieces;
+using Models;
 
 public class MoveRequest
 {

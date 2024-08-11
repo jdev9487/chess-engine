@@ -1,7 +1,7 @@
 namespace Jdev.ChessEngine.Factory;
 
+using Board;
 using Enums;
-using Interfaces;
 using Models;
 using Pieces;
 

@@ -1,6 +1,4 @@
-namespace Jdev.ChessEngine.Interfaces;
-
-using Factory;
+namespace Jdev.ChessEngine.Factory;
 
 public interface ILegislatorFactory
 {

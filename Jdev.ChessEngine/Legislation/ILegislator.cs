@@ -1,6 +1,5 @@
-namespace Jdev.ChessEngine.Interfaces;
+namespace Jdev.ChessEngine.Legislation;
 
-using Models;
 using Pieces;
 
 public interface ILegislator
