@@ -18,22 +18,16 @@ public class IntrinsicMovesBase<TPiece>(IntrinsicTestModel model) where TPiece :
     }
 
     [Test]
-    public void ShouldContainSquares()
-    {
+    public void ShouldContainSquares() =>
         Assert.Multiple(() =>
         {
             foreach (var location in model.ExpectedIntrinsicLocations)
             {
-                AssertContains(location);
+                Assert.That(_intrinsic, Contains.Item(location));
             }
         });
-    }
-    
-    [Test]
-    public void ShouldOnlyHaveCorrectNumberOfSquares() => ShouldHaveLength(model.ExpectedIntrinsicLocations.Count());
-    
-    private void AssertContains(Square location) =>
-        Assert.That(_intrinsic, Contains.Item(location));
 
-    private void ShouldHaveLength(int length) => Assert.That(_intrinsic, Has.Length.EqualTo(length));
+    [Test]
+    public void ShouldOnlyHaveCorrectNumberOfSquares() =>
+        Assert.That(_intrinsic, Has.Length.EqualTo(model.ExpectedIntrinsicLocations.Count()));
 }
