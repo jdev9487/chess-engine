@@ -1,7 +1,6 @@
 namespace Jdev.ChessEngine.Tests.Pieces.Intrinsic.Cases;
 
 using Board;
-using Models;
 
 public static class King
 {
