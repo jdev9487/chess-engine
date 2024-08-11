@@ -1,5 +1,7 @@
 namespace Jdev.ChessEngine.Models;
 
+using Enums;
+
 public readonly struct Coordinate(int value)
 {
     public int Value { get; } = value;
