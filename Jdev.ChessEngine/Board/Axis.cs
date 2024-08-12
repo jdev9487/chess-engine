@@ -22,7 +22,7 @@ public abstract class Axis<TAxis> where TAxis : Axis<TAxis>, new()
         axis.Coordinate + step > MaxValue || axis.Coordinate + step < MinValue
             ? null
             : GetAxis(axis.Coordinate + step);
-    public static Axis<TAxis>? operator -(Axis<TAxis> axis, int step) =>
+    public static TAxis? operator -(Axis<TAxis> axis, int step) =>
         axis.Coordinate - step < MinValue || axis.Coordinate + step < MinValue
             ? null
             : GetAxis(axis.Coordinate - step);

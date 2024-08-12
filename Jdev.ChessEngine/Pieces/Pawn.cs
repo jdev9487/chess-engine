@@ -20,7 +20,20 @@ public class Pawn : BasePiece
 
     public override IEnumerable<MoveProposition> GetIntrinsicCaptures()
     {
-        return Array.Empty<MoveProposition>();
+        var captures = new List<MoveProposition>();
+        var fileToLeft = Position.File - 1;
+        var fileToRight = Position.File + 1;
+        if (fileToLeft is not null) captures.Add(new MoveProposition
+        {
+            Target = Square.At(fileToLeft, (Colour == Colour.White ? Position.Rank + 1 : Position.Rank - 1)!),
+            SubsequentMove = IsOnPenultimateRank ? MoveType.Promotion : MoveType.Standard
+        });
+        if (fileToRight is not null) captures.Add(new MoveProposition
+        {
+            Target = Square.At(fileToRight, (Colour == Colour.White ? Position.Rank + 1 : Position.Rank - 1)!),
+            SubsequentMove = IsOnPenultimateRank ? MoveType.Promotion : MoveType.Standard
+        });
+        return captures;
     }
 
     public override List<Square> GetPotentialBlocks(Square destination)
@@ -44,8 +57,8 @@ public class Pawn : BasePiece
 
     private Square GetStandardForwardRelocate => Colour switch
     {
-        Colour.White => Square.At(Position.File, Rank.At(Position.Rank.Coordinate + 1)),
-        Colour.Black => Square.At(Position.File, Rank.At(Position.Rank.Coordinate - 1)),
+        Colour.White => Square.At(Position.File, (Position.Rank + 1)!),
+        Colour.Black => Square.At(Position.File, (Position.Rank - 1)!),
         _ => throw new ArgumentOutOfRangeException()
     };
 
