@@ -1,34 +1,51 @@
 namespace Jdev.ChessEngine.Tests.Pieces.Intrinsic;
 
 using Board;
-using Models;
 using Jdev.ChessEngine.Pieces;
 
 public class IntrinsicMovesBase<TPiece>(IntrinsicTestModel model) where TPiece : BasePiece, new()
 {
     private TPiece _piece = default!;
-    private Square[] _intrinsic = default!;
+    private Square[] _intrinsicRelocations = default!;
+    private Square[] _intrinsicCaptures = default!;
 
     [SetUp]
     public void SetUp()
     {
-        _piece = new TPiece { Position = model.StartingLocation };
-        _intrinsic = _piece.GetIntrinsicRelocations()
+        _piece = new TPiece { Position = model.StartingLocation, Colour = model.Colour.GetValueOrDefault() };
+        _intrinsicRelocations = _piece.GetIntrinsicRelocations()
+            .Select(mp => mp.Target)
+            .ToArray();
+        _intrinsicCaptures = _piece.GetIntrinsicCaptures()
             .Select(mp => mp.Target)
             .ToArray();
     }
 
     [Test]
-    public void ShouldContainSquares() =>
+    public void RelocationsShouldContainSquares() =>
         Assert.Multiple(() =>
         {
-            foreach (var location in model.ExpectedIntrinsicLocations)
+            foreach (var location in model.ExpectedIntrinsicRelocations)
             {
-                Assert.That(_intrinsic, Contains.Item(location));
+                Assert.That(_intrinsicRelocations, Contains.Item(location));
             }
         });
 
     [Test]
-    public void ShouldOnlyHaveCorrectNumberOfSquares() =>
-        Assert.That(_intrinsic, Has.Length.EqualTo(model.ExpectedIntrinsicLocations.Count()));
+    public void RelocationsShouldOnlyHaveCorrectNumberOfSquares() =>
+        Assert.That(_intrinsicRelocations, Has.Length.EqualTo(model.ExpectedIntrinsicRelocations.Count()));
+
+    [Test]
+    public void CapturesShouldContainSquares() =>
+        Assert.Multiple(() =>
+        {
+            foreach (var location in model.ExpectedIntrinsicCaptures)
+            {
+                Assert.That(_intrinsicCaptures, Contains.Item(location));
+            }
+        });
+
+    [Test]
+    public void CapturesShouldOnlyHaveCorrectNumberOfSquares() =>
+        Assert.That(_intrinsicCaptures, Has.Length.EqualTo(model.ExpectedIntrinsicCaptures.Count()));
 }

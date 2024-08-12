@@ -18,6 +18,15 @@ public abstract class Axis<TAxis> where TAxis : Axis<TAxis>, new()
         }
     }
 
+    public static TAxis? operator +(Axis<TAxis> axis, int step) =>
+        axis.Coordinate + step > MaxValue || axis.Coordinate + step < MinValue
+            ? null
+            : GetAxis(axis.Coordinate + step);
+    public static TAxis? operator -(Axis<TAxis> axis, int step) =>
+        axis.Coordinate - step < MinValue || axis.Coordinate + step < MinValue
+            ? null
+            : GetAxis(axis.Coordinate - step);
+
     public static IEnumerable<TAxis> Enumerate => Enumerable.Range(1, 8).Select(GetAxis);
 
     public static TAxis At(int coordinate) => GetAxis(coordinate);
