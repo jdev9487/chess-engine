@@ -14,6 +14,8 @@ public class King(IntrinsicTestModel model) : IntrinsicMovesBase<ChessEngine.Pie
         Intrinsic.Cases.King.OnA1,
         Intrinsic.Cases.King.OnH1,
         Intrinsic.Cases.King.OnH8,
-        Intrinsic.Cases.King.OnA8
+        Intrinsic.Cases.King.OnA8,
+        Intrinsic.Cases.King.WhiteOnHomeHasNotMoved,
+        Intrinsic.Cases.King.BlackOnHomeHasNotMoved
     ];
 }
