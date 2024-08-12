@@ -1,22 +1,18 @@
 namespace Jdev.ChessEngine.Pieces;
 
 using Board;
-using Models;
+using Enums;
 
 public class Bishop : BasePiece
 {
-    public override IEnumerable<MoveProposition> GetIntrinsicRelocations()
-    {
-        throw new NotImplementedException();
-    }
+    public override IEnumerable<MoveProposition> GetIntrinsicRelocations() =>
+        GetMoves().Select(s => new MoveProposition { Target = s, SubsequentMove = MoveType.Standard });
 
-    public override IEnumerable<MoveProposition> GetIntrinsicCaptures()
-    {
-        throw new NotImplementedException();
-    }
+    public override IEnumerable<MoveProposition> GetIntrinsicCaptures() => GetIntrinsicRelocations();
 
-    public override List<Square> GetPotentialBlocks(Square destination)
-    {
-        throw new NotImplementedException();
-    }
+    public override IEnumerable<Square> GetPotentialBlocks(Square destination) => GetMoves();
+
+    private IEnumerable<Square> GetMoves() => Position.GetEnclosingPositiveDiagonal()
+        .Concat(Position.GetEnclosingNegativeDiagonal())
+        .Where(s => s != Position);
 }

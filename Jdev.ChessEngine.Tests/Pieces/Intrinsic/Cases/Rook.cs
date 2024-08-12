@@ -2,7 +2,7 @@ namespace Jdev.ChessEngine.Tests.Pieces.Intrinsic.Cases;
 
 using Board;
 
-public static class Queen
+public static class Rook
 {
     public static readonly IntrinsicTestModel NotOnBorder = new()
         {
@@ -22,20 +22,7 @@ public static class Queen
                 Square.At(File.D, Rank.Five),
                 Square.At(File.D, Rank.Six),
                 Square.At(File.D, Rank.Seven),
-                Square.At(File.D, Rank.Eight),
-                Square.At(File.A, Rank.One),
-                Square.At(File.B, Rank.Two),
-                Square.At(File.C, Rank.Three),
-                Square.At(File.E, Rank.Five),
-                Square.At(File.F, Rank.Six),
-                Square.At(File.G, Rank.Seven),
-                Square.At(File.H, Rank.Eight),
-                Square.At(File.A, Rank.Seven),
-                Square.At(File.B, Rank.Six),
-                Square.At(File.C, Rank.Five),
-                Square.At(File.E, Rank.Three),
-                Square.At(File.F, Rank.Two),
-                Square.At(File.G, Rank.One)
+                Square.At(File.D, Rank.Eight)
             ]
         };
     public static readonly IntrinsicTestModel OnBottomBorder = new()
@@ -56,14 +43,7 @@ public static class Queen
                 Square.At(File.D, Rank.Five),
                 Square.At(File.D, Rank.Six),
                 Square.At(File.D, Rank.Seven),
-                Square.At(File.D, Rank.Eight),
-                Square.At(File.A, Rank.Four),
-                Square.At(File.B, Rank.Three),
-                Square.At(File.C, Rank.Two),
-                Square.At(File.E, Rank.Two),
-                Square.At(File.F, Rank.Three),
-                Square.At(File.G, Rank.Four),
-                Square.At(File.H, Rank.Five)
+                Square.At(File.D, Rank.Eight)
             ]
         };
     public static readonly IntrinsicTestModel OnRightBorder = new()
@@ -84,14 +64,7 @@ public static class Queen
                 Square.At(File.H, Rank.Five),
                 Square.At(File.H, Rank.Six),
                 Square.At(File.H, Rank.Seven),
-                Square.At(File.H, Rank.Eight),
-                Square.At(File.F, Rank.One),
-                Square.At(File.G, Rank.Two),
-                Square.At(File.G, Rank.Four),
-                Square.At(File.F, Rank.Five),
-                Square.At(File.E, Rank.Six),
-                Square.At(File.D, Rank.Seven),
-                Square.At(File.C, Rank.Eight)
+                Square.At(File.H, Rank.Eight)
             ]
         };
     public static readonly IntrinsicTestModel OnTopBorder = new()
@@ -112,14 +85,7 @@ public static class Queen
                 Square.At(File.D, Rank.Four),
                 Square.At(File.D, Rank.Five),
                 Square.At(File.D, Rank.Six),
-                Square.At(File.D, Rank.Seven),
-                Square.At(File.A, Rank.Five),
-                Square.At(File.B, Rank.Six),
-                Square.At(File.C, Rank.Seven),
-                Square.At(File.E, Rank.Seven),
-                Square.At(File.F, Rank.Six),
-                Square.At(File.G, Rank.Five),
-                Square.At(File.H, Rank.Four)
+                Square.At(File.D, Rank.Seven)
             ]
         };
     public static readonly IntrinsicTestModel OnLeftBorder = new()
@@ -140,14 +106,7 @@ public static class Queen
                 Square.At(File.A, Rank.Five),
                 Square.At(File.A, Rank.Six),
                 Square.At(File.A, Rank.Seven),
-                Square.At(File.A, Rank.Eight),
-                Square.At(File.C, Rank.One),
-                Square.At(File.B, Rank.Two),
-                Square.At(File.B, Rank.Four),
-                Square.At(File.C, Rank.Five),
-                Square.At(File.D, Rank.Six),
-                Square.At(File.E, Rank.Seven),
-                Square.At(File.F, Rank.Eight)
+                Square.At(File.A, Rank.Eight)
             ]
         };
     public static readonly IntrinsicTestModel OnA1 = new()
@@ -168,14 +127,7 @@ public static class Queen
                 Square.At(File.E, Rank.One),
                 Square.At(File.F, Rank.One),
                 Square.At(File.G, Rank.One),
-                Square.At(File.H, Rank.One),
-                Square.At(File.B, Rank.Two),
-                Square.At(File.C, Rank.Three),
-                Square.At(File.D, Rank.Four),
-                Square.At(File.E, Rank.Five),
-                Square.At(File.F, Rank.Six),
-                Square.At(File.G, Rank.Seven),
-                Square.At(File.H, Rank.Eight)
+                Square.At(File.H, Rank.One)
             ]
         };
     public static readonly IntrinsicTestModel OnA8 = new()
@@ -196,14 +148,7 @@ public static class Queen
                 Square.At(File.E, Rank.Eight),
                 Square.At(File.F, Rank.Eight),
                 Square.At(File.G, Rank.Eight),
-                Square.At(File.H, Rank.Eight),
-                Square.At(File.B, Rank.Seven),
-                Square.At(File.C, Rank.Six),
-                Square.At(File.D, Rank.Five),
-                Square.At(File.E, Rank.Four),
-                Square.At(File.F, Rank.Three),
-                Square.At(File.G, Rank.Two),
-                Square.At(File.H, Rank.One)
+                Square.At(File.H, Rank.Eight)
             ]
         };
     public static readonly IntrinsicTestModel OnH8 = new()
@@ -224,14 +169,7 @@ public static class Queen
                 Square.At(File.D, Rank.Eight),
                 Square.At(File.E, Rank.Eight),
                 Square.At(File.F, Rank.Eight),
-                Square.At(File.G, Rank.Eight),
-                Square.At(File.G, Rank.Seven),
-                Square.At(File.F, Rank.Six),
-                Square.At(File.E, Rank.Five),
-                Square.At(File.D, Rank.Four),
-                Square.At(File.C, Rank.Three),
-                Square.At(File.B, Rank.Two),
-                Square.At(File.A, Rank.One)
+                Square.At(File.G, Rank.Eight)
             ]
         };
     public static readonly IntrinsicTestModel OnH1 = new()
@@ -252,14 +190,7 @@ public static class Queen
                 Square.At(File.D, Rank.One),
                 Square.At(File.E, Rank.One),
                 Square.At(File.F, Rank.One),
-                Square.At(File.G, Rank.One),
-                Square.At(File.G, Rank.Two),
-                Square.At(File.F, Rank.Three),
-                Square.At(File.E, Rank.Four),
-                Square.At(File.D, Rank.Five),
-                Square.At(File.C, Rank.Six),
-                Square.At(File.B, Rank.Seven),
-                Square.At(File.A, Rank.Eight)
+                Square.At(File.G, Rank.One)
             ]
         };
 }
