@@ -43,4 +43,11 @@ public class King : BasePiece
             .SelectMany(i => Enumerable.Range(Position.Rank.Dec, Position.Rank.Inc - Position.Rank.Dec + 1)
                 .Select(j => Square.At(File.At(i), Rank.At(j))))
             .Where(s => s != Position);
+
+    public override string ToString() => Colour switch
+    {
+        Colour.White => "♔",
+        Colour.Black => "♚",
+        _ => throw new ArgumentOutOfRangeException()
+    };
 }
