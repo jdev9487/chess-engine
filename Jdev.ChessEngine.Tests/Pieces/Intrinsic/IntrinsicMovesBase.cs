@@ -12,7 +12,8 @@ public class IntrinsicMovesBase<TPiece>(IntrinsicTestModel model) where TPiece :
     [SetUp]
     public void SetUp()
     {
-        _piece = new TPiece { Position = model.StartingLocation, Colour = model.Colour.GetValueOrDefault() };
+        _piece = new TPiece
+            { Position = model.StartingLocation, Colour = model.Colour.GetValueOrDefault(), HasMoved = model.HasMoved };
         _intrinsicRelocations = _piece.GetIntrinsicRelocations()
             .Select(mp => mp.Target)
             .ToArray();

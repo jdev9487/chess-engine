@@ -1,6 +1,7 @@
 namespace Jdev.ChessEngine.Tests.Pieces.Intrinsic.Cases;
 
 using Board;
+using Enums;
 
 public static class King
 {
@@ -106,5 +107,53 @@ public static class King
                 Square.At(File.B, Rank.Seven),
                 Square.At(File.B, Rank.Eight)
             ]
+        };
+    public static readonly IntrinsicTestModel WhiteOnHomeHasNotMoved = new()
+        {
+            StartingLocation = Square.At(File.E, Rank.One),
+            HasMoved = false,
+            ExpectedIntrinsicRelocations =
+            [
+                Square.At(File.D, Rank.One),
+                Square.At(File.D, Rank.Two),
+                Square.At(File.D, Rank.Two),
+                Square.At(File.F, Rank.Two),
+                Square.At(File.F, Rank.One),
+                Square.At(File.G, Rank.One),
+                Square.At(File.C, Rank.One)
+            ],
+            ExpectedIntrinsicCaptures =
+            [
+                Square.At(File.D, Rank.One),
+                Square.At(File.D, Rank.Two),
+                Square.At(File.D, Rank.Two),
+                Square.At(File.F, Rank.Two),
+                Square.At(File.F, Rank.One)
+            ],
+            Colour = Colour.White
+        };
+    public static readonly IntrinsicTestModel BlackOnHomeHasNotMoved = new()
+        {
+            StartingLocation = Square.At(File.E, Rank.Eight),
+            HasMoved = false,
+            ExpectedIntrinsicRelocations =
+            [
+                Square.At(File.D, Rank.Eight),
+                Square.At(File.D, Rank.Seven),
+                Square.At(File.D, Rank.Seven),
+                Square.At(File.F, Rank.Seven),
+                Square.At(File.F, Rank.Eight),
+                Square.At(File.G, Rank.Eight),
+                Square.At(File.C, Rank.Eight)
+            ],
+            ExpectedIntrinsicCaptures =
+            [
+                Square.At(File.D, Rank.Eight),
+                Square.At(File.D, Rank.Seven),
+                Square.At(File.D, Rank.Seven),
+                Square.At(File.F, Rank.Seven),
+                Square.At(File.F, Rank.Eight)
+            ],
+            Colour = Colour.Black
         };
 }

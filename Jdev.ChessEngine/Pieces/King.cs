@@ -5,10 +5,28 @@ using Enums;
 
 public class King : BasePiece
 {
-    public override IEnumerable<MoveProposition> GetIntrinsicRelocations() =>
-        GetMoves().Select(s => new MoveProposition { Target = s, SubsequentMove = MoveType.Standard });
+    public override IEnumerable<MoveProposition> GetIntrinsicRelocations()
+    {
+        var standardMoves = GetMoves().Select(s => new MoveProposition
+            { Target = s, SubsequentMove = MoveType.Standard });
+        var castlingMoves = HasMoved
+            ? Array.Empty<MoveProposition>()
+            : Colour == Colour.White
+                ?
+                [
+                    new MoveProposition { Target = Square.At(File.G, Rank.One), SubsequentMove = MoveType.Castle },
+                    new MoveProposition { Target = Square.At(File.C, Rank.One), SubsequentMove = MoveType.Castle },
+                ]
+                :
+                [
+                    new MoveProposition { Target = Square.At(File.G, Rank.Eight), SubsequentMove = MoveType.Castle },
+                    new MoveProposition { Target = Square.At(File.C, Rank.Eight), SubsequentMove = MoveType.Castle },
+                ];
+        return standardMoves.Concat(castlingMoves);
+    }
 
-    public override IEnumerable<MoveProposition> GetIntrinsicCaptures() => GetIntrinsicRelocations();
+    public override IEnumerable<MoveProposition> GetIntrinsicCaptures() =>
+        GetMoves().Select(s => new MoveProposition { Target = s, SubsequentMove = MoveType.Standard });
 
     public override IEnumerable<Square> GetPotentialBlocks(Square destination) => GetMoves();
 

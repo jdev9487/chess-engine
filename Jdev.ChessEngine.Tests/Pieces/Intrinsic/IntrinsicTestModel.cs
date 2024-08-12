@@ -16,4 +16,5 @@ public class IntrinsicTestModel
     }
 
     public Colour? Colour { get; init; }
+    public bool HasMoved { get; init; } = true;
 }
