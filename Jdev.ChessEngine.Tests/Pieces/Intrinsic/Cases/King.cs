@@ -7,7 +7,7 @@ public static class King
     public static readonly IntrinsicTestModel NotOnBorder = new()
         {
             StartingLocation = Square.At(File.D, Rank.Four),
-            ExpectedIntrinsicLocations =
+            ExpectedIntrinsicRelocations =
             [
                 Square.At(File.C, Rank.Three),
                 Square.At(File.C, Rank.Four),
@@ -22,7 +22,7 @@ public static class King
     public static readonly IntrinsicTestModel OnRightBorder = new()
         {
             StartingLocation = Square.At(File.H, Rank.Four),
-            ExpectedIntrinsicLocations =
+            ExpectedIntrinsicRelocations =
             [
                 Square.At(File.G, Rank.Three),
                 Square.At(File.G, Rank.Four),
@@ -34,7 +34,7 @@ public static class King
     public static readonly IntrinsicTestModel OnLeftBorder = new()
         {
             StartingLocation = Square.At(File.A, Rank.Four),
-            ExpectedIntrinsicLocations =
+            ExpectedIntrinsicRelocations =
             [
                 Square.At(File.B, Rank.Three),
                 Square.At(File.B, Rank.Four),
@@ -46,7 +46,7 @@ public static class King
     public static readonly IntrinsicTestModel OnTopBorder = new()
         {
             StartingLocation = Square.At(File.D, Rank.Eight),
-            ExpectedIntrinsicLocations =
+            ExpectedIntrinsicRelocations =
             [
                 Square.At(File.C, Rank.Eight),
                 Square.At(File.C, Rank.Seven),
@@ -58,7 +58,7 @@ public static class King
     public static readonly IntrinsicTestModel OnBottomBorder = new()
         {
             StartingLocation = Square.At(File.D, Rank.One),
-            ExpectedIntrinsicLocations =
+            ExpectedIntrinsicRelocations =
             [
                 Square.At(File.C, Rank.One),
                 Square.At(File.C, Rank.Two),
@@ -70,7 +70,7 @@ public static class King
     public static readonly IntrinsicTestModel OnA1 = new()
         {
             StartingLocation = Square.At(File.A, Rank.One),
-            ExpectedIntrinsicLocations =
+            ExpectedIntrinsicRelocations =
             [
                 Square.At(File.A, Rank.Two),
                 Square.At(File.B, Rank.Two),
@@ -80,7 +80,7 @@ public static class King
     public static readonly IntrinsicTestModel OnH1 = new()
         {
             StartingLocation = Square.At(File.H, Rank.One),
-            ExpectedIntrinsicLocations =
+            ExpectedIntrinsicRelocations =
             [
                 Square.At(File.H, Rank.Two),
                 Square.At(File.G, Rank.Two),
@@ -90,7 +90,7 @@ public static class King
     public static readonly IntrinsicTestModel OnH8 = new()
         {
             StartingLocation = Square.At(File.H, Rank.Eight),
-            ExpectedIntrinsicLocations =
+            ExpectedIntrinsicRelocations =
             [
                 Square.At(File.H, Rank.Seven),
                 Square.At(File.G, Rank.Seven),
@@ -100,7 +100,7 @@ public static class King
     public static readonly IntrinsicTestModel OnA8 = new()
         {
             StartingLocation = Square.At(File.A, Rank.Eight),
-            ExpectedIntrinsicLocations =
+            ExpectedIntrinsicRelocations =
             [
                 Square.At(File.A, Rank.Seven),
                 Square.At(File.B, Rank.Seven),

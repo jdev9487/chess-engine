@@ -3,7 +3,6 @@ namespace Jdev.ChessEngine.Factory;
 using Board;
 using ChessEngine.Legislation;
 using Enums;
-using Models;
 using Services;
 using Pieces;
 

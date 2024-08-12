@@ -7,7 +7,7 @@ public static class Rook
     public static readonly IntrinsicTestModel NotOnBorder = new()
         {
             StartingLocation = Square.At(File.D, Rank.Four),
-            ExpectedIntrinsicLocations =
+            ExpectedIntrinsicRelocations =
             [
                 Square.At(File.A, Rank.Four),
                 Square.At(File.B, Rank.Four),
@@ -28,7 +28,7 @@ public static class Rook
     public static readonly IntrinsicTestModel OnBottomBorder = new()
         {
             StartingLocation = Square.At(File.D, Rank.One),
-            ExpectedIntrinsicLocations =
+            ExpectedIntrinsicRelocations =
             [
                 Square.At(File.A, Rank.One),
                 Square.At(File.B, Rank.One),
@@ -49,7 +49,7 @@ public static class Rook
     public static readonly IntrinsicTestModel OnRightBorder = new()
         {
             StartingLocation = Square.At(File.H, Rank.Three),
-            ExpectedIntrinsicLocations =
+            ExpectedIntrinsicRelocations =
             [
                 Square.At(File.A, Rank.Three),
                 Square.At(File.B, Rank.Three),
@@ -70,7 +70,7 @@ public static class Rook
     public static readonly IntrinsicTestModel OnTopBorder = new()
         {
             StartingLocation = Square.At(File.D, Rank.Eight),
-            ExpectedIntrinsicLocations =
+            ExpectedIntrinsicRelocations =
             [
                 Square.At(File.A, Rank.Eight),
                 Square.At(File.B, Rank.Eight),
@@ -91,7 +91,7 @@ public static class Rook
     public static readonly IntrinsicTestModel OnLeftBorder = new()
         {
             StartingLocation = Square.At(File.A, Rank.Three),
-            ExpectedIntrinsicLocations =
+            ExpectedIntrinsicRelocations =
             [
                 Square.At(File.B, Rank.Three),
                 Square.At(File.C, Rank.Three),
@@ -112,7 +112,7 @@ public static class Rook
     public static readonly IntrinsicTestModel OnA1 = new()
         {
             StartingLocation = Square.At(File.A, Rank.One),
-            ExpectedIntrinsicLocations =
+            ExpectedIntrinsicRelocations =
             [
                 Square.At(File.A, Rank.Two),
                 Square.At(File.A, Rank.Three),
@@ -133,7 +133,7 @@ public static class Rook
     public static readonly IntrinsicTestModel OnA8 = new()
         {
             StartingLocation = Square.At(File.A, Rank.Eight),
-            ExpectedIntrinsicLocations =
+            ExpectedIntrinsicRelocations =
             [
                 Square.At(File.A, Rank.One),
                 Square.At(File.A, Rank.Two),
@@ -154,7 +154,7 @@ public static class Rook
     public static readonly IntrinsicTestModel OnH8 = new()
         {
             StartingLocation = Square.At(File.H, Rank.Eight),
-            ExpectedIntrinsicLocations =
+            ExpectedIntrinsicRelocations =
             [
                 Square.At(File.H, Rank.One),
                 Square.At(File.H, Rank.Two),
@@ -175,7 +175,7 @@ public static class Rook
     public static readonly IntrinsicTestModel OnH1 = new()
         {
             StartingLocation = Square.At(File.H, Rank.One),
-            ExpectedIntrinsicLocations =
+            ExpectedIntrinsicRelocations =
             [
                 Square.At(File.H, Rank.Two),
                 Square.At(File.H, Rank.Three),

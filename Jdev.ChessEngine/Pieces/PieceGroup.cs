@@ -1,7 +1,6 @@
-namespace Jdev.ChessEngine.Models;
+namespace Jdev.ChessEngine.Pieces;
 
 using Board;
-using Pieces;
 
 public class PieceGroup
 {

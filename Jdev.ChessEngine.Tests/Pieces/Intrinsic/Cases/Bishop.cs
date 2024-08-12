@@ -7,7 +7,7 @@ public static class Bishop
     public static readonly IntrinsicTestModel NotOnBorder = new()
         {
             StartingLocation = Square.At(File.D, Rank.Four),
-            ExpectedIntrinsicLocations =
+            ExpectedIntrinsicRelocations =
             [
                 Square.At(File.A, Rank.One),
                 Square.At(File.B, Rank.Two),
@@ -27,7 +27,7 @@ public static class Bishop
     public static readonly IntrinsicTestModel OnBottomBorder = new()
         {
             StartingLocation = Square.At(File.D, Rank.One),
-            ExpectedIntrinsicLocations =
+            ExpectedIntrinsicRelocations =
             [
                 Square.At(File.A, Rank.Four),
                 Square.At(File.B, Rank.Three),
@@ -41,7 +41,7 @@ public static class Bishop
     public static readonly IntrinsicTestModel OnRightBorder = new()
         {
             StartingLocation = Square.At(File.H, Rank.Three),
-            ExpectedIntrinsicLocations =
+            ExpectedIntrinsicRelocations =
             [
                 Square.At(File.F, Rank.One),
                 Square.At(File.G, Rank.Two),
@@ -55,7 +55,7 @@ public static class Bishop
     public static readonly IntrinsicTestModel OnTopBorder = new()
         {
             StartingLocation = Square.At(File.D, Rank.Eight),
-            ExpectedIntrinsicLocations =
+            ExpectedIntrinsicRelocations =
             [
                 Square.At(File.A, Rank.Five),
                 Square.At(File.B, Rank.Six),
@@ -69,7 +69,7 @@ public static class Bishop
     public static readonly IntrinsicTestModel OnLeftBorder = new()
         {
             StartingLocation = Square.At(File.A, Rank.Three),
-            ExpectedIntrinsicLocations =
+            ExpectedIntrinsicRelocations =
             [
                 Square.At(File.C, Rank.One),
                 Square.At(File.B, Rank.Two),
@@ -83,7 +83,7 @@ public static class Bishop
     public static readonly IntrinsicTestModel OnA1 = new()
         {
             StartingLocation = Square.At(File.A, Rank.One),
-            ExpectedIntrinsicLocations =
+            ExpectedIntrinsicRelocations =
             [
                 Square.At(File.B, Rank.Two),
                 Square.At(File.C, Rank.Three),
@@ -97,7 +97,7 @@ public static class Bishop
     public static readonly IntrinsicTestModel OnA8 = new()
         {
             StartingLocation = Square.At(File.A, Rank.Eight),
-            ExpectedIntrinsicLocations =
+            ExpectedIntrinsicRelocations =
             [
                 Square.At(File.B, Rank.Seven),
                 Square.At(File.C, Rank.Six),
@@ -111,7 +111,7 @@ public static class Bishop
     public static readonly IntrinsicTestModel OnH8 = new()
         {
             StartingLocation = Square.At(File.H, Rank.Eight),
-            ExpectedIntrinsicLocations =
+            ExpectedIntrinsicRelocations =
             [
                 Square.At(File.G, Rank.Seven),
                 Square.At(File.F, Rank.Six),
@@ -125,7 +125,7 @@ public static class Bishop
     public static readonly IntrinsicTestModel OnH1 = new()
         {
             StartingLocation = Square.At(File.H, Rank.One),
-            ExpectedIntrinsicLocations =
+            ExpectedIntrinsicRelocations =
             [
                 Square.At(File.G, Rank.Two),
                 Square.At(File.F, Rank.Three),
