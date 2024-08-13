@@ -6,7 +6,7 @@ using Pieces;
 
 public class PieceFactory : IPieceFactory
 {
-    public T Create<T>(Square location, Colour colour) where T : BasePiece, new()
+    public T Create<T>(Square location, Colour colour) where T : IPiece, new()
         => new() { Position = location, Colour = colour };
 
     public Rook CreateRook(Square location, Colour colour, Square castlingLocation) => new()

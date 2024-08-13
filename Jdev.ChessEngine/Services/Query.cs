@@ -15,18 +15,18 @@ public class Query(IPieceGroup pieceGroup) : IQuery
             return checkTarget is not null && !IsPieceBlockedForCapture(checkTarget.Target, p);
         });
 
-    public bool IsDestinationIntrinsic(Square destination, BasePiece pieceToMove)
+    public bool IsDestinationIntrinsic(Square destination, IPiece pieceToMove)
     {
         var intrinsicMoves = pieceToMove.GetIntrinsicRelocations().Concat(pieceToMove.GetIntrinsicCaptures()).ToArray();
         return intrinsicMoves.Select(mp => mp.Target).Contains(destination);
     }
 
-    public bool DoesRequestUncheckMover(Square proposedDestination, BasePiece pieceToMove)
+    public bool DoesRequestUncheckMover(Square proposedDestination, IPiece pieceToMove)
     {
         return false;
     }
 
-    public bool DoesRequestPlaceMoverInCheck(Square proposedDestination, BasePiece pieceToMove)
+    public bool DoesRequestPlaceMoverInCheck(Square proposedDestination, IPiece pieceToMove)
     {
         return false;
     }
@@ -36,27 +36,27 @@ public class Query(IPieceGroup pieceGroup) : IQuery
         return pieceGroup.Pieces.Any(p => p.Position == destination);
     }
 
-    public bool IsPieceBlockedForCapture(Square destination, BasePiece pieceToMove)
+    public bool IsPieceBlockedForCapture(Square destination, IPiece pieceToMove)
     {
         return false;
     }
 
-    public bool IsPieceBlockedForRelocation(Square destination, BasePiece pieceToMove)
+    public bool IsPieceBlockedForRelocation(Square destination, IPiece pieceToMove)
     {
         return false;
     }
 
-    public MoveType GetMoveType(Square destination, BasePiece pieceToMove)
+    public MoveType GetMoveType(Square destination, IPiece pieceToMove)
     {
         return MoveType.Standard;
     }
 
-    public BasePiece? PieceAt(Square location)
+    public IPiece? PieceAt(Square location)
     {
         return pieceGroup.PieceAt(location.File, location.Rank);
     }
     
-    public BasePiece? PieceAt(File file, Rank rank)
+    public IPiece? PieceAt(File file, Rank rank)
     {
         return pieceGroup.PieceAt(file, rank);
     }

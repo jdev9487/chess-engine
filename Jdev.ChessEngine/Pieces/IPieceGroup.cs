@@ -5,7 +5,7 @@ using Enums;
 
 public interface IPieceGroup
 {
-    IList<BasePiece> Pieces { get; }
-    BasePiece? PieceAt(File file, Rank rank);
+    IList<IPiece> Pieces { get; }
+    IPiece? PieceAt(File file, Rank rank);
     public King King(Colour colour);
 }

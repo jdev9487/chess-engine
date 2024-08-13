@@ -2,8 +2,9 @@ namespace Jdev.ChessEngine.Tests.Query;
 
 using Board;
 using Enums;
-using ChessEngine.Pieces;
 using Models;
+using ChessEngine.Pieces;
+using Moq;
 
 [TestFixture]
 [TestFixtureSource(nameof(Cases))]
@@ -23,12 +24,17 @@ public class Check(CheckTestModel model) : QueryBase
     [Test]
     public void ShouldDeemKingToBeInCheckFromQueen()
     {
+        var queenMock = new Mock<IPiece>();
+        queenMock.SetupGet(x => x.Colour).Returns(model.CheckingColour);
+        queenMock
+            .Setup(x => x.GetIntrinsicCaptures())
+            .Returns(new List<MoveProposition> { new() { Target = _checkedKing.Position } });
         PieceGroupMock
             .SetupGet(x => x.Pieces)
-            .Returns(new List<BasePiece>
+            .Returns(new List<IPiece>
             {
                 _checkedKing,
-                new Queen { Colour = model.CheckingColour, Position = Square.At(File.G, Rank.Three) }
+                queenMock.Object
             });
         var actual = Query.IsInCheck(model.CheckedKingColour);
         Assert.That(actual, Is.True);

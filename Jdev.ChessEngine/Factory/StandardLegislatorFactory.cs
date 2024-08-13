@@ -18,7 +18,7 @@ public class StandardLegislatorFactory(IPieceFactory pieceFactory) : BaseLegisla
         var blackKingsideRook = pieceFactory.CreateRook(Square.At(File.H, Rank.Eight), Colour.Black, Square.At(File.F, Rank.Eight));
         var blackKing = pieceFactory.CreateKing(Square.At(File.E, Rank.Eight), Colour.Black, kingside: blackKingsideRook, queenside: blackQueensideRook);
         
-        var pieces = new List<BasePiece>
+        var pieces = new List<IPiece>
         {
             whiteQueensideRook,
             pieceFactory.Create<Knight>(Square.At(File.B, Rank.One), Colour.White),

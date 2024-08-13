@@ -6,9 +6,9 @@ using Enums;
 
 public class PieceGroup : IPieceGroup
 {
-    public IList<BasePiece> Pieces { get; init; } = default!;
+    public IList<IPiece> Pieces { get; init; } = default!;
 
-    public BasePiece? PieceAt(File file, Rank rank) => Pieces.SingleOrDefault(p => p.Position == Square.At(file, rank));
+    public IPiece? PieceAt(File file, Rank rank) => Pieces.SingleOrDefault(p => p.Position == Square.At(file, rank));
     public override string ToString()
     {
         var stringBoard = new StringBuilder();
