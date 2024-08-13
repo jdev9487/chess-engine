@@ -6,7 +6,6 @@ using Pieces;
 
 public interface IQuery
 {
-    PieceGroup PieceGroup { get; }
     bool IsInCheck(Colour colour);
     bool IsDestinationIntrinsic(Square destination, BasePiece pieceToMove);
     bool DoesRequestUncheckMover(Square proposedDestination, BasePiece pieceToMove);

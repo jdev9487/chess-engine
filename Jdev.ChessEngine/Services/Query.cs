@@ -4,14 +4,16 @@ using Board;
 using Enums;
 using Pieces;
 
-public class Query(PieceGroup pieceGroup) : IQuery
+public class Query(IPieceGroup pieceGroup) : IQuery
 {
-    public PieceGroup PieceGroup => pieceGroup;
-
-    public bool IsInCheck(Colour colour)
-    {
-        return false;
-    }
+    public bool IsInCheck(Colour colour) => pieceGroup.Pieces
+        .Where(p => p.Colour != colour)
+        .Any(p =>
+        {
+            var checkTarget = p.GetIntrinsicCaptures()
+                .SingleOrDefault(mp => mp.Target == pieceGroup.King(colour).Position);
+            return checkTarget is not null && !IsPieceBlockedForCapture(checkTarget.Target, p);
+        });
 
     public bool IsDestinationIntrinsic(Square destination, BasePiece pieceToMove)
     {

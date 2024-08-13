@@ -2,8 +2,9 @@ namespace Jdev.ChessEngine.Pieces;
 
 using Board;
 using System.Text;
+using Enums;
 
-public class PieceGroup
+public class PieceGroup : IPieceGroup
 {
     public IList<BasePiece> Pieces { get; init; } = default!;
 
@@ -21,4 +22,6 @@ public class PieceGroup
 
         return stringBoard.ToString();
     }
+
+    public King King(Colour colour) => (King)Pieces.Where(p => p is King).Single(p => p.Colour == colour);
 }
