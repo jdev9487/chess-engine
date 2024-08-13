@@ -3,7 +3,7 @@ namespace Jdev.ChessEngine.Tests.Pieces.Intrinsic;
 using Board;
 using Jdev.ChessEngine.Pieces;
 
-public class IntrinsicMovesBase<TPiece>(IntrinsicTestModel model) where TPiece : BasePiece, new()
+public class IntrinsicMovesBase<TPiece>(IntrinsicTestModel model) where TPiece : IPiece, new()
 {
     private TPiece _piece = default!;
     private Square[] _intrinsicRelocations = default!;

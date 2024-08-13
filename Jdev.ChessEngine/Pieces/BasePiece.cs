@@ -3,7 +3,7 @@ namespace Jdev.ChessEngine.Pieces;
 using Board;
 using Enums;
 
-public abstract class BasePiece
+public abstract class BasePiece : IPiece
 {
     public abstract IEnumerable<MoveProposition> GetIntrinsicRelocations();
     public abstract IEnumerable<MoveProposition> GetIntrinsicCaptures();

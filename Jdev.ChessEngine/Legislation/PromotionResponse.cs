@@ -5,7 +5,7 @@ using Pieces;
 
 public class PromotionResponse(MoveRequest request, bool relocation) : MoveResponse(null)
 {
-    public PromotionRequest<T> CreateSubsequentRequest<T>(PieceType pieceType) where T : BasePiece, new() =>
+    public PromotionRequest<T> CreateSubsequentRequest<T>(PieceType pieceType) where T : IPiece, new() =>
         new()
         {
             Relocation = relocation,
