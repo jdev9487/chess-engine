@@ -21,14 +21,15 @@ public class Query(IPieceGroup pieceGroup) : IQuery
         return intrinsicMoves.Select(mp => mp.Target).Contains(destination);
     }
 
-    public bool DoesRequestUncheckMover(Square proposedDestination, IPiece pieceToMove)
+    public bool WouldRequestResultInCheck(Square proposedDestination, IPiece pieceToMove)
     {
-        return false;
-    }
-
-    public bool DoesRequestPlaceMoverInCheck(Square proposedDestination, IPiece pieceToMove)
-    {
-        return false;
+        var ghostPieces = pieceGroup.Pieces
+            .Where(p => p.Position != proposedDestination && p.Position != pieceToMove.Position).ToList();
+        var ghostPieceToMove = (IPiece)pieceToMove.Clone();
+        ghostPieceToMove.Position = proposedDestination;
+        ghostPieces.Add(ghostPieceToMove);
+        var ghostPieceGroup = new PieceGroup { Pieces = ghostPieces };
+        return new Query(ghostPieceGroup).IsInCheck(pieceToMove.Colour);
     }
 
     public bool IsDestinationOccupied(Square destination)

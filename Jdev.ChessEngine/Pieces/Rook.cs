@@ -24,6 +24,8 @@ public class Rook : BasePiece
     {
         throw new NotImplementedException();
     }
+    
+    public override object Clone() => CloneObject<Rook>();
 
     public Square CastlingLocation { get; init; } = default!;
 
