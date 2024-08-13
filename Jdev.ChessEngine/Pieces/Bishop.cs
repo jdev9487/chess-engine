@@ -15,4 +15,11 @@ public class Bishop : BasePiece
     private IEnumerable<Square> GetMoves() => Position.GetEnclosingPositiveDiagonal()
         .Concat(Position.GetEnclosingNegativeDiagonal())
         .Where(s => s != Position);
+
+    public override string ToString() => Colour switch
+    {
+        Colour.White => "♗",
+        Colour.Black => "♝",
+        _ => throw new ArgumentOutOfRangeException()
+    };
 }

@@ -68,4 +68,11 @@ public class Pawn : BasePiece
         Colour.Black => Square.At(Position.File, Rank.Five),
         _ => throw new ArgumentOutOfRangeException()
     };
+
+    public override string ToString() => Colour switch
+    {
+        Colour.White => "♙",
+        Colour.Black => "♟",
+        _ => throw new ArgumentOutOfRangeException()
+    };
 }

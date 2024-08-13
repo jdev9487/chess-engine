@@ -4,31 +4,31 @@ using Enums;
 using Pieces;
 using Services;
 
-public class Standard(IQuery query, IWorker worker) : ILegislator
+public class Standard(IQuery query, IWorker worker) : BaseLegislator(query, worker)
 {
-    public MoveResponse EnactMove(MoveRequest request)
+    public override MoveResponse EnactMove(MoveRequest request)
     {
-        if (query.IsInCheck(request.PieceToMove.Colour))
+        if (Query.IsInCheck(request.PieceToMove.Colour))
         {
-            if (!query.DoesRequestUncheckMover(request.Destination, request.PieceToMove))
+            if (!Query.DoesRequestUncheckMover(request.Destination, request.PieceToMove))
                 return new MoveResponse(RejectionReason.UnresolvedCheck);
         }
 
-        if (!query.IsDestinationIntrinsic(request.Destination, request.PieceToMove))
+        if (!Query.IsDestinationIntrinsic(request.Destination, request.PieceToMove))
             return new MoveResponse(RejectionReason.MoveNotIntrinsic);
 
-        if (query.DoesRequestPlaceMoverInCheck(request.Destination, request.PieceToMove))
+        if (Query.DoesRequestPlaceMoverInCheck(request.Destination, request.PieceToMove))
             return new MoveResponse(RejectionReason.MoveResultsInCheck);
 
-        if (query.IsDestinationOccupied(request.Destination))
+        if (Query.IsDestinationOccupied(request.Destination))
         {
-            if (query.IsPieceBlockedForCapture(request.Destination, request.PieceToMove))
+            if (Query.IsPieceBlockedForCapture(request.Destination, request.PieceToMove))
                 return new MoveResponse(RejectionReason.MoveBlocked);
-            switch (query.GetMoveType(request.Destination, request.PieceToMove))
+            switch (Query.GetMoveType(request.Destination, request.PieceToMove))
             {
                 case MoveType.Standard:
-                    worker.KillPiece(query.PieceAt(request.Destination)!);
-                    worker.RelocatePiece(request.PieceToMove, request.Destination);
+                    Worker.KillPiece(Query.PieceAt(request.Destination)!);
+                    Worker.RelocatePiece(request.PieceToMove, request.Destination);
                     break;
                 case MoveType.Promotion:
                     return new PromotionResponse(request, relocation: false);
@@ -39,17 +39,17 @@ public class Standard(IQuery query, IWorker worker) : ILegislator
         }
         else
         {
-            if (query.IsPieceBlockedForRelocation(request.Destination, request.PieceToMove))
+            if (Query.IsPieceBlockedForRelocation(request.Destination, request.PieceToMove))
                 return new MoveResponse(RejectionReason.MoveBlocked);
-            switch (query.GetMoveType(request.Destination, request.PieceToMove))
+            switch (Query.GetMoveType(request.Destination, request.PieceToMove))
             {
                 case MoveType.Standard:
-                    worker.RelocatePiece(request.PieceToMove, request.Destination);
+                    Worker.RelocatePiece(request.PieceToMove, request.Destination);
                     break;
                 case MoveType.Promotion:
                     return new PromotionResponse(request, relocation: true);
                 case MoveType.Castle:
-                    worker.Castle((King)request.PieceToMove, request.Destination);
+                    Worker.Castle((King)request.PieceToMove, request.Destination);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -59,12 +59,12 @@ public class Standard(IQuery query, IWorker worker) : ILegislator
         return new MoveResponse(null);
     }
 
-    public MoveResponse Promote<T>(PromotionRequest<T> request) where T : BasePiece, new()
+    public override MoveResponse Promote<T>(PromotionRequest<T> request)
     {
         if (request.Relocation)
-            worker.KillPiece(query.PieceAt(request.Destination));
-        worker.KillPiece(request.PieceToMove);
-        worker.SpawnPiece<T>(request.Destination, request.PieceToMove.Colour);
+            Worker.KillPiece(Query.PieceAt(request.Destination));
+        Worker.KillPiece(request.PieceToMove);
+        Worker.SpawnPiece<T>(request.Destination, request.PieceToMove.Colour);
         
         return new MoveResponse(null);
     }

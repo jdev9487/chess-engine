@@ -26,4 +26,11 @@ public class Rook : BasePiece
     }
 
     public Square CastlingLocation { get; init; } = default!;
+
+    public override string ToString() => Colour switch
+    {
+        Colour.White => "♖",
+        Colour.Black => "♜",
+        _ => throw new ArgumentOutOfRangeException()
+    };
 }

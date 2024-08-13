@@ -3,14 +3,11 @@ namespace Jdev.ChessEngine.Factory;
 using Board;
 using ChessEngine.Legislation;
 using Enums;
-using Services;
 using Pieces;
+using Services;
 
-public class StandardLegislatorFactory(IPieceFactory pieceFactory) : LegislatorFactory
+public class StandardLegislatorFactory(IPieceFactory pieceFactory) : BaseLegislatorFactory<Standard>
 {
-    protected override ILegislator Create(PieceGroup pieceGroup) =>
-        new Standard(new Query(pieceGroup), new Worker(pieceGroup, pieceFactory));
-
     protected override PieceGroup CreatePieces()
     {
         var whiteQueensideRook = pieceFactory.CreateRook(Square.At(File.A, Rank.One), Colour.White, Square.At(File.D, Rank.One));
@@ -41,24 +38,33 @@ public class StandardLegislatorFactory(IPieceFactory pieceFactory) : LegislatorF
             pieceFactory.Create<Pawn>(Square.At(File.G, Rank.Two), Colour.White),
             pieceFactory.Create<Pawn>(Square.At(File.H, Rank.Two), Colour.White),
             
-            pieceFactory.Create<Pawn>(Square.At(File.A, Rank.Seven), Colour.White),
-            pieceFactory.Create<Pawn>(Square.At(File.B, Rank.Seven), Colour.White),
-            pieceFactory.Create<Pawn>(Square.At(File.C, Rank.Seven), Colour.White),
-            pieceFactory.Create<Pawn>(Square.At(File.D, Rank.Seven), Colour.White),
-            pieceFactory.Create<Pawn>(Square.At(File.E, Rank.Seven), Colour.White),
-            pieceFactory.Create<Pawn>(Square.At(File.F, Rank.Seven), Colour.White),
-            pieceFactory.Create<Pawn>(Square.At(File.G, Rank.Seven), Colour.White),
-            pieceFactory.Create<Pawn>(Square.At(File.H, Rank.Seven), Colour.White),
+            pieceFactory.Create<Pawn>(Square.At(File.A, Rank.Seven), Colour.Black),
+            pieceFactory.Create<Pawn>(Square.At(File.B, Rank.Seven), Colour.Black),
+            pieceFactory.Create<Pawn>(Square.At(File.C, Rank.Seven), Colour.Black),
+            pieceFactory.Create<Pawn>(Square.At(File.D, Rank.Seven), Colour.Black),
+            pieceFactory.Create<Pawn>(Square.At(File.E, Rank.Seven), Colour.Black),
+            pieceFactory.Create<Pawn>(Square.At(File.F, Rank.Seven), Colour.Black),
+            pieceFactory.Create<Pawn>(Square.At(File.G, Rank.Seven), Colour.Black),
+            pieceFactory.Create<Pawn>(Square.At(File.H, Rank.Seven), Colour.Black),
             
             blackQueensideRook,
-            pieceFactory.Create<Knight>(Square.At(File.B, Rank.Eight), Colour.White),
-            pieceFactory.Create<Bishop>(Square.At(File.C, Rank.Eight), Colour.White),
-            pieceFactory.Create<Queen>(Square.At(File.D, Rank.Eight), Colour.White),
+            pieceFactory.Create<Knight>(Square.At(File.B, Rank.Eight), Colour.Black),
+            pieceFactory.Create<Bishop>(Square.At(File.C, Rank.Eight), Colour.Black),
+            pieceFactory.Create<Queen>(Square.At(File.D, Rank.Eight), Colour.Black),
             blackKing,
-            pieceFactory.Create<Bishop>(Square.At(File.F, Rank.Eight), Colour.White),
-            pieceFactory.Create<Knight>(Square.At(File.G, Rank.Eight), Colour.White),
+            pieceFactory.Create<Bishop>(Square.At(File.F, Rank.Eight), Colour.Black),
+            pieceFactory.Create<Knight>(Square.At(File.G, Rank.Eight), Colour.Black),
             blackKingsideRook
         };
         return new PieceGroup { Pieces = pieces };
     }
+
+    protected override Standard CreateLegislator(IQuery query, IWorker worker)
+    {
+        return new Standard(query, worker);
+    }
+
+    protected override IQuery CreateQuery(PieceGroup pieceGroup) => new Query(pieceGroup);
+
+    protected override IWorker CreateWorker(PieceGroup pieceGroup) => new Worker(pieceGroup, pieceFactory);
 }
