@@ -66,7 +66,7 @@ public class Square : ISquare
         else if (Rank.Coordinate == destination.Rank.Coordinate) vertical = false;
         else return [];
         return vertical
-            ? GetEnclosingFile().Where(s => s.File <= maxFile && s.File >= minFile)
-            : GetEnclosingRank().Where(s => s.Rank <= maxRank && s.Rank >= minRank);
+            ? GetEnclosingFile().Where(s => s.Rank <= maxRank && s.Rank >= minRank)
+            : GetEnclosingRank().Where(s => s.File <= maxFile && s.File >= minFile);
     }
 }
