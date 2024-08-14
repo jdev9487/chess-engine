@@ -11,6 +11,8 @@ public class Queen : BasePiece
     public override IEnumerable<MoveProposition> GetIntrinsicCaptures() => GetIntrinsicRelocations();
 
     public override IEnumerable<Square> GetPotentialBlocks(Square destination) => GetMoves();
+    
+    public override object Clone() => CloneObject<Queen>();
 
     private IEnumerable<Square> GetMoves() => Position.GetEnclosingRank()
         .Concat(Position.GetEnclosingFile())

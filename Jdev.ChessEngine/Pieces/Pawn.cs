@@ -40,6 +40,8 @@ public class Pawn : BasePiece
     {
         throw new NotImplementedException();
     }
+    
+    public override object Clone() => CloneObject<Pawn>();
 
     private bool HasMoved => Colour switch
     {

@@ -34,6 +34,8 @@ public class King : BasePiece
     {
         return KingsideRook;
     }
+    
+    public override object Clone() => CloneObject<King>();
 
     public Rook KingsideRook { private get; init; } = default!;
     public Rook QueensideRook { private get; init; } = default!;

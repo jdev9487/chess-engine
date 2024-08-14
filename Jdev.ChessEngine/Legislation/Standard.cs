@@ -10,14 +10,14 @@ public class Standard(IQuery query, IWorker worker) : BaseLegislator(query, work
     {
         if (Query.IsInCheck(request.PieceToMove.Colour))
         {
-            if (!Query.DoesRequestUncheckMover(request.Destination, request.PieceToMove))
+            if (Query.WouldRequestResultInCheck(request.Destination, request.PieceToMove))
                 return new MoveResponse(RejectionReason.UnresolvedCheck);
         }
 
         if (!Query.IsDestinationIntrinsic(request.Destination, request.PieceToMove))
             return new MoveResponse(RejectionReason.MoveNotIntrinsic);
 
-        if (Query.DoesRequestPlaceMoverInCheck(request.Destination, request.PieceToMove))
+        if (Query.WouldRequestResultInCheck(request.Destination, request.PieceToMove))
             return new MoveResponse(RejectionReason.MoveResultsInCheck);
 
         if (Query.IsDestinationOccupied(request.Destination))

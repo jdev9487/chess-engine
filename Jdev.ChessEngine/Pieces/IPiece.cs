@@ -3,7 +3,7 @@ namespace Jdev.ChessEngine.Pieces;
 using Board;
 using Enums;
 
-public interface IPiece
+public interface IPiece : ICloneable
 {
     IEnumerable<MoveProposition> GetIntrinsicRelocations();
     IEnumerable<MoveProposition> GetIntrinsicCaptures();

@@ -28,6 +28,8 @@ public class Knight : BasePiece
     public override IEnumerable<MoveProposition> GetIntrinsicCaptures() => GetIntrinsicRelocations();
 
     public override List<Square> GetPotentialBlocks(Square destination) => [];
+    
+    public override object Clone() => CloneObject<Knight>();
 
     public override string ToString() => Colour switch
     {

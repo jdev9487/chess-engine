@@ -9,6 +9,7 @@ public class PieceGroup : IPieceGroup
     public IList<IPiece> Pieces { get; init; } = default!;
 
     public IPiece? PieceAt(File file, Rank rank) => Pieces.SingleOrDefault(p => p.Position == Square.At(file, rank));
+    public IPiece? PieceAt(Square location) => Pieces.SingleOrDefault(p => p.Position == location);
     public override string ToString()
     {
         var stringBoard = new StringBuilder();
