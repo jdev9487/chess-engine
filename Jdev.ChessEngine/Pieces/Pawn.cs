@@ -36,7 +36,12 @@ public class Pawn : BasePiece
         return captures;
     }
 
-    public override List<Square> GetPotentialBlocks(Square destination)
+    public override IEnumerable<ISquare> GetPotentialRelocationBlocks(ISquare destination)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override IEnumerable<ISquare> GetPotentialCaptureBlocks(ISquare destination)
     {
         throw new NotImplementedException();
     }
@@ -57,14 +62,14 @@ public class Pawn : BasePiece
         _ => throw new ArgumentOutOfRangeException()
     };
 
-    private Square GetStandardForwardRelocate => Colour switch
+    private ISquare GetStandardForwardRelocate => Colour switch
     {
         Colour.White => Square.At(Position.File, (Position.Rank + 1)!),
         Colour.Black => Square.At(Position.File, (Position.Rank - 1)!),
         _ => throw new ArgumentOutOfRangeException()
     };
 
-    private Square GetInitialExtendedRelocate => Colour switch
+    private ISquare GetInitialExtendedRelocate => Colour switch
     {
         Colour.White => Square.At(Position.File, Rank.Four),
         Colour.Black => Square.At(Position.File, Rank.Five),

@@ -5,11 +5,11 @@ using Enums;
 
 public class IntrinsicTestModel
 {
-    private readonly IEnumerable<Square>? _expectedIntrinsicCaptures;
-    public required Square StartingLocation { get; init; }
-    public required IEnumerable<Square> ExpectedIntrinsicRelocations { get; init; }
+    private readonly IEnumerable<ISquare>? _expectedIntrinsicCaptures;
+    public required ISquare StartingLocation { get; init; }
+    public required IEnumerable<ISquare> ExpectedIntrinsicRelocations { get; init; }
 
-    public IEnumerable<Square> ExpectedIntrinsicCaptures
+    public IEnumerable<ISquare> ExpectedIntrinsicCaptures
     {
         get => _expectedIntrinsicCaptures ?? ExpectedIntrinsicRelocations;
         init => _expectedIntrinsicCaptures = value;

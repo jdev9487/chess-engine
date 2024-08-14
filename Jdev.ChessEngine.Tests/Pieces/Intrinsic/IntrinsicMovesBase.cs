@@ -6,8 +6,8 @@ using Jdev.ChessEngine.Pieces;
 public class IntrinsicMovesBase<TPiece>(IntrinsicTestModel model) where TPiece : IPiece, new()
 {
     private TPiece _piece = default!;
-    private Square[] _intrinsicRelocations = default!;
-    private Square[] _intrinsicCaptures = default!;
+    private ISquare[] _intrinsicRelocations = default!;
+    private ISquare[] _intrinsicCaptures = default!;
 
     [SetUp]
     public void SetUp()

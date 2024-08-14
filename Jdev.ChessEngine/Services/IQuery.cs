@@ -7,12 +7,12 @@ using Pieces;
 public interface IQuery
 {
     bool IsInCheck(Colour colour);
-    bool IsDestinationIntrinsic(Square destination, IPiece pieceToMove);
-    bool WouldRequestResultInCheck(Square proposedDestination, IPiece pieceToMove);
-    bool IsDestinationOccupied(Square destination);
-    bool IsPieceBlockedForCapture(Square destination, IPiece pieceToMove);
-    bool IsPieceBlockedForRelocation(Square destination, IPiece pieceToMove);
-    MoveType GetMoveType(Square destination, IPiece pieceToMove);
-    IPiece? PieceAt(Square location);
+    bool IsDestinationIntrinsic(ISquare destination, IPiece pieceToMove);
+    bool WouldRequestResultInCheck(ISquare proposedDestination, IPiece pieceToMove);
+    bool IsDestinationOccupied(ISquare destination);
+    bool IsPieceBlockedForCapture(ISquare destination, IPiece pieceToMove);
+    bool IsPieceBlockedForRelocation(ISquare destination, IPiece pieceToMove);
+    MoveType GetMoveType(ISquare destination, IPiece pieceToMove);
+    IPiece? PieceAt(ISquare location);
     IPiece? PieceAt(File file, Rank rank);
 }

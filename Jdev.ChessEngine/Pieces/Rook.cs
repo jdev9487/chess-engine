@@ -19,15 +19,15 @@ public class Rook : BasePiece
     }
 
     public override IEnumerable<MoveProposition> GetIntrinsicCaptures() => GetIntrinsicRelocations();
+    public override IEnumerable<ISquare> GetPotentialRelocationBlocks(ISquare destination) =>
+        Position.GetStraightsInBetween(destination).Where(s => s != Position);
 
-    public override List<Square> GetPotentialBlocks(Square destination)
-    {
-        throw new NotImplementedException();
-    }
+    public override IEnumerable<ISquare> GetPotentialCaptureBlocks(ISquare destination) =>
+        GetPotentialRelocationBlocks(destination);
     
     public override object Clone() => CloneObject<Rook>();
 
-    public Square CastlingLocation { get; init; } = default!;
+    public ISquare CastlingLocation { get; init; } = default!;
 
     public override string ToString() => Colour switch
     {

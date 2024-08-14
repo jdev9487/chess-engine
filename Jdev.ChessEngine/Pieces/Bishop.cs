@@ -10,11 +10,15 @@ public class Bishop : BasePiece
 
     public override IEnumerable<MoveProposition> GetIntrinsicCaptures() => GetIntrinsicRelocations();
 
-    public override IEnumerable<Square> GetPotentialBlocks(Square destination) => GetMoves();
-    
+    public override IEnumerable<ISquare> GetPotentialRelocationBlocks(ISquare destination) =>
+        Position.GetDiagonalsInBetween(destination).Where(s => s != Position);
+
+    public override IEnumerable<ISquare> GetPotentialCaptureBlocks(ISquare destination) =>
+        GetPotentialRelocationBlocks(destination);
+
     public override object Clone() => CloneObject<Bishop>();
 
-    private IEnumerable<Square> GetMoves() => Position.GetEnclosingPositiveDiagonal()
+    private IEnumerable<ISquare> GetMoves() => Position.GetEnclosingPositiveDiagonal()
         .Concat(Position.GetEnclosingNegativeDiagonal())
         .Where(s => s != Position);
 

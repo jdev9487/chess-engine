@@ -5,6 +5,6 @@ using Enums;
 
 public class MoveProposition
 {
-    public Square Target { get; init; } = default!;
+    public ISquare Target { get; init; } = default!;
     public MoveType SubsequentMove { get; init; }
 }
