@@ -38,17 +38,24 @@ public class Pawn : BasePiece
 
     public override IEnumerable<ISquare> GetPotentialRelocationBlocks(ISquare destination)
     {
-        throw new NotImplementedException();
+        var vib = Position.GetVerticalsInBetween(destination)
+            .Where(s => s != Position)
+            .ToArray();
+        return HasMoved switch
+        {
+            true when vib.Length == 1 => vib,
+            false when vib.Length <= 2 => vib,
+            _ => []
+        };
     }
 
-    public override IEnumerable<ISquare> GetPotentialCaptureBlocks(ISquare destination)
-    {
-        throw new NotImplementedException();
-    }
-    
+    public override IEnumerable<ISquare> GetPotentialCaptureBlocks(ISquare destination) => GetIntrinsicCaptures()
+        .Select(mp => mp.Target)
+        .Where(s => s == destination);
+
     public override object Clone() => CloneObject<Pawn>();
 
-    private bool HasMoved => Colour switch
+    public override bool HasMoved => Colour switch
     {
         Colour.White => Position.Rank != Rank.Two,
         Colour.Black => Position.Rank != Rank.Seven,

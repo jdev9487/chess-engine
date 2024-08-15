@@ -70,6 +70,15 @@ public class Square : ISquare
             : GetEnclosingRank().Where(s => s.File <= maxFile && s.File >= minFile);
     }
 
+    public IEnumerable<ISquare> GetVerticalsInBetween(ISquare destination)
+    {
+        var minRank = Rank.Min(Rank, destination.Rank);
+        var maxRank = Rank.Max(Rank, destination.Rank);
+        return File.Coordinate != destination.File.Coordinate
+            ? []
+            : GetEnclosingFile().Where(s => s.Rank <= maxRank && s.Rank >= minRank);
+    }
+
     public bool IsTouching(ISquare destination)
     {
         return (File.Distance(File, destination.File) == 1 && Rank.Distance(Rank, destination.Rank) == 1)

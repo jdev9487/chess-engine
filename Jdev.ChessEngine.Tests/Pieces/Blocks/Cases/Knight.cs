@@ -58,4 +58,30 @@ public static class Knight
                 Square.At(File.B, Rank.Three)
             ]
         };
+    public static readonly BlockTestModel WestNorth = new()
+        {
+            Origin = Square.At(File.D, Rank.Four),
+            Destination = Square.At(File.B, Rank.Five),
+            ExpectedRelocationBlocks =
+            [
+                Square.At(File.B, Rank.Five)
+            ]
+        };
+    public static readonly BlockTestModel NorthWest = new()
+        {
+            Origin = Square.At(File.D, Rank.Four),
+            Destination = Square.At(File.C, Rank.Six),
+            ExpectedRelocationBlocks =
+            [
+                Square.At(File.C, Rank.Six)
+            ]
+        };
+    public static readonly BlockTestModel NotAMove = new()
+        {
+            Origin = Square.At(File.D, Rank.Four),
+            Destination = Square.At(File.G, Rank.Six),
+            ExpectedRelocationBlocks =
+            [
+            ]
+        };
 }
