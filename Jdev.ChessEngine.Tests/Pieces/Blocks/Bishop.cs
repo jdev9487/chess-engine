@@ -6,8 +6,10 @@ public class Bishop(BlockTestModel model) : BlockMovesBase<ChessEngine.Pieces.Bi
 {
     public static readonly object[] Cases =
     [
-        Blocks.Cases.Bishop.PositiveDiagonal,
-        Blocks.Cases.Bishop.NegativeDiagonal,
+        Blocks.Cases.Bishop.NorthEast,
+        Blocks.Cases.Bishop.SouthEast,
+        Blocks.Cases.Bishop.SouthWest,
+        Blocks.Cases.Bishop.NorthWest,
         Blocks.Cases.Bishop.OffDiagonal
     ];
 }
