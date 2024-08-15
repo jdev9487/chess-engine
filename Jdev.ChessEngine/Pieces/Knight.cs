@@ -26,8 +26,8 @@ public class Knight : BasePiece
     }
 
     public override IEnumerable<MoveProposition> GetIntrinsicCaptures() => GetIntrinsicRelocations();
-    public override IEnumerable<ISquare> GetPotentialRelocationBlocks(ISquare destination) => [];
-    public override IEnumerable<ISquare> GetPotentialCaptureBlocks(ISquare destination) => [];
+    public override IEnumerable<ISquare> GetPotentialRelocationBlocks(ISquare destination) => [destination];
+    public override IEnumerable<ISquare> GetPotentialCaptureBlocks(ISquare destination) => [destination];
     
     public override object Clone() => CloneObject<Knight>();
 

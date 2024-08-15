@@ -52,8 +52,8 @@ public abstract class Axis<TAxis> where TAxis : Axis<TAxis>, new()
     public static bool operator !=(Axis<TAxis> a, Axis<TAxis> b) => a.Coordinate != b.Coordinate;
     public static TAxis Min(Axis<TAxis> a, Axis<TAxis> b) => a <= b ? GetAxis(a.Coordinate) : GetAxis(b.Coordinate);
     public static TAxis Max(Axis<TAxis> a, Axis<TAxis> b) => a >= b ? GetAxis(a.Coordinate) : GetAxis(b.Coordinate);
-
     public static IEnumerable<TAxis> Enumerate => Enumerable.Range(1, 8).Select(GetAxis);
+    public static int Distance(Axis<TAxis> a, Axis<TAxis> b) => Max(a, b).Coordinate - Min(a, b).Coordinate;
 
     public static TAxis At(int coordinate) => GetAxis(coordinate);
     

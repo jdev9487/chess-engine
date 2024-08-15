@@ -28,9 +28,16 @@ public class King : BasePiece
     public override IEnumerable<MoveProposition> GetIntrinsicCaptures() =>
         GetMoves().Select(s => new MoveProposition { Target = s, SubsequentMove = MoveType.Standard });
 
-    public override IEnumerable<ISquare> GetPotentialRelocationBlocks(ISquare destination) => GetMoves();
+    public override IEnumerable<ISquare> GetPotentialRelocationBlocks(ISquare destination)
+    {
+        if (!Position.IsTouching(destination)) return [];
+        return Position.GetDiagonalsInBetween(destination)
+            .Concat(Position.GetStraightsInBetween(destination))
+            .Where(s => s != Position);
+    }
 
-    public override IEnumerable<ISquare> GetPotentialCaptureBlocks(ISquare destination) => GetMoves();
+    public override IEnumerable<ISquare> GetPotentialCaptureBlocks(ISquare destination) =>
+        GetPotentialRelocationBlocks(destination);
 
     public Rook? GetCastlingRook(ISquare destination)
     {

@@ -69,4 +69,11 @@ public class Square : ISquare
             ? GetEnclosingFile().Where(s => s.Rank <= maxRank && s.Rank >= minRank)
             : GetEnclosingRank().Where(s => s.File <= maxFile && s.File >= minFile);
     }
+
+    public bool IsTouching(ISquare destination)
+    {
+        return (File.Distance(File, destination.File) == 1 && Rank.Distance(Rank, destination.Rank) == 1)
+               || (File.Distance(File, destination.File) == 1 && Rank.Distance(Rank, destination.Rank) == 0)
+               || (File.Distance(File, destination.File) == 0 && Rank.Distance(Rank, destination.Rank) == 1);
+    }
 }

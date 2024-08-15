@@ -9,12 +9,10 @@ public class Queen : BasePiece
         GetMoves().Select(s => new MoveProposition { Target = s, SubsequentMove = MoveType.Standard });
 
     public override IEnumerable<MoveProposition> GetIntrinsicCaptures() => GetIntrinsicRelocations();
-    public override IEnumerable<ISquare> GetPotentialRelocationBlocks(ISquare destination)
-    {
-        return Position.GetDiagonalsInBetween(destination)
+    public override IEnumerable<ISquare> GetPotentialRelocationBlocks(ISquare destination) =>
+        Position.GetDiagonalsInBetween(destination)
             .Concat(Position.GetStraightsInBetween(destination))
             .Where(s => s != Position);
-    }
 
     public override IEnumerable<ISquare> GetPotentialCaptureBlocks(ISquare destination) =>
         GetPotentialRelocationBlocks(destination);
