@@ -1,8 +1,8 @@
 namespace Jdev.ChessEngine.Tests.Query;
 
+using Moq;
 using Services;
 using ChessEngine.Pieces;
-using Moq;
 
 public class QueryBase
 {
