@@ -24,10 +24,12 @@ public class BlockedForRelocation : QueryBase
     }
 
     [Test]
-    public void ShouldBeBlocked()
+    [TestCase(Colour.White)]
+    [TestCase(Colour.Black)]
+    public void ShouldBeBlocked(Colour colour)
     {
         var blockingPiece = new Mock<IPiece>();
-        blockingPiece.SetupGet(x => x.Colour).Returns(Colour.White);
+        blockingPiece.SetupGet(x => x.Colour).Returns(colour);
         PieceGroupMock
             .Setup(x => x.PieceAt(_blockingLocation.File, _blockingLocation.Rank))
             .Returns(blockingPiece.Object);
@@ -44,10 +46,12 @@ public class BlockedForRelocation : QueryBase
     }
 
     [Test]
-    public void ShouldNotBeBlocked()
+    [TestCase(Colour.White)]
+    [TestCase(Colour.Black)]
+    public void ShouldNotBeBlocked(Colour colour)
     {
         var blockingPiece = new Mock<IPiece>();
-        blockingPiece.SetupGet(x => x.Colour).Returns(Colour.White);
+        blockingPiece.SetupGet(x => x.Colour).Returns(colour);
         PieceGroupMock
             .Setup(x => x.PieceAt(_blockingLocation.File, _blockingLocation.Rank))
             .Returns((IPiece)null!);

@@ -39,8 +39,12 @@ public class Query(IPieceGroup pieceGroup) : IQuery
 
     public bool IsPieceBlockedForCapture(ISquare destination, IPiece pieceToMove)
     {
-        return pieceToMove.GetPotentialCaptureBlocks(destination)
-            .Any(s => PieceAt(s) is not null);
+        var potentialBlocks = pieceToMove
+            .GetPotentialCaptureBlocks(destination)
+            .Where(s => s != destination).ToArray();
+        var destinationPiece = PieceAt(destination);
+        return potentialBlocks.Any(s => PieceAt(s) is not null) ||
+               (destinationPiece is not null && destinationPiece.Colour == pieceToMove.Colour);
     }
 
     public bool IsPieceBlockedForRelocation(ISquare destination, IPiece pieceToMove)
