@@ -55,7 +55,19 @@ public class Query(IPieceGroup pieceGroup) : IQuery
 
     public MoveType GetMoveType(ISquare destination, IPiece pieceToMove)
     {
-        return MoveType.Standard;
+        switch (pieceToMove)
+        {
+            case Pawn when pieceToMove.Colour == Colour.White && destination.Rank == Rank.Eight:
+            case Pawn when pieceToMove.Colour == Colour.Black && destination.Rank == Rank.One:
+                return MoveType.Promotion;
+            case King when pieceToMove is { Colour: Colour.White, HasMoved: false } && 
+                           (destination == Square.At(File.G, Rank.One) || destination == Square.At(File.C, Rank.One)):
+            case King when pieceToMove is { Colour: Colour.Black, HasMoved: false } &&
+                           (destination == Square.At(File.G, Rank.Eight) || destination == Square.At(File.C, Rank.Eight)):
+                return MoveType.Castle;
+            default:
+                return MoveType.Standard;
+        }
     }
 
     public IPiece? PieceAt(ISquare location)
