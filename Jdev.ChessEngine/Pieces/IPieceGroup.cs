@@ -7,6 +7,6 @@ public interface IPieceGroup
 {
     IList<IPiece> Pieces { get; }
     IPiece? PieceAt(File file, Rank rank);
-    IPiece? PieceAt(Square location);
+    IPiece? PieceAt(ISquare location);
     public King King(Colour colour);
 }

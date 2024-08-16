@@ -7,9 +7,10 @@ public interface IPiece : ICloneable
 {
     IEnumerable<MoveProposition> GetIntrinsicRelocations();
     IEnumerable<MoveProposition> GetIntrinsicCaptures();
-    IEnumerable<Square> GetPotentialBlocks(Square destination);
+    IEnumerable<ISquare> GetPotentialRelocationBlocks(ISquare destination);
+    IEnumerable<ISquare> GetPotentialCaptureBlocks(ISquare destination);
     Colour Colour { get; init; }
-    Square Position { get; set; }
+    ISquare Position { get; set; }
     bool IsAlive { get; set; }
     bool HasMoved { get; set; }
 }

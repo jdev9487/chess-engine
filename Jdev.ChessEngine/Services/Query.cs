@@ -15,13 +15,13 @@ public class Query(IPieceGroup pieceGroup) : IQuery
             return checkTarget is not null && !IsPieceBlockedForCapture(checkTarget.Target, p);
         });
 
-    public bool IsDestinationIntrinsic(Square destination, IPiece pieceToMove)
+    public bool IsDestinationIntrinsic(ISquare destination, IPiece pieceToMove)
     {
         var intrinsicMoves = pieceToMove.GetIntrinsicRelocations().Concat(pieceToMove.GetIntrinsicCaptures()).ToArray();
         return intrinsicMoves.Select(mp => mp.Target).Contains(destination);
     }
 
-    public bool WouldRequestResultInCheck(Square proposedDestination, IPiece pieceToMove)
+    public bool WouldRequestResultInCheck(ISquare proposedDestination, IPiece pieceToMove)
     {
         var ghostPieces = pieceGroup.Pieces
             .Where(p => p.Position != proposedDestination && p.Position != pieceToMove.Position).ToList();
@@ -32,27 +32,33 @@ public class Query(IPieceGroup pieceGroup) : IQuery
         return new Query(ghostPieceGroup).IsInCheck(pieceToMove.Colour);
     }
 
-    public bool IsDestinationOccupied(Square destination)
+    public bool IsDestinationOccupied(ISquare destination)
     {
-        return pieceGroup.Pieces.Any(p => p.Position == destination);
+        return pieceGroup.PieceAt(destination) is not null;
     }
 
-    public bool IsPieceBlockedForCapture(Square destination, IPiece pieceToMove)
+    public bool IsPieceBlockedForCapture(ISquare destination, IPiece pieceToMove)
     {
-        return false;
+        var potentialBlocks = pieceToMove
+            .GetPotentialCaptureBlocks(destination)
+            .Where(s => s != destination).ToArray();
+        var destinationPiece = PieceAt(destination);
+        return potentialBlocks.Any(s => PieceAt(s) is not null) ||
+               (destinationPiece is not null && destinationPiece.Colour == pieceToMove.Colour);
     }
 
-    public bool IsPieceBlockedForRelocation(Square destination, IPiece pieceToMove)
+    public bool IsPieceBlockedForRelocation(ISquare destination, IPiece pieceToMove)
     {
-        return false;
+        return pieceToMove.GetPotentialRelocationBlocks(destination)
+            .Any(s => PieceAt(s) is not null);
     }
 
-    public MoveType GetMoveType(Square destination, IPiece pieceToMove)
+    public MoveType GetMoveType(ISquare destination, IPiece pieceToMove)
     {
         return MoveType.Standard;
     }
 
-    public IPiece? PieceAt(Square location)
+    public IPiece? PieceAt(ISquare location)
     {
         return pieceGroup.PieceAt(location.File, location.Rank);
     }

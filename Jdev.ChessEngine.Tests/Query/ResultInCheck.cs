@@ -11,9 +11,9 @@ using ChessEngine.Pieces;
 public class ResultInCheck(CheckTestModel model) : QueryBase
 {
     private King _kingUnderQuestion = default!;
-    private Square _kingOrigin = default!;
-    private Square _kingDestination = default!;
-    private Square _kingNotHere = default!;
+    private ISquare _kingOrigin = default!;
+    private ISquare _kingDestination = default!;
+    private ISquare _kingNotHere = default!;
 
     [SetUp]
     public void ResultInCheckSetUp()

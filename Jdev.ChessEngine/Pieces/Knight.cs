@@ -24,10 +24,11 @@ public class Knight : BasePiece
             .Select(x => new MoveProposition
                 { Target = Square.At(x.Item1!, x.Item2!), SubsequentMove = MoveType.Standard });
     }
-
     public override IEnumerable<MoveProposition> GetIntrinsicCaptures() => GetIntrinsicRelocations();
-
-    public override List<Square> GetPotentialBlocks(Square destination) => [];
+    public override IEnumerable<ISquare> GetPotentialRelocationBlocks(ISquare destination) =>
+        GetIntrinsicRelocations().Select(mp => mp.Target).Contains(destination) ? [destination] : [];
+    public override IEnumerable<ISquare> GetPotentialCaptureBlocks(ISquare destination) =>
+        GetPotentialRelocationBlocks(destination);
     
     public override object Clone() => CloneObject<Knight>();
 
