@@ -114,6 +114,7 @@ public static class Pawn
             Origin = Square.At(File.D, Rank.Five),
             Colour = Colour.Black,
             Destination = Square.At(File.D, Rank.Three),
+            HasMoved = true,
             ExpectedRelocationBlocks = []
         };
     public static readonly BlockTestModel BlackStandardCaptureLeft = new()
