@@ -15,12 +15,12 @@ public class King : BasePiece, IKing
                 ?
                 [
                     new MoveProposition { Target = Square.At(File.G, Rank.One), SubsequentMove = MoveType.Castle },
-                    new MoveProposition { Target = Square.At(File.C, Rank.One), SubsequentMove = MoveType.Castle },
+                    new MoveProposition { Target = Square.At(File.C, Rank.One), SubsequentMove = MoveType.Castle }
                 ]
                 :
                 [
                     new MoveProposition { Target = Square.At(File.G, Rank.Eight), SubsequentMove = MoveType.Castle },
-                    new MoveProposition { Target = Square.At(File.C, Rank.Eight), SubsequentMove = MoveType.Castle },
+                    new MoveProposition { Target = Square.At(File.C, Rank.Eight), SubsequentMove = MoveType.Castle }
                 ];
         return standardMoves.Concat(castlingMoves);
     }

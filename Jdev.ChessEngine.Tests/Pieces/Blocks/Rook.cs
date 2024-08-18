@@ -1,8 +1,10 @@
 namespace Jdev.ChessEngine.Tests.Pieces.Blocks;
 
+using Models;
+
 [TestFixture]
 [TestFixtureSource(nameof(Cases))]
-public class Rook(BlockTestModel model) : BlockMovesBase<ChessEngine.Pieces.Rook>(model)
+public class Rook(BlockTestModelRook modelBase) : BlockMovesBase<ChessEngine.Pieces.Rook>(modelBase)
 {
     public static readonly object[] Cases =
     [

@@ -2,8 +2,9 @@ namespace Jdev.ChessEngine.Tests.Pieces.Blocks;
 
 using Board;
 using Jdev.ChessEngine.Pieces;
+using Models;
 
-public class BlockMovesBase<TPiece>(BlockTestModel model) where TPiece : IPiece, new()
+public class BlockMovesBase<TPiece>(BlockTestModelBase<TPiece> modelBase) where TPiece : IPiece
 {
     private TPiece _piece = default!;
     private ISquare[] _relocationBlocks = default!;
@@ -12,11 +13,11 @@ public class BlockMovesBase<TPiece>(BlockTestModel model) where TPiece : IPiece,
     [SetUp]
     public void SetUp()
     {
-        _piece = new TPiece
-            { Position = model.Origin, Colour = model.Colour.GetValueOrDefault() };
-        _relocationBlocks = _piece.GetPotentialRelocationBlocks(model.Destination)
+        _piece = modelBase.CreatePiece();
+        _piece.Position = modelBase.Origin;
+        _relocationBlocks = _piece.GetPotentialRelocationBlocks(modelBase.Destination)
             .ToArray();
-        _captureBlocks = _piece.GetPotentialCaptureBlocks(model.Destination)
+        _captureBlocks = _piece.GetPotentialCaptureBlocks(modelBase.Destination)
             .ToArray();
     }
 
@@ -24,7 +25,7 @@ public class BlockMovesBase<TPiece>(BlockTestModel model) where TPiece : IPiece,
     public void RelocationBlockShouldContainSquares() =>
         Assert.Multiple(() =>
         {
-            foreach (var location in model.ExpectedRelocationBlocks)
+            foreach (var location in modelBase.ExpectedRelocationBlocks)
             {
                 Assert.That(_relocationBlocks, Contains.Item(location));
             }
@@ -32,13 +33,13 @@ public class BlockMovesBase<TPiece>(BlockTestModel model) where TPiece : IPiece,
 
     [Test]
     public void RelocationBlocksShouldHaveCorrectNumberOfSquares() =>
-        Assert.That(_relocationBlocks, Has.Length.EqualTo(model.ExpectedRelocationBlocks.Count()));
+        Assert.That(_relocationBlocks, Has.Length.EqualTo(modelBase.ExpectedRelocationBlocks.Count()));
 
     [Test]
     public void CaptureBlocksShouldContainSquares() =>
         Assert.Multiple(() =>
         {
-            foreach (var location in model.ExpectedCaptureBlocks)
+            foreach (var location in modelBase.ExpectedCaptureBlocks)
             {
                 Assert.That(_captureBlocks, Contains.Item(location));
             }
@@ -46,5 +47,5 @@ public class BlockMovesBase<TPiece>(BlockTestModel model) where TPiece : IPiece,
 
     [Test]
     public void CaptureBlocksShouldHaveCorrectNumberOfSquares() =>
-        Assert.That(_captureBlocks, Has.Length.EqualTo(model.ExpectedCaptureBlocks.Count()));
+        Assert.That(_captureBlocks, Has.Length.EqualTo(modelBase.ExpectedCaptureBlocks.Count()));
 }

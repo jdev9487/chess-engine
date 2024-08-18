@@ -1,8 +1,10 @@
 namespace Jdev.ChessEngine.Tests.Pieces.Blocks;
 
+using Models;
+
 [TestFixture]
 [TestFixtureSource(nameof(Cases))]
-public class Queen(BlockTestModel model) : BlockMovesBase<ChessEngine.Pieces.Queen>(model)
+public class Queen(BlockTestModelQueen modelBase) : BlockMovesBase<ChessEngine.Pieces.Queen>(modelBase)
 {
     public static readonly object[] Cases =
     [

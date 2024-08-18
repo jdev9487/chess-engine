@@ -1,8 +1,10 @@
 namespace Jdev.ChessEngine.Tests.Pieces.Blocks;
 
+using Models;
+
 [TestFixture]
 [TestFixtureSource(nameof(Cases))]
-public class Bishop(BlockTestModel model) : BlockMovesBase<ChessEngine.Pieces.Bishop>(model)
+public class Bishop(BlockTestModelBishop modelBase) : BlockMovesBase<ChessEngine.Pieces.Bishop>(modelBase)
 {
     public static readonly object[] Cases =
     [
