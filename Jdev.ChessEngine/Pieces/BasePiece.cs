@@ -15,13 +15,11 @@ public abstract class BasePiece : IPiece
     public Colour Colour { get; init; }
     public ISquare Position { get; set; } = default!;
     public bool IsAlive { get; set; } = true;
-    public virtual bool HasMoved { get; set; } = false;
 
     protected T CloneObject<T>() where T : IPiece, new() =>
         new()
         {
             Colour = Colour,
-            HasMoved = HasMoved,
             IsAlive = IsAlive,
             Position = Position
         };

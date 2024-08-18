@@ -5,5 +5,6 @@ public enum RejectionReason
     UnresolvedCheck,
     MoveNotIntrinsic,
     MoveResultsInCheck,
-    MoveBlocked
+    MoveBlocked,
+    IllegalCastleAttempt
 }

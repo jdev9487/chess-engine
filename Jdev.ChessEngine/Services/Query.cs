@@ -53,6 +53,20 @@ public class Query(IPieceGroup pieceGroup) : IQuery
             .Any(s => PieceAt(s) is not null);
     }
 
+    public bool CanKingCastle(IKing castlingKing, ISquare destination)
+    {
+        if (castlingKing.HasMoved) return false;
+        var castlingRook = castlingKing.GetCastlingRook(destination);
+        if (castlingRook is null || castlingRook.HasMoved) return false;
+        var squaresInBetweenCastlingRook = castlingKing.Position.GetStraightsInBetween(castlingRook.Position)
+            .Where(s => s != castlingRook.Position)
+            .Where(s => s != castlingKing.Position);
+        if (squaresInBetweenCastlingRook.Any(s => PieceAt(s) is not null)) return false;
+        var squaresInBetweenCastlingLocation = castlingKing.Position.GetStraightsInBetween(destination)
+            .Where(s => s != castlingKing.Position);
+        return !squaresInBetweenCastlingLocation.Any(square => WouldRequestResultInCheck(square, castlingKing));
+    }
+
     public MoveType GetMoveType(ISquare destination, IPiece pieceToMove)
     {
         switch (pieceToMove)
@@ -60,10 +74,10 @@ public class Query(IPieceGroup pieceGroup) : IQuery
             case Pawn when pieceToMove.Colour == Colour.White && destination.Rank == Rank.Eight:
             case Pawn when pieceToMove.Colour == Colour.Black && destination.Rank == Rank.One:
                 return MoveType.Promotion;
-            case King when pieceToMove is { Colour: Colour.White, HasMoved: false } && 
-                           (destination == Square.At(File.G, Rank.One) || destination == Square.At(File.C, Rank.One)):
-            case King when pieceToMove is { Colour: Colour.Black, HasMoved: false } &&
-                           (destination == Square.At(File.G, Rank.Eight) || destination == Square.At(File.C, Rank.Eight)):
+            case King { Colour: Colour.White, HasMoved: false }
+                when destination == Square.At(File.G, Rank.One) || destination == Square.At(File.C, Rank.One):
+            case King { Colour: Colour.Black, HasMoved: false }
+                when destination == Square.At(File.G, Rank.Eight) || destination == Square.At(File.C, Rank.Eight):
                 return MoveType.Castle;
             default:
                 return MoveType.Standard;

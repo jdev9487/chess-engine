@@ -12,6 +12,7 @@ public interface IQuery
     bool IsDestinationOccupied(ISquare destination);
     bool IsPieceBlockedForCapture(ISquare destination, IPiece pieceToMove);
     bool IsPieceBlockedForRelocation(ISquare destination, IPiece pieceToMove);
+    bool CanKingCastle(IKing castlingKing, ISquare destination);
     MoveType GetMoveType(ISquare destination, IPiece pieceToMove);
     IPiece? PieceAt(ISquare location);
     IPiece? PieceAt(File file, Rank rank);

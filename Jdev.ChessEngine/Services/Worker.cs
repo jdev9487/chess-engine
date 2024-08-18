@@ -23,7 +23,7 @@ public class Worker(PieceGroup pieceGroup, IPieceFactory pieceFactory) : IWorker
         piece.Position = destination;
     }
 
-    public void Castle(King king, Square destination)
+    public void Castle(IKing king, Square destination)
     {
         var castlingRook = king.GetCastlingRook(destination);
         castlingRook.Position = castlingRook.CastlingLocation;

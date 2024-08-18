@@ -3,7 +3,7 @@ namespace Jdev.ChessEngine.Pieces;
 using Board;
 using Enums;
 
-public class Pawn : BasePiece
+public class Pawn : BasePiece, IPawn
 {
     public override IEnumerable<MoveProposition> GetIntrinsicRelocations()
     {
@@ -55,12 +55,6 @@ public class Pawn : BasePiece
 
     public override object Clone() => CloneObject<Pawn>();
 
-    public override bool HasMoved => Colour switch
-    {
-        Colour.White => Position.Rank != Rank.Two,
-        Colour.Black => Position.Rank != Rank.Seven,
-        _ => throw new ArgumentOutOfRangeException()
-    };
 
     private bool IsOnPenultimateRank => Colour switch
     {
@@ -89,4 +83,6 @@ public class Pawn : BasePiece
         Colour.Black => "♟",
         _ => throw new ArgumentOutOfRangeException()
     };
+
+    public bool HasMoved { get; set; }
 }

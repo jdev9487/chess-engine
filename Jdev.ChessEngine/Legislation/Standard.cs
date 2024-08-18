@@ -32,8 +32,12 @@ public class Standard(IQuery query, IWorker worker) : BaseLegislator(query, work
                     break;
                 case MoveType.Promotion:
                     return new PromotionResponse(request, relocation: false);
-                default:
                 case MoveType.Castle:
+                    if (Query.CanKingCastle((IKing)request.PieceToMove, request.Destination))
+                        Worker.Castle((IKing)request.PieceToMove, request.Destination);
+                    else return new MoveResponse(RejectionReason.IllegalCastleAttempt);
+                    break;
+                default:
                     throw new ArgumentOutOfRangeException();
             }
         }
@@ -49,7 +53,9 @@ public class Standard(IQuery query, IWorker worker) : BaseLegislator(query, work
                 case MoveType.Promotion:
                     return new PromotionResponse(request, relocation: true);
                 case MoveType.Castle:
-                    Worker.Castle((King)request.PieceToMove, request.Destination);
+                    if (Query.CanKingCastle((IKing)request.PieceToMove, request.Destination))
+                        Worker.Castle((IKing)request.PieceToMove, request.Destination);
+                    else return new MoveResponse(RejectionReason.IllegalCastleAttempt);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

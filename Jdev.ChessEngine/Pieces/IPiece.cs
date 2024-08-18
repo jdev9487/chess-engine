@@ -12,5 +12,4 @@ public interface IPiece : ICloneable
     Colour Colour { get; init; }
     ISquare Position { get; set; }
     bool IsAlive { get; set; }
-    bool HasMoved { get; set; }
 }
