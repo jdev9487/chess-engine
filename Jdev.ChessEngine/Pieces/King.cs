@@ -3,7 +3,7 @@ namespace Jdev.ChessEngine.Pieces;
 using Board;
 using Enums;
 
-public class King : BasePiece
+public class King : BasePiece, IKing
 {
     public override IEnumerable<MoveProposition> GetIntrinsicRelocations()
     {
@@ -39,15 +39,29 @@ public class King : BasePiece
     public override IEnumerable<ISquare> GetPotentialCaptureBlocks(ISquare destination) =>
         GetPotentialRelocationBlocks(destination);
 
-    public Rook? GetCastlingRook(ISquare destination)
-    {
-        return KingsideRook;
-    }
-    
+    public IRook? GetCastlingRook(ISquare destination) =>
+        Colour switch
+        {
+            Colour.White => destination switch
+            {
+                not null when destination == Square.At(File.G, Rank.One) => KingsideRook,
+                not null when destination == Square.At(File.C, Rank.One) => QueensideRook,
+                _ => null
+            },
+            Colour.Black => destination switch
+            {
+                not null when destination == Square.At(File.G, Rank.Eight) => KingsideRook,
+                not null when destination == Square.At(File.C, Rank.Eight) => QueensideRook,
+                _ => null
+            },
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
     public override object Clone() => CloneObject<King>();
 
     public Rook KingsideRook { private get; init; } = default!;
     public Rook QueensideRook { private get; init; } = default!;
+    public bool HasMoved { get; set; } = false;
     
     private IEnumerable<ISquare> GetMoves() =>
         Enumerable.Range(Position.File.Dec, Position.File.Inc - Position.File.Dec + 1)

@@ -3,7 +3,7 @@ namespace Jdev.ChessEngine.Pieces;
 using Board;
 using Enums;
 
-public class Rook : BasePiece
+public class Rook : BasePiece, IRook
 {
     public override IEnumerable<MoveProposition> GetIntrinsicRelocations()
     {
@@ -27,6 +27,7 @@ public class Rook : BasePiece
     
     public override object Clone() => CloneObject<Rook>();
 
+    public bool HasMoved { get; set; } = false;
     public ISquare CastlingLocation { get; init; } = default!;
 
     public override string ToString() => Colour switch
