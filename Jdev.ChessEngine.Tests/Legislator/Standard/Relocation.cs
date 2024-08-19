@@ -12,13 +12,13 @@ public class Relocation : StandardLegislatorBase
     public void ShouldRejectDueToBlock()
     {
         QueryMock
-            .Setup(x => x.IsDestinationIntrinsic(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.IsDestinationIntrinsic(Request.Destination, PieceToMove))
             .Returns(true);
         QueryMock
             .Setup(x => x.IsDestinationOccupied(Request.Destination))
             .Returns(false);
         QueryMock
-            .Setup(x => x.IsPieceBlockedForRelocation(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.IsPieceBlockedForRelocation(Request.Destination, PieceToMove))
             .Returns(true);
         Act();
         Assert.Multiple(() =>
@@ -32,16 +32,16 @@ public class Relocation : StandardLegislatorBase
     public void ShouldAcceptAsStandardRelocation()
     {
         QueryMock
-            .Setup(x => x.IsDestinationIntrinsic(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.IsDestinationIntrinsic(Request.Destination, PieceToMove))
             .Returns(true);
         QueryMock
             .Setup(x => x.IsDestinationOccupied(Request.Destination))
             .Returns(false);
         QueryMock
-            .Setup(x => x.IsPieceBlockedForRelocation(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.IsPieceBlockedForRelocation(Request.Destination, PieceToMove))
             .Returns(false);
         QueryMock
-            .Setup(x => x.GetMoveType(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.GetMoveType(Request.Destination, PieceToMove))
             .Returns(MoveType.Standard);
         Act();
         Assert.Multiple(() =>
@@ -56,36 +56,36 @@ public class Relocation : StandardLegislatorBase
     public void ShouldRelocatePiece()
     {
         QueryMock
-            .Setup(x => x.IsDestinationIntrinsic(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.IsDestinationIntrinsic(Request.Destination, PieceToMove))
             .Returns(true);
         QueryMock
             .Setup(x => x.IsDestinationOccupied(Request.Destination))
             .Returns(false);
         QueryMock
-            .Setup(x => x.IsPieceBlockedForRelocation(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.IsPieceBlockedForRelocation(Request.Destination, PieceToMove))
             .Returns(false);
         QueryMock
-            .Setup(x => x.GetMoveType(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.GetMoveType(Request.Destination, PieceToMove))
             .Returns(MoveType.Standard);
         Act();
         WorkerMock
-            .Verify(x => x.RelocatePiece(Request.PieceToMove, Request.Destination), Times.Once);
+            .Verify(x => x.RelocatePiece(PieceToMove, Request.Destination), Times.Once);
     }
     
     [Test]
     public void ShouldAcceptWithPromotion()
     {
         QueryMock
-            .Setup(x => x.IsDestinationIntrinsic(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.IsDestinationIntrinsic(Request.Destination, PieceToMove))
             .Returns(true);
         QueryMock
             .Setup(x => x.IsDestinationOccupied(Request.Destination))
             .Returns(false);
         QueryMock
-            .Setup(x => x.IsPieceBlockedForRelocation(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.IsPieceBlockedForRelocation(Request.Destination, PieceToMove))
             .Returns(false);
         QueryMock
-            .Setup(x => x.GetMoveType(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.GetMoveType(Request.Destination, PieceToMove))
             .Returns(MoveType.Promotion);
         Act();
         Assert.Multiple(() =>
@@ -100,19 +100,19 @@ public class Relocation : StandardLegislatorBase
     public void ShouldRejectDueToIllegalCastle()
     {
         QueryMock
-            .Setup(x => x.IsDestinationIntrinsic(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.IsDestinationIntrinsic(Request.Destination, PieceToMove))
             .Returns(true);
         QueryMock
             .Setup(x => x.IsDestinationOccupied(Request.Destination))
             .Returns(false);
         QueryMock
-            .Setup(x => x.IsPieceBlockedForRelocation(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.IsPieceBlockedForRelocation(Request.Destination, PieceToMove))
             .Returns(false);
         QueryMock
-            .Setup(x => x.GetMoveType(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.GetMoveType(Request.Destination, PieceToMove))
             .Returns(MoveType.Castle);
         QueryMock
-            .Setup(x => x.CanKingCastle((IKing)Request.PieceToMove, Request.Destination))
+            .Setup(x => x.CanKingCastle((IKing)PieceToMove, Request.Destination))
             .Returns(false);
         Act();
         Assert.Multiple(() =>
@@ -126,22 +126,22 @@ public class Relocation : StandardLegislatorBase
     public void ShouldCastle()
     {
         QueryMock
-            .Setup(x => x.IsDestinationIntrinsic(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.IsDestinationIntrinsic(Request.Destination, PieceToMove))
             .Returns(true);
         QueryMock
             .Setup(x => x.IsDestinationOccupied(Request.Destination))
             .Returns(false);
         QueryMock
-            .Setup(x => x.IsPieceBlockedForRelocation(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.IsPieceBlockedForRelocation(Request.Destination, PieceToMove))
             .Returns(false);
         QueryMock
-            .Setup(x => x.GetMoveType(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.GetMoveType(Request.Destination, PieceToMove))
             .Returns(MoveType.Castle);
         QueryMock
-            .Setup(x => x.CanKingCastle((IKing)Request.PieceToMove, Request.Destination))
+            .Setup(x => x.CanKingCastle((IKing)PieceToMove, Request.Destination))
             .Returns(true);
         Act();
         WorkerMock
-            .Verify(x => x.Castle((IKing)Request.PieceToMove, Request.Destination), Times.Once);
+            .Verify(x => x.Castle((IKing)PieceToMove, Request.Destination), Times.Once);
     }
 }

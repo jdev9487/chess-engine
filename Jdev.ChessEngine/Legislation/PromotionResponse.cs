@@ -11,6 +11,6 @@ public class PromotionResponse(MoveRequest request, bool relocation) : MoveRespo
             Relocation = relocation,
             PieceType = pieceType,
             Destination = request.Destination,
-            PieceToMove = request.PieceToMove
+            Origin = request.Origin
         };
 }

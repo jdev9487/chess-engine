@@ -2,6 +2,7 @@ namespace Jdev.ChessEngine.Tests.Legislator.Standard;
 
 using Moq;
 using Board;
+using ChessEngine.Pieces;
 using Services;
 using Legislation;
 
@@ -12,6 +13,7 @@ public class StandardLegislatorBase
     private protected Mock<IWorker> WorkerMock = default!;
     private protected MoveRequest Request = default!;
     private protected MoveResponse Response = default!;
+    private protected IPiece PieceToMove = default!;
 
     [SetUp]
     public void SetUp()
@@ -22,8 +24,19 @@ public class StandardLegislatorBase
         Request = new MoveRequest
         {
             Destination = Square.At(File.A, Rank.One),
-            PieceToMove = new ChessEngine.Pieces.King()
+            Origin = Square.At(File.B, Rank.Three)
         };
+        PieceToMove = new King();
+        var pieceGroupMock = new Mock<IPieceGroup>();
+        pieceGroupMock
+            .Setup(x => x.PieceAt(Request.Origin))
+            .Returns(PieceToMove);
+        QueryMock
+            .SetupGet(x => x.PieceGroup)
+            .Returns(pieceGroupMock.Object);
+        QueryMock
+            .Setup(x => x.PieceAt(Request.Origin))
+            .Returns(PieceToMove);
     }
 
     private protected void Act() => Response = _standard.EnactMove(Request);

@@ -10,21 +10,21 @@ public class Standard(IQuery query, IWorker worker) : BaseLegislator(query, work
     {
         var pieceToMove = PieceGroup.PieceAt(request.Origin);
         if (pieceToMove is null) return new MoveResponse(RejectionReason.NoPieceAtOrigin);
-        if (!Query.IsDestinationIntrinsic(request.Destination, request.PieceToMove))
+        if (!Query.IsDestinationIntrinsic(request.Destination, pieceToMove))
             return new MoveResponse(RejectionReason.MoveNotIntrinsic);
 
-        if (Query.WouldRequestResultInCheck(request.Destination, request.PieceToMove))
+        if (Query.WouldRequestResultInCheck(request.Destination, pieceToMove))
             return new MoveResponse(RejectionReason.MoveResultsInCheck);
 
         if (Query.IsDestinationOccupied(request.Destination))
         {
-            if (Query.IsPieceBlockedForCapture(request.Destination, request.PieceToMove))
+            if (Query.IsPieceBlockedForCapture(request.Destination, pieceToMove))
                 return new MoveResponse(RejectionReason.MoveBlocked);
-            switch (Query.GetMoveType(request.Destination, request.PieceToMove))
+            switch (Query.GetMoveType(request.Destination, pieceToMove))
             {
                 case MoveType.Standard:
                     Worker.KillPiece(Query.PieceAt(request.Destination)!);
-                    Worker.RelocatePiece(request.PieceToMove, request.Destination);
+                    Worker.RelocatePiece(pieceToMove, request.Destination);
                     break;
                 case MoveType.Promotion:
                     return new PromotionResponse(request, relocation: false);
@@ -36,18 +36,18 @@ public class Standard(IQuery query, IWorker worker) : BaseLegislator(query, work
         }
         else
         {
-            if (Query.IsPieceBlockedForRelocation(request.Destination, request.PieceToMove))
+            if (Query.IsPieceBlockedForRelocation(request.Destination, pieceToMove))
                 return new MoveResponse(RejectionReason.MoveBlocked);
-            switch (Query.GetMoveType(request.Destination, request.PieceToMove))
+            switch (Query.GetMoveType(request.Destination, pieceToMove))
             {
                 case MoveType.Standard:
-                    Worker.RelocatePiece(request.PieceToMove, request.Destination);
+                    Worker.RelocatePiece(pieceToMove, request.Destination);
                     break;
                 case MoveType.Promotion:
                     return new PromotionResponse(request, relocation: true);
                 case MoveType.Castle:
-                    if (Query.CanKingCastle((IKing)request.PieceToMove, request.Destination))
-                        Worker.Castle((IKing)request.PieceToMove, request.Destination);
+                    if (Query.CanKingCastle((IKing)pieceToMove, request.Destination))
+                        Worker.Castle((IKing)pieceToMove, request.Destination);
                     else return new MoveResponse(RejectionReason.IllegalCastleAttempt);
                     break;
                 default:
@@ -60,10 +60,12 @@ public class Standard(IQuery query, IWorker worker) : BaseLegislator(query, work
 
     public override MoveResponse Promote<T>(PromotionRequest<T> request)
     {
+        var pieceToMove = PieceGroup.PieceAt(request.Origin);
+        if (pieceToMove is null) return new MoveResponse(RejectionReason.NoPieceAtOrigin);
         if (request.Relocation)
             Worker.KillPiece(Query.PieceAt(request.Destination));
-        Worker.KillPiece(request.PieceToMove);
-        Worker.SpawnPiece<T>(request.Destination, request.PieceToMove.Colour);
+        Worker.KillPiece(pieceToMove);
+        Worker.SpawnPiece<T>(request.Destination, pieceToMove.Colour);
         
         return new MoveResponse(null);
     }
