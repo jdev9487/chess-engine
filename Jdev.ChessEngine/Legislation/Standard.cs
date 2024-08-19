@@ -8,6 +8,8 @@ public class Standard(IQuery query, IWorker worker) : BaseLegislator(query, work
 {
     public override MoveResponse EnactMove(MoveRequest request)
     {
+        var pieceToMove = PieceGroup.PieceAt(request.Origin);
+        if (pieceToMove is null) return new MoveResponse(RejectionReason.NoPieceAtOrigin);
         if (!Query.IsDestinationIntrinsic(request.Destination, request.PieceToMove))
             return new MoveResponse(RejectionReason.MoveNotIntrinsic);
 

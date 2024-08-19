@@ -7,7 +7,7 @@ using Legislation;
 
 public class StandardLegislatorBase
 {
-    private protected Standard Standard = default!;
+    private Standard _standard = default!;
     private protected Mock<IQuery> QueryMock = default!;
     private protected Mock<IWorker> WorkerMock = default!;
     private protected MoveRequest Request = default!;
@@ -18,7 +18,7 @@ public class StandardLegislatorBase
     {
         QueryMock = new Mock<IQuery>();
         WorkerMock = new Mock<IWorker>();
-        Standard = new Standard(QueryMock.Object, WorkerMock.Object);
+        _standard = new Standard(QueryMock.Object, WorkerMock.Object);
         Request = new MoveRequest
         {
             Destination = Square.At(File.A, Rank.One),
@@ -26,13 +26,13 @@ public class StandardLegislatorBase
         };
     }
 
-    private protected MoveResponse Act() => Response = Standard.EnactMove(Request);
+    private protected void Act() => Response = _standard.EnactMove(Request);
 
     [TearDown]
     public void TearDown()
     {
         QueryMock = null!;
         WorkerMock = null!;
-        Standard = null!;
+        _standard = null!;
     }
 }
