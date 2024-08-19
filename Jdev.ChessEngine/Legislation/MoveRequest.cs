@@ -6,5 +6,5 @@ using Pieces;
 public class MoveRequest
 {
     public IPiece PieceToMove { get; init; } = default!;
-    public Square Destination { get; init; } = default!;
+    public ISquare Destination { get; init; } = default!;
 }

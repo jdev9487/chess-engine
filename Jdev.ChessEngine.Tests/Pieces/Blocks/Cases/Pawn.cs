@@ -2,11 +2,12 @@ namespace Jdev.ChessEngine.Tests.Pieces.Blocks.Cases;
 
 using Board;
 using Enums;
+using Models;
 
 public static class Pawn
 {
     // White
-    public static readonly BlockTestModel WhiteInitialOne = new()
+    public static readonly BlockTestModelPawn WhiteInitialOne = new()
         {
             Origin = Square.At(File.D, Rank.Two),
             Colour = Colour.White,
@@ -18,7 +19,7 @@ public static class Pawn
             ExpectedCaptureBlocks = [],
             HasMoved = false
         };
-    public static readonly BlockTestModel WhiteInitialTwo = new()
+    public static readonly BlockTestModelPawn WhiteInitialTwo = new()
         {
             Origin = Square.At(File.D, Rank.Two),
             Colour = Colour.White,
@@ -31,7 +32,7 @@ public static class Pawn
             ExpectedCaptureBlocks = [],
             HasMoved = false
         };
-    public static readonly BlockTestModel WhiteOne = new()
+    public static readonly BlockTestModelPawn WhiteOne = new()
         {
             Origin = Square.At(File.D, Rank.Five),
             Colour = Colour.White,
@@ -42,14 +43,14 @@ public static class Pawn
             ],
             ExpectedCaptureBlocks = []
         };
-    public static readonly BlockTestModel WhiteTwo = new()
+    public static readonly BlockTestModelPawn WhiteTwo = new()
         {
             Origin = Square.At(File.D, Rank.Five),
             Colour = Colour.White,
             Destination = Square.At(File.D, Rank.Seven),
             ExpectedRelocationBlocks = []
         };
-    public static readonly BlockTestModel WhiteStandardCaptureLeft = new()
+    public static readonly BlockTestModelPawn WhiteStandardCaptureLeft = new()
         {
             Origin = Square.At(File.D, Rank.Five),
             Colour = Colour.White,
@@ -57,7 +58,7 @@ public static class Pawn
             ExpectedRelocationBlocks = [],
             ExpectedCaptureBlocks = [Square.At(File.C, Rank.Six)]
         };
-    public static readonly BlockTestModel WhiteStandardCaptureRight = new()
+    public static readonly BlockTestModelPawn WhiteStandardCaptureRight = new()
         {
             Origin = Square.At(File.D, Rank.Five),
             Colour = Colour.White,
@@ -65,7 +66,7 @@ public static class Pawn
             ExpectedRelocationBlocks = [],
             ExpectedCaptureBlocks = [Square.At(File.E, Rank.Six)]
         };
-    public static readonly BlockTestModel WhiteOff = new()
+    public static readonly BlockTestModelPawn WhiteOff = new()
         {
             Origin = Square.At(File.D, Rank.Five),
             Colour = Colour.White,
@@ -73,7 +74,7 @@ public static class Pawn
             ExpectedRelocationBlocks = []
         };
     // Black
-    public static readonly BlockTestModel BlackInitialOne = new()
+    public static readonly BlockTestModelPawn BlackInitialOne = new()
         {
             Origin = Square.At(File.D, Rank.Seven),
             Colour = Colour.Black,
@@ -85,7 +86,7 @@ public static class Pawn
             ExpectedCaptureBlocks = [],
             HasMoved = false
         };
-    public static readonly BlockTestModel BlackInitialTwo = new()
+    public static readonly BlockTestModelPawn BlackInitialTwo = new()
         {
             Origin = Square.At(File.D, Rank.Seven),
             Colour = Colour.Black,
@@ -98,7 +99,7 @@ public static class Pawn
             ExpectedCaptureBlocks = [],
             HasMoved = false
         };
-    public static readonly BlockTestModel BlackOne = new()
+    public static readonly BlockTestModelPawn BlackOne = new()
         {
             Origin = Square.At(File.D, Rank.Five),
             Colour = Colour.White,
@@ -109,14 +110,15 @@ public static class Pawn
             ],
             ExpectedCaptureBlocks = []
         };
-    public static readonly BlockTestModel BlackTwo = new()
+    public static readonly BlockTestModelPawn BlackTwo = new()
         {
             Origin = Square.At(File.D, Rank.Five),
             Colour = Colour.Black,
             Destination = Square.At(File.D, Rank.Three),
+            HasMoved = true,
             ExpectedRelocationBlocks = []
         };
-    public static readonly BlockTestModel BlackStandardCaptureLeft = new()
+    public static readonly BlockTestModelPawn BlackStandardCaptureLeft = new()
         {
             Origin = Square.At(File.D, Rank.Five),
             Colour = Colour.Black,
@@ -124,7 +126,7 @@ public static class Pawn
             ExpectedRelocationBlocks = [],
             ExpectedCaptureBlocks = [Square.At(File.C, Rank.Four)]
         };
-    public static readonly BlockTestModel BlackStandardCaptureRight = new()
+    public static readonly BlockTestModelPawn BlackStandardCaptureRight = new()
         {
             Origin = Square.At(File.D, Rank.Five),
             Colour = Colour.Black,
@@ -132,7 +134,7 @@ public static class Pawn
             ExpectedRelocationBlocks = [],
             ExpectedCaptureBlocks = [Square.At(File.E, Rank.Four)]
         };
-    public static readonly BlockTestModel BlackOff = new()
+    public static readonly BlockTestModelPawn BlackOff = new()
         {
             Origin = Square.At(File.D, Rank.Five),
             Colour = Colour.Black,

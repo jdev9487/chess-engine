@@ -2,10 +2,11 @@ namespace Jdev.ChessEngine.Tests.Pieces.Intrinsic.Cases;
 
 using Board;
 using Enums;
+using Models;
 
 public static class Pawn
 {
-    public static IntrinsicTestModel OnStartingRankOnAFile(Colour colour) => new()
+    public static IntrinsicTestModelPawn OnStartingRankOnAFile(Colour colour) => new()
         {
             StartingLocation = Square.At(File.A, colour == Colour.White ? Rank.Two : Rank.Seven),
             ExpectedIntrinsicRelocations =
@@ -17,9 +18,10 @@ public static class Pawn
             [
                 Square.At(File.B, colour == Colour.White? Rank.Three : Rank.Six)
             ],
-            Colour = colour
+            Colour = colour,
+            HasMoved = false
         };
-    public static IntrinsicTestModel OnStartingRankOnHFile(Colour colour) => new()
+    public static IntrinsicTestModelPawn OnStartingRankOnHFile(Colour colour) => new()
         {
             StartingLocation = Square.At(File.H, colour == Colour.White ? Rank.Two : Rank.Seven),
             ExpectedIntrinsicRelocations =
@@ -31,9 +33,10 @@ public static class Pawn
             [
                 Square.At(File.G, colour == Colour.White? Rank.Three : Rank.Six)
             ],
-            Colour = colour
+            Colour = colour,
+            HasMoved = false
         };
-    public static IntrinsicTestModel OnStartingRankNotOnEdge(Colour colour) => new()
+    public static IntrinsicTestModelPawn OnStartingRankNotOnEdge(Colour colour) => new()
         {
             StartingLocation = Square.At(File.D, colour == Colour.White ? Rank.Two : Rank.Seven),
             ExpectedIntrinsicRelocations =
@@ -46,9 +49,10 @@ public static class Pawn
                 Square.At(File.C, colour == Colour.White? Rank.Three : Rank.Six),
                 Square.At(File.E, colour == Colour.White? Rank.Three : Rank.Six)
             ],
-            Colour = colour
+            Colour = colour,
+            HasMoved = false
         };
-    public static IntrinsicTestModel NotOnStartingRankOnAFile(Colour colour) => new()
+    public static IntrinsicTestModelPawn NotOnStartingRankOnAFile(Colour colour) => new()
         {
             StartingLocation = Square.At(File.A, Rank.Four),
             ExpectedIntrinsicRelocations =
@@ -61,7 +65,7 @@ public static class Pawn
             ],
             Colour = colour
         };
-    public static IntrinsicTestModel NotOnStartingRankOnHFile(Colour colour) => new()
+    public static IntrinsicTestModelPawn NotOnStartingRankOnHFile(Colour colour) => new()
         {
             StartingLocation = Square.At(File.H, Rank.Four),
             ExpectedIntrinsicRelocations =
@@ -74,7 +78,7 @@ public static class Pawn
             ],
             Colour = colour
         };
-    public static IntrinsicTestModel NotOnStartingRankNotOnEdge(Colour colour) => new()
+    public static IntrinsicTestModelPawn NotOnStartingRankNotOnEdge(Colour colour) => new()
         {
             StartingLocation = Square.At(File.D, Rank.Four),
             ExpectedIntrinsicRelocations =

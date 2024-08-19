@@ -7,7 +7,7 @@ using Pieces;
 public interface IWorker
 {
     void KillPiece(IPiece piece);
-    void SpawnPiece<T>(Square location, Colour colour) where T : IPiece, new();
-    void RelocatePiece(IPiece piece, Square destination);
-    void Castle(IKing king, Square destination);
+    void SpawnPiece<T>(ISquare location, Colour colour) where T : IPiece, new();
+    void RelocatePiece(IPiece piece, ISquare destination);
+    void Castle(IKing king, ISquare destination);
 }

@@ -1,10 +1,11 @@
 namespace Jdev.ChessEngine.Tests.Pieces.Blocks.Cases;
 
 using Board;
+using Models;
 
 public static class Rook
 {
-    public static readonly BlockTestModel North = new()
+    public static readonly BlockTestModelRook North = new()
         {
             Origin = Square.At(File.D, Rank.Four),
             Destination = Square.At(File.D, Rank.Six),
@@ -14,7 +15,7 @@ public static class Rook
                 Square.At(File.D, Rank.Six)
             ]
         };
-    public static readonly BlockTestModel East = new()
+    public static readonly BlockTestModelRook East = new()
         {
             Origin = Square.At(File.D, Rank.Four),
             Destination = Square.At(File.G, Rank.Four),
@@ -25,7 +26,7 @@ public static class Rook
                 Square.At(File.G, Rank.Four)
             ]
         };
-    public static readonly BlockTestModel South = new()
+    public static readonly BlockTestModelRook South = new()
         {
             Origin = Square.At(File.D, Rank.Four),
             Destination = Square.At(File.D, Rank.Three),
@@ -34,7 +35,7 @@ public static class Rook
                 Square.At(File.D, Rank.Three)
             ]
         };
-    public static readonly BlockTestModel West = new()
+    public static readonly BlockTestModelRook West = new()
         {
             Origin = Square.At(File.D, Rank.Four),
             Destination = Square.At(File.A, Rank.Four),
@@ -45,7 +46,7 @@ public static class Rook
                 Square.At(File.A, Rank.Four)
             ]
         };
-    public static readonly BlockTestModel Off = new()
+    public static readonly BlockTestModelRook Off = new()
         {
             Origin = Square.At(File.D, Rank.Four),
             Destination = Square.At(File.A, Rank.Six),

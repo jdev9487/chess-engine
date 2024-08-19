@@ -1,10 +1,11 @@
 namespace Jdev.ChessEngine.Tests.Pieces.Blocks.Cases;
 
 using Board;
+using Models;
 
 public static class Queen
 {
-    public static readonly BlockTestModel North = new()
+    public static readonly BlockTestModelQueen North = new()
         {
             Origin = Square.At(File.D, Rank.Four),
             Destination = Square.At(File.D, Rank.Six),
@@ -14,7 +15,7 @@ public static class Queen
                 Square.At(File.D, Rank.Six)
             ]
         };
-    public static readonly BlockTestModel NorthEast = new()
+    public static readonly BlockTestModelQueen NorthEast = new()
         {
             Origin = Square.At(File.D, Rank.Four),
             Destination = Square.At(File.G, Rank.Seven),
@@ -25,7 +26,7 @@ public static class Queen
                 Square.At(File.G, Rank.Seven)
             ]
         };
-    public static readonly BlockTestModel East = new()
+    public static readonly BlockTestModelQueen East = new()
         {
             Origin = Square.At(File.D, Rank.Four),
             Destination = Square.At(File.G, Rank.Four),
@@ -36,7 +37,7 @@ public static class Queen
                 Square.At(File.G, Rank.Four)
             ]
         };
-    public static readonly BlockTestModel SouthEast = new()
+    public static readonly BlockTestModelQueen SouthEast = new()
         {
             Origin = Square.At(File.D, Rank.Four),
             Destination = Square.At(File.F, Rank.Two),
@@ -46,7 +47,7 @@ public static class Queen
                 Square.At(File.F, Rank.Two)
             ]
         };
-    public static readonly BlockTestModel South = new()
+    public static readonly BlockTestModelQueen South = new()
         {
             Origin = Square.At(File.D, Rank.Four),
             Destination = Square.At(File.D, Rank.Three),
@@ -55,7 +56,7 @@ public static class Queen
                 Square.At(File.D, Rank.Three)
             ]
         };
-    public static readonly BlockTestModel SouthWest = new()
+    public static readonly BlockTestModelQueen SouthWest = new()
         {
             Origin = Square.At(File.D, Rank.Four),
             Destination = Square.At(File.A, Rank.One),
@@ -66,7 +67,7 @@ public static class Queen
                 Square.At(File.A, Rank.One)
             ]
         };
-    public static readonly BlockTestModel West = new()
+    public static readonly BlockTestModelQueen West = new()
         {
             Origin = Square.At(File.D, Rank.Four),
             Destination = Square.At(File.A, Rank.Four),
@@ -77,7 +78,7 @@ public static class Queen
                 Square.At(File.A, Rank.Four)
             ]
         };
-    public static readonly BlockTestModel NorthWest = new()
+    public static readonly BlockTestModelQueen NorthWest = new()
         {
             Origin = Square.At(File.D, Rank.Four),
             Destination = Square.At(File.C, Rank.Five),
@@ -86,7 +87,7 @@ public static class Queen
                 Square.At(File.C, Rank.Five)
             ]
         };
-    public static readonly BlockTestModel Off = new()
+    public static readonly BlockTestModelQueen Off = new()
         {
             Origin = Square.At(File.D, Rank.Four),
             Destination = Square.At(File.A, Rank.Six),
