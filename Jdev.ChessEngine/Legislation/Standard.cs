@@ -32,6 +32,8 @@ public class Standard(IQuery query, IWorker worker, IState state) : BaseLegislat
                     return new PromotionResponse(request, relocation: false);
                 case MoveType.Castle:
                     return new StandardResponse(RejectionReason.IllegalCastleAttempt);
+                case MoveType.EnPassant:
+                    return new StandardResponse(RejectionReason.IllegalEnPassantAttempt);
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -53,6 +55,7 @@ public class Standard(IQuery query, IWorker worker, IState state) : BaseLegislat
                         Worker.Castle((IKing)pieceToMove, request.Destination);
                     else return new StandardResponse(RejectionReason.IllegalCastleAttempt);
                     break;
+                case MoveType.EnPassant:
                 default:
                     throw new ArgumentOutOfRangeException();
             }
