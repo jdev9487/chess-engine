@@ -17,7 +17,7 @@ public class Check : StandardLegislatorBase
         QueryMock
             .Setup(x => x.IsDestinationIntrinsic(It.IsAny<ISquare>(), It.IsAny<IPiece>()))
             .Returns(true);
-        Act();
+        EnactMove();
         Assert.Multiple(() =>
         {
             Assert.That(Response.Success, Is.False);
@@ -37,7 +37,7 @@ public class Check : StandardLegislatorBase
         QueryMock
             .Setup(x => x.IsDestinationIntrinsic(It.IsAny<ISquare>(), It.IsAny<IPiece>()))
             .Returns(true);
-        Act();
+        EnactMove();
         Assert.Multiple(() =>
         {
             Assert.That(Response.Success, Is.True);

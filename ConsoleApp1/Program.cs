@@ -129,6 +129,7 @@ var res = standard.EnactMove(new MoveRequest
     Origin = Square.At(File.B, Rank.Seven),
     Destination = Square.At(File.B, Rank.Eight)
 });
-standard.Promote<Queen>(res.CreateSubsequentRequest());
+var promotionRequest = res.CreateSubsequentRequest();
+if (promotionRequest is not null) standard.Promote<Queen>(promotionRequest);
 
-var x = 1;
+Console.WriteLine();

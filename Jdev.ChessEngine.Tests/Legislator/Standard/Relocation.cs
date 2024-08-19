@@ -20,7 +20,7 @@ public class Relocation : StandardLegislatorBase
         QueryMock
             .Setup(x => x.IsPieceBlockedForRelocation(Request.Destination, PieceToMove))
             .Returns(true);
-        Act();
+        EnactMove();
         Assert.Multiple(() =>
         {
             Assert.That(Response.Success, Is.False);
@@ -43,7 +43,7 @@ public class Relocation : StandardLegislatorBase
         QueryMock
             .Setup(x => x.GetMoveType(Request.Destination, PieceToMove))
             .Returns(MoveType.Standard);
-        Act();
+        EnactMove();
         Assert.Multiple(() =>
         {
             Assert.That(Response.Success, Is.True);
@@ -67,7 +67,7 @@ public class Relocation : StandardLegislatorBase
         QueryMock
             .Setup(x => x.GetMoveType(Request.Destination, PieceToMove))
             .Returns(MoveType.Standard);
-        Act();
+        EnactMove();
         WorkerMock
             .Verify(x => x.RelocatePiece(PieceToMove, Request.Destination), Times.Once);
     }
@@ -87,7 +87,7 @@ public class Relocation : StandardLegislatorBase
         QueryMock
             .Setup(x => x.GetMoveType(Request.Destination, PieceToMove))
             .Returns(MoveType.Promotion);
-        Act();
+        EnactMove();
         Assert.Multiple(() =>
         {
             Assert.That(Response.Success, Is.True);
@@ -114,7 +114,7 @@ public class Relocation : StandardLegislatorBase
         QueryMock
             .Setup(x => x.CanKingCastle((IKing)PieceToMove, Request.Destination))
             .Returns(false);
-        Act();
+        EnactMove();
         Assert.Multiple(() =>
         {
             Assert.That(Response.Success, Is.False);
@@ -140,7 +140,7 @@ public class Relocation : StandardLegislatorBase
         QueryMock
             .Setup(x => x.CanKingCastle((IKing)PieceToMove, Request.Destination))
             .Returns(true);
-        Act();
+        EnactMove();
         WorkerMock
             .Verify(x => x.Castle((IKing)PieceToMove, Request.Destination), Times.Once);
     }

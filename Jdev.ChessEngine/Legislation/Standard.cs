@@ -4,13 +4,11 @@ using Enums;
 using Pieces;
 using Services;
 
-public class Standard(IQuery query, IWorker worker) : BaseLegislator(query, worker)
+public class Standard(IQuery query, IWorker worker, IState state) : BaseLegislator(query, worker)
 {
-    private bool _expectingPromotion;
-    
     public override MoveResponse EnactMove(MoveRequest request)
     {
-        if (_expectingPromotion) return new StandardResponse(RejectionReason.PromotionExpected);
+        if (state.ExpectingPromotion) return new StandardResponse(RejectionReason.PromotionExpected);
         var pieceToMove = PieceGroup.PieceAt(request.Origin);
         if (pieceToMove is null) return new StandardResponse(RejectionReason.NoPieceAtOrigin);
         if (!Query.IsDestinationIntrinsic(request.Destination, pieceToMove))
@@ -30,7 +28,7 @@ public class Standard(IQuery query, IWorker worker) : BaseLegislator(query, work
                     Worker.RelocatePiece(pieceToMove, request.Destination);
                     break;
                 case MoveType.Promotion:
-                    _expectingPromotion = true;
+                    state.ExpectingPromotion = true;
                     return new PromotionResponse(request, relocation: false);
                 case MoveType.Castle:
                     return new StandardResponse(RejectionReason.IllegalCastleAttempt);
@@ -48,7 +46,7 @@ public class Standard(IQuery query, IWorker worker) : BaseLegislator(query, work
                     Worker.RelocatePiece(pieceToMove, request.Destination);
                     break;
                 case MoveType.Promotion:
-                    _expectingPromotion = true;
+                    state.ExpectingPromotion = true;
                     return new PromotionResponse(request, relocation: true);
                 case MoveType.Castle:
                     if (Query.CanKingCastle((IKing)pieceToMove, request.Destination))
@@ -65,15 +63,15 @@ public class Standard(IQuery query, IWorker worker) : BaseLegislator(query, work
 
     public override StandardResponse Promote<T>(PromotionRequest request)
     {
-        if (!_expectingPromotion) return new StandardResponse(RejectionReason.PromotionNotExpected);
+        if (!state.ExpectingPromotion) return new StandardResponse(RejectionReason.PromotionNotExpected);
         var pieceToMove = PieceGroup.PieceAt(request.Origin);
         if (pieceToMove is null) return new StandardResponse(RejectionReason.NoPieceAtOrigin);
-        if (request.Relocation)
-            Worker.KillPiece(Query.PieceAt(request.Destination));
+        if (!request.Relocation)
+            Worker.KillPiece(Query.PieceAt(request.Destination)!);
         Worker.KillPiece(pieceToMove);
         Worker.SpawnPiece<T>(request.Destination, pieceToMove.Colour);
 
-        _expectingPromotion = false;
+        state.ExpectingPromotion = false;
         return new StandardResponse(null);
     }
 }

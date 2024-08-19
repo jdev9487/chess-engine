@@ -20,7 +20,7 @@ public class Capture : StandardLegislatorBase
         QueryMock
             .Setup(x => x.IsPieceBlockedForCapture(Request.Destination, PieceToMove))
             .Returns(true);
-        Act();
+        EnactMove();
         Assert.Multiple(() =>
         {
             Assert.That(Response.Success, Is.False);
@@ -43,7 +43,7 @@ public class Capture : StandardLegislatorBase
         QueryMock
             .Setup(x => x.GetMoveType(Request.Destination, PieceToMove))
             .Returns(MoveType.Standard);
-        Act();
+        EnactMove();
         Assert.Multiple(() =>
         {
             Assert.That(Response.Success, Is.True);
@@ -67,7 +67,7 @@ public class Capture : StandardLegislatorBase
         QueryMock
             .Setup(x => x.GetMoveType(Request.Destination, PieceToMove))
             .Returns(MoveType.Standard);
-        Act();
+        EnactMove();
         WorkerMock
             .Verify(x => x.RelocatePiece(PieceToMove, Request.Destination), Times.Once);
     }
@@ -91,7 +91,7 @@ public class Capture : StandardLegislatorBase
         QueryMock
             .Setup(x => x.PieceAt(Request.Destination))
             .Returns(pieceToKill);
-        Act();
+        EnactMove();
         WorkerMock
             .Verify(x => x.KillPiece(pieceToKill), Times.Once);
     }
@@ -111,7 +111,7 @@ public class Capture : StandardLegislatorBase
         QueryMock
             .Setup(x => x.GetMoveType(Request.Destination, PieceToMove))
             .Returns(MoveType.Promotion);
-        Act();
+        EnactMove();
         Assert.Multiple(() =>
         {
             Assert.That(Response.Success, Is.True);
@@ -135,7 +135,7 @@ public class Capture : StandardLegislatorBase
         QueryMock
             .Setup(x => x.GetMoveType(Request.Destination, PieceToMove))
             .Returns(MoveType.Castle);
-        Act();
+        EnactMove();
         Assert.Multiple(() =>
         {
             Assert.That(Response.Success, Is.False);
