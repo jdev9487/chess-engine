@@ -1,10 +1,11 @@
 namespace Jdev.ChessEngine.Tests.Pieces.Intrinsic;
 
 using Enums;
+using Models;
 
 [TestFixture]
 [TestFixtureSource(nameof(Cases))]
-public class Pawn(IntrinsicTestModel model) : IntrinsicMovesBase<ChessEngine.Pieces.Pawn>(model)
+public class Pawn(IntrinsicTestModelPawn model) : IntrinsicMovesBase<ChessEngine.Pieces.Pawn>(model)
 {
     public static readonly object[] Cases =
     [

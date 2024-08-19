@@ -1,10 +1,12 @@
-namespace Jdev.ChessEngine.Tests.Pieces.Intrinsic;
+namespace Jdev.ChessEngine.Tests.Pieces.Intrinsic.Models;
 
 using Board;
+using ChessEngine.Pieces;
 using Enums;
 
-public class IntrinsicTestModel
+public abstract class IntrinsicTestModelBase<TPiece> where TPiece : IPiece
 {
+    public abstract TPiece CreatePiece();
     private readonly IEnumerable<ISquare>? _expectedIntrinsicCaptures;
     public required ISquare StartingLocation { get; init; }
     public required IEnumerable<ISquare> ExpectedIntrinsicRelocations { get; init; }

@@ -2,8 +2,9 @@ namespace Jdev.ChessEngine.Tests.Pieces.Intrinsic;
 
 using Board;
 using Jdev.ChessEngine.Pieces;
+using Models;
 
-public class IntrinsicMovesBase<TPiece>(IntrinsicTestModel model) where TPiece : IPiece, new()
+public class IntrinsicMovesBase<TPiece>(IntrinsicTestModelBase<TPiece> model) where TPiece : IPiece, new()
 {
     private TPiece _piece = default!;
     private ISquare[] _intrinsicRelocations = default!;
@@ -12,9 +13,7 @@ public class IntrinsicMovesBase<TPiece>(IntrinsicTestModel model) where TPiece :
     [SetUp]
     public void SetUp()
     {
-        _piece = new TPiece
-            // { Position = model.StartingLocation, Colour = model.Colour.GetValueOrDefault(), HasMoved = model.HasMoved };
-            { Position = model.StartingLocation, Colour = model.Colour.GetValueOrDefault() };
+        _piece = model.CreatePiece();
         _intrinsicRelocations = _piece.GetIntrinsicRelocations()
             .Select(mp => mp.Target)
             .ToArray();

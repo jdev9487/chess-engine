@@ -2,10 +2,11 @@ namespace Jdev.ChessEngine.Tests.Pieces.Intrinsic.Cases;
 
 using Board;
 using Enums;
+using Models;
 
 public static class King
 {
-    public static readonly IntrinsicTestModel NotOnBorder = new()
+    public static readonly IntrinsicTestModelKing NotOnBorder = new()
         {
             StartingLocation = Square.At(File.D, Rank.Four),
             ExpectedIntrinsicRelocations =
@@ -20,7 +21,7 @@ public static class King
                 Square.At(File.E, Rank.Five)
             ]
         };
-    public static readonly IntrinsicTestModel OnRightBorder = new()
+    public static readonly IntrinsicTestModelKing OnRightBorder = new()
         {
             StartingLocation = Square.At(File.H, Rank.Four),
             ExpectedIntrinsicRelocations =
@@ -32,7 +33,7 @@ public static class King
                 Square.At(File.H, Rank.Five)
             ]
         };
-    public static readonly IntrinsicTestModel OnLeftBorder = new()
+    public static readonly IntrinsicTestModelKing OnLeftBorder = new()
         {
             StartingLocation = Square.At(File.A, Rank.Four),
             ExpectedIntrinsicRelocations =
@@ -44,7 +45,7 @@ public static class King
                 Square.At(File.A, Rank.Five)
             ]
         };
-    public static readonly IntrinsicTestModel OnTopBorder = new()
+    public static readonly IntrinsicTestModelKing OnTopBorder = new()
         {
             StartingLocation = Square.At(File.D, Rank.Eight),
             ExpectedIntrinsicRelocations =
@@ -56,7 +57,7 @@ public static class King
                 Square.At(File.E, Rank.Eight)
             ]
         };
-    public static readonly IntrinsicTestModel OnBottomBorder = new()
+    public static readonly IntrinsicTestModelKing OnBottomBorder = new()
         {
             StartingLocation = Square.At(File.D, Rank.One),
             ExpectedIntrinsicRelocations =
@@ -68,7 +69,7 @@ public static class King
                 Square.At(File.E, Rank.One)
             ]
         };
-    public static readonly IntrinsicTestModel OnA1 = new()
+    public static readonly IntrinsicTestModelKing OnA1 = new()
         {
             StartingLocation = Square.At(File.A, Rank.One),
             ExpectedIntrinsicRelocations =
@@ -78,7 +79,7 @@ public static class King
                 Square.At(File.B, Rank.One)
             ]
         };
-    public static readonly IntrinsicTestModel OnH1 = new()
+    public static readonly IntrinsicTestModelKing OnH1 = new()
         {
             StartingLocation = Square.At(File.H, Rank.One),
             ExpectedIntrinsicRelocations =
@@ -88,7 +89,7 @@ public static class King
                 Square.At(File.G, Rank.One)
             ]
         };
-    public static readonly IntrinsicTestModel OnH8 = new()
+    public static readonly IntrinsicTestModelKing OnH8 = new()
         {
             StartingLocation = Square.At(File.H, Rank.Eight),
             ExpectedIntrinsicRelocations =
@@ -98,7 +99,7 @@ public static class King
                 Square.At(File.G, Rank.Eight)
             ]
         };
-    public static readonly IntrinsicTestModel OnA8 = new()
+    public static readonly IntrinsicTestModelKing OnA8 = new()
         {
             StartingLocation = Square.At(File.A, Rank.Eight),
             ExpectedIntrinsicRelocations =
@@ -108,7 +109,7 @@ public static class King
                 Square.At(File.B, Rank.Eight)
             ]
         };
-    public static readonly IntrinsicTestModel WhiteOnHomeHasNotMoved = new()
+    public static readonly IntrinsicTestModelKing WhiteOnHomeHasNotMoved = new()
         {
             StartingLocation = Square.At(File.E, Rank.One),
             HasMoved = false,
@@ -132,7 +133,7 @@ public static class King
             ],
             Colour = Colour.White
         };
-    public static readonly IntrinsicTestModel BlackOnHomeHasNotMoved = new()
+    public static readonly IntrinsicTestModelKing BlackOnHomeHasNotMoved = new()
         {
             StartingLocation = Square.At(File.E, Rank.Eight),
             HasMoved = false,

@@ -1,10 +1,11 @@
 namespace Jdev.ChessEngine.Tests.Pieces.Intrinsic.Cases;
 
 using Board;
+using Models;
 
 public static class Queen
 {
-    public static readonly IntrinsicTestModel NotOnBorder = new()
+    public static readonly IntrinsicTestModelQueen NotOnBorder = new()
         {
             StartingLocation = Square.At(File.D, Rank.Four),
             ExpectedIntrinsicRelocations =
@@ -38,7 +39,7 @@ public static class Queen
                 Square.At(File.G, Rank.One)
             ]
         };
-    public static readonly IntrinsicTestModel OnBottomBorder = new()
+    public static readonly IntrinsicTestModelQueen OnBottomBorder = new()
         {
             StartingLocation = Square.At(File.D, Rank.One),
             ExpectedIntrinsicRelocations =
@@ -66,7 +67,7 @@ public static class Queen
                 Square.At(File.H, Rank.Five)
             ]
         };
-    public static readonly IntrinsicTestModel OnRightBorder = new()
+    public static readonly IntrinsicTestModelQueen OnRightBorder = new()
         {
             StartingLocation = Square.At(File.H, Rank.Three),
             ExpectedIntrinsicRelocations =
@@ -94,7 +95,7 @@ public static class Queen
                 Square.At(File.C, Rank.Eight)
             ]
         };
-    public static readonly IntrinsicTestModel OnTopBorder = new()
+    public static readonly IntrinsicTestModelQueen OnTopBorder = new()
         {
             StartingLocation = Square.At(File.D, Rank.Eight),
             ExpectedIntrinsicRelocations =
@@ -122,7 +123,7 @@ public static class Queen
                 Square.At(File.H, Rank.Four)
             ]
         };
-    public static readonly IntrinsicTestModel OnLeftBorder = new()
+    public static readonly IntrinsicTestModelQueen OnLeftBorder = new()
         {
             StartingLocation = Square.At(File.A, Rank.Three),
             ExpectedIntrinsicRelocations =
@@ -150,7 +151,7 @@ public static class Queen
                 Square.At(File.F, Rank.Eight)
             ]
         };
-    public static readonly IntrinsicTestModel OnA1 = new()
+    public static readonly IntrinsicTestModelQueen OnA1 = new()
         {
             StartingLocation = Square.At(File.A, Rank.One),
             ExpectedIntrinsicRelocations =
@@ -178,7 +179,7 @@ public static class Queen
                 Square.At(File.H, Rank.Eight)
             ]
         };
-    public static readonly IntrinsicTestModel OnA8 = new()
+    public static readonly IntrinsicTestModelQueen OnA8 = new()
         {
             StartingLocation = Square.At(File.A, Rank.Eight),
             ExpectedIntrinsicRelocations =
@@ -206,7 +207,7 @@ public static class Queen
                 Square.At(File.H, Rank.One)
             ]
         };
-    public static readonly IntrinsicTestModel OnH8 = new()
+    public static readonly IntrinsicTestModelQueen OnH8 = new()
         {
             StartingLocation = Square.At(File.H, Rank.Eight),
             ExpectedIntrinsicRelocations =
@@ -234,7 +235,7 @@ public static class Queen
                 Square.At(File.A, Rank.One)
             ]
         };
-    public static readonly IntrinsicTestModel OnH1 = new()
+    public static readonly IntrinsicTestModelQueen OnH1 = new()
         {
             StartingLocation = Square.At(File.H, Rank.One),
             ExpectedIntrinsicRelocations =

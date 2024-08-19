@@ -1,8 +1,10 @@
 namespace Jdev.ChessEngine.Tests.Pieces.Intrinsic;
 
+using Models;
+
 [TestFixture]
 [TestFixtureSource(nameof(Cases))]
-public class King(IntrinsicTestModel model) : IntrinsicMovesBase<ChessEngine.Pieces.King>(model)
+public class King(IntrinsicTestModelKing model) : IntrinsicMovesBase<ChessEngine.Pieces.King>(model)
 {
     public static readonly object[] Cases =
     [

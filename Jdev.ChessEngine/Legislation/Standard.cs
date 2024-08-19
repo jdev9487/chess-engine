@@ -8,12 +8,6 @@ public class Standard(IQuery query, IWorker worker) : BaseLegislator(query, work
 {
     public override MoveResponse EnactMove(MoveRequest request)
     {
-        if (Query.IsInCheck(request.PieceToMove.Colour))
-        {
-            if (Query.WouldRequestResultInCheck(request.Destination, request.PieceToMove))
-                return new MoveResponse(RejectionReason.UnresolvedCheck);
-        }
-
         if (!Query.IsDestinationIntrinsic(request.Destination, request.PieceToMove))
             return new MoveResponse(RejectionReason.MoveNotIntrinsic);
 
@@ -33,10 +27,7 @@ public class Standard(IQuery query, IWorker worker) : BaseLegislator(query, work
                 case MoveType.Promotion:
                     return new PromotionResponse(request, relocation: false);
                 case MoveType.Castle:
-                    if (Query.CanKingCastle((IKing)request.PieceToMove, request.Destination))
-                        Worker.Castle((IKing)request.PieceToMove, request.Destination);
-                    else return new MoveResponse(RejectionReason.IllegalCastleAttempt);
-                    break;
+                    return new MoveResponse(RejectionReason.IllegalCastleAttempt);
                 default:
                     throw new ArgumentOutOfRangeException();
             }

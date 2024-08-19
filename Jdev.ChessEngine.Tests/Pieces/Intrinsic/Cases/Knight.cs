@@ -1,10 +1,11 @@
 namespace Jdev.ChessEngine.Tests.Pieces.Intrinsic.Cases;
 
 using Board;
+using Models;
 
 public static class Knight
 {
-    public static readonly IntrinsicTestModel InCenter = new()
+    public static readonly IntrinsicTestModelKnight InCenter = new()
         {
             StartingLocation = Square.At(File.D, Rank.Four),
             ExpectedIntrinsicRelocations =
@@ -19,7 +20,7 @@ public static class Knight
                 Square.At(File.C, Rank.Six)
             ]
         };
-    public static readonly IntrinsicTestModel OnG4 = new()
+    public static readonly IntrinsicTestModelKnight OnG4 = new()
         {
             StartingLocation = Square.At(File.G, Rank.Four),
             ExpectedIntrinsicRelocations =
@@ -32,7 +33,7 @@ public static class Knight
                 Square.At(File.F, Rank.Six)
             ]
         };
-    public static readonly IntrinsicTestModel OnD7 = new()
+    public static readonly IntrinsicTestModelKnight OnD7 = new()
         {
             StartingLocation = Square.At(File.D, Rank.Seven),
             ExpectedIntrinsicRelocations =
@@ -45,7 +46,7 @@ public static class Knight
                 Square.At(File.B, Rank.Eight)
             ]
         };
-    public static readonly IntrinsicTestModel OnB4 = new()
+    public static readonly IntrinsicTestModelKnight OnB4 = new()
         {
             StartingLocation = Square.At(File.B, Rank.Four),
             ExpectedIntrinsicRelocations =
@@ -58,7 +59,7 @@ public static class Knight
                 Square.At(File.C, Rank.Six)
             ]
         };
-    public static readonly IntrinsicTestModel OnD2 = new()
+    public static readonly IntrinsicTestModelKnight OnD2 = new()
         {
             StartingLocation = Square.At(File.D, Rank.Two),
             ExpectedIntrinsicRelocations =
@@ -71,7 +72,7 @@ public static class Knight
                 Square.At(File.B, Rank.One)
             ]
         };
-    public static readonly IntrinsicTestModel OnG2 = new()
+    public static readonly IntrinsicTestModelKnight OnG2 = new()
         {
             StartingLocation = Square.At(File.G, Rank.Two),
             ExpectedIntrinsicRelocations =
@@ -82,7 +83,7 @@ public static class Knight
                 Square.At(File.F, Rank.Four)
             ]
         };
-    public static readonly IntrinsicTestModel OnG7 = new()
+    public static readonly IntrinsicTestModelKnight OnG7 = new()
         {
             StartingLocation = Square.At(File.G, Rank.Seven),
             ExpectedIntrinsicRelocations =
@@ -93,7 +94,7 @@ public static class Knight
                 Square.At(File.F, Rank.Five)
             ]
         };
-    public static readonly IntrinsicTestModel OnB7 = new()
+    public static readonly IntrinsicTestModelKnight OnB7 = new()
         {
             StartingLocation = Square.At(File.B, Rank.Seven),
             ExpectedIntrinsicRelocations =
@@ -104,7 +105,7 @@ public static class Knight
                 Square.At(File.C, Rank.Five)
             ]
         };
-    public static readonly IntrinsicTestModel OnB2 = new()
+    public static readonly IntrinsicTestModelKnight OnB2 = new()
         {
             StartingLocation = Square.At(File.B, Rank.Two),
             ExpectedIntrinsicRelocations =
@@ -115,7 +116,7 @@ public static class Knight
                 Square.At(File.C, Rank.Four)
             ]
         };
-    public static readonly IntrinsicTestModel OnH4 = new()
+    public static readonly IntrinsicTestModelKnight OnH4 = new()
         {
             StartingLocation = Square.At(File.H, Rank.Four),
             ExpectedIntrinsicRelocations =
@@ -126,7 +127,7 @@ public static class Knight
                 Square.At(File.G, Rank.Six)
             ]
         };
-    public static readonly IntrinsicTestModel OnA4 = new()
+    public static readonly IntrinsicTestModelKnight OnA4 = new()
         {
             StartingLocation = Square.At(File.A, Rank.Four),
             ExpectedIntrinsicRelocations =
@@ -137,7 +138,7 @@ public static class Knight
                 Square.At(File.B, Rank.Six)
             ]
         };
-    public static readonly IntrinsicTestModel OnD1 = new()
+    public static readonly IntrinsicTestModelKnight OnD1 = new()
         {
             StartingLocation = Square.At(File.D, Rank.One),
             ExpectedIntrinsicRelocations =
@@ -148,7 +149,7 @@ public static class Knight
                 Square.At(File.F, Rank.Two)
             ]
         };
-    public static readonly IntrinsicTestModel OnD8 = new()
+    public static readonly IntrinsicTestModelKnight OnD8 = new()
         {
             StartingLocation = Square.At(File.D, Rank.Eight),
             ExpectedIntrinsicRelocations =
@@ -159,7 +160,7 @@ public static class Knight
                 Square.At(File.F, Rank.Seven)
             ]
         };
-    public static readonly IntrinsicTestModel OnA1 = new()
+    public static readonly IntrinsicTestModelKnight OnA1 = new()
         {
             StartingLocation = Square.At(File.A, Rank.One),
             ExpectedIntrinsicRelocations =
@@ -168,7 +169,7 @@ public static class Knight
                 Square.At(File.C, Rank.Two)
             ]
         };
-    public static readonly IntrinsicTestModel OnA8 = new()
+    public static readonly IntrinsicTestModelKnight OnA8 = new()
         {
             StartingLocation = Square.At(File.A, Rank.Eight),
             ExpectedIntrinsicRelocations =
@@ -177,7 +178,7 @@ public static class Knight
                 Square.At(File.C, Rank.Seven)
             ]
         };
-    public static readonly IntrinsicTestModel OnH8 = new()
+    public static readonly IntrinsicTestModelKnight OnH8 = new()
         {
             StartingLocation = Square.At(File.H, Rank.Eight),
             ExpectedIntrinsicRelocations =
@@ -186,7 +187,7 @@ public static class Knight
                 Square.At(File.F, Rank.Seven)
             ]
         };
-    public static readonly IntrinsicTestModel OnH1 = new()
+    public static readonly IntrinsicTestModelKnight OnH1 = new()
         {
             StartingLocation = Square.At(File.H, Rank.One),
             ExpectedIntrinsicRelocations =

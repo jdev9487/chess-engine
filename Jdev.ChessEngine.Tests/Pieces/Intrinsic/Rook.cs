@@ -1,8 +1,10 @@
 namespace Jdev.ChessEngine.Tests.Pieces.Intrinsic;
 
+using Models;
+
 [TestFixture]
 [TestFixtureSource(nameof(Cases))]
-public class Rook(IntrinsicTestModel model) : IntrinsicMovesBase<ChessEngine.Pieces.Rook>(model)
+public class Rook(IntrinsicTestModelRook model) : IntrinsicMovesBase<ChessEngine.Pieces.Rook>(model)
 {
     public static readonly object[] Cases =
     [

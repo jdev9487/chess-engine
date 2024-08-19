@@ -1,8 +1,10 @@
 namespace Jdev.ChessEngine.Tests.Pieces.Intrinsic;
 
+using Models;
+
 [TestFixture]
 [TestFixtureSource(nameof(Cases))]
-public class Bishop(IntrinsicTestModel model) : IntrinsicMovesBase<ChessEngine.Pieces.Bishop>(model)
+public class Bishop(IntrinsicTestModelBishop model) : IntrinsicMovesBase<ChessEngine.Pieces.Bishop>(model)
 {
     public static readonly object[] Cases =
     [
