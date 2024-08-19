@@ -118,6 +118,7 @@ public class Capture : StandardLegislatorBase
             Assert.That(Response.RejectionReason, Is.Null);
             Assert.That(Response, Is.TypeOf<PromotionResponse>());
         });
+        StateMock.VerifySet(state => state.ExpectingPromotion = true);
     }
     
     [Test]
