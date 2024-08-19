@@ -12,15 +12,15 @@ public class Capture : StandardLegislatorBase
     public void ShouldRejectDueToBlock()
     {
         QueryMock
-            .Setup(x => x.IsDestinationIntrinsic(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.IsDestinationIntrinsic(Request.Destination, PieceToMove))
             .Returns(true);
         QueryMock
             .Setup(x => x.IsDestinationOccupied(Request.Destination))
             .Returns(true);
         QueryMock
-            .Setup(x => x.IsPieceBlockedForCapture(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.IsPieceBlockedForCapture(Request.Destination, PieceToMove))
             .Returns(true);
-        Act();
+        EnactMove();
         Assert.Multiple(() =>
         {
             Assert.That(Response.Success, Is.False);
@@ -32,18 +32,18 @@ public class Capture : StandardLegislatorBase
     public void ShouldAcceptAsStandardCapture()
     {
         QueryMock
-            .Setup(x => x.IsDestinationIntrinsic(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.IsDestinationIntrinsic(Request.Destination, PieceToMove))
             .Returns(true);
         QueryMock
             .Setup(x => x.IsDestinationOccupied(Request.Destination))
             .Returns(true);
         QueryMock
-            .Setup(x => x.IsPieceBlockedForCapture(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.IsPieceBlockedForCapture(Request.Destination, PieceToMove))
             .Returns(false);
         QueryMock
-            .Setup(x => x.GetMoveType(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.GetMoveType(Request.Destination, PieceToMove))
             .Returns(MoveType.Standard);
-        Act();
+        EnactMove();
         Assert.Multiple(() =>
         {
             Assert.That(Response.Success, Is.True);
@@ -56,42 +56,42 @@ public class Capture : StandardLegislatorBase
     public void ShouldRelocatePiece()
     {
         QueryMock
-            .Setup(x => x.IsDestinationIntrinsic(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.IsDestinationIntrinsic(Request.Destination, PieceToMove))
             .Returns(true);
         QueryMock
             .Setup(x => x.IsDestinationOccupied(Request.Destination))
             .Returns(true);
         QueryMock
-            .Setup(x => x.IsPieceBlockedForCapture(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.IsPieceBlockedForCapture(Request.Destination, PieceToMove))
             .Returns(false);
         QueryMock
-            .Setup(x => x.GetMoveType(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.GetMoveType(Request.Destination, PieceToMove))
             .Returns(MoveType.Standard);
-        Act();
+        EnactMove();
         WorkerMock
-            .Verify(x => x.RelocatePiece(Request.PieceToMove, Request.Destination), Times.Once);
+            .Verify(x => x.RelocatePiece(PieceToMove, Request.Destination), Times.Once);
     }
     
     [Test]
     public void ShouldKillPiece()
     {
         QueryMock
-            .Setup(x => x.IsDestinationIntrinsic(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.IsDestinationIntrinsic(Request.Destination, PieceToMove))
             .Returns(true);
         QueryMock
             .Setup(x => x.IsDestinationOccupied(Request.Destination))
             .Returns(true);
         QueryMock
-            .Setup(x => x.IsPieceBlockedForCapture(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.IsPieceBlockedForCapture(Request.Destination, PieceToMove))
             .Returns(false);
         QueryMock
-            .Setup(x => x.GetMoveType(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.GetMoveType(Request.Destination, PieceToMove))
             .Returns(MoveType.Standard);
         var pieceToKill = new Pawn();
         QueryMock
             .Setup(x => x.PieceAt(Request.Destination))
             .Returns(pieceToKill);
-        Act();
+        EnactMove();
         WorkerMock
             .Verify(x => x.KillPiece(pieceToKill), Times.Once);
     }
@@ -100,42 +100,43 @@ public class Capture : StandardLegislatorBase
     public void ShouldAcceptWithPromotion()
     {
         QueryMock
-            .Setup(x => x.IsDestinationIntrinsic(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.IsDestinationIntrinsic(Request.Destination, PieceToMove))
             .Returns(true);
         QueryMock
             .Setup(x => x.IsDestinationOccupied(Request.Destination))
             .Returns(true);
         QueryMock
-            .Setup(x => x.IsPieceBlockedForCapture(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.IsPieceBlockedForCapture(Request.Destination, PieceToMove))
             .Returns(false);
         QueryMock
-            .Setup(x => x.GetMoveType(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.GetMoveType(Request.Destination, PieceToMove))
             .Returns(MoveType.Promotion);
-        Act();
+        EnactMove();
         Assert.Multiple(() =>
         {
             Assert.That(Response.Success, Is.True);
             Assert.That(Response.RejectionReason, Is.Null);
             Assert.That(Response, Is.TypeOf<PromotionResponse>());
         });
+        StateMock.VerifySet(state => state.ExpectingPromotion = true);
     }
     
     [Test]
     public void ShouldRejectDueToIllegalCastle()
     {
         QueryMock
-            .Setup(x => x.IsDestinationIntrinsic(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.IsDestinationIntrinsic(Request.Destination, PieceToMove))
             .Returns(true);
         QueryMock
             .Setup(x => x.IsDestinationOccupied(Request.Destination))
             .Returns(true);
         QueryMock
-            .Setup(x => x.IsPieceBlockedForCapture(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.IsPieceBlockedForCapture(Request.Destination, PieceToMove))
             .Returns(false);
         QueryMock
-            .Setup(x => x.GetMoveType(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.GetMoveType(Request.Destination, PieceToMove))
             .Returns(MoveType.Castle);
-        Act();
+        EnactMove();
         Assert.Multiple(() =>
         {
             Assert.That(Response.Success, Is.False);

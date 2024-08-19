@@ -1,16 +1,23 @@
 namespace Jdev.ChessEngine.Legislation;
 
 using Enums;
-using Pieces;
 
 public class PromotionResponse(MoveRequest request, bool relocation) : MoveResponse(null)
 {
-    public PromotionRequest<T> CreateSubsequentRequest<T>(PieceType pieceType) where T : IPiece, new() =>
+    public override PromotionRequest CreateSubsequentRequest() =>
         new()
         {
             Relocation = relocation,
-            PieceType = pieceType,
             Destination = request.Destination,
-            PieceToMove = request.PieceToMove
+            Origin = request.Origin
         };
+
+    public override bool PromotionNecessary => true;
+}
+
+public class StandardResponse(RejectionReason? rejectionReason) : MoveResponse(rejectionReason)
+{
+    public override PromotionRequest? CreateSubsequentRequest() => null;
+
+    public override bool PromotionNecessary => false;
 }

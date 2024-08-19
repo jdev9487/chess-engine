@@ -4,17 +4,18 @@ using Pieces;
 using Services;
 using ChessEngine.Legislation;
 
-public abstract class BaseLegislatorFactory<T> where T : BaseLegislator
+public abstract class BaseLegislatorFactory
 {
-    public T Create()
+    public BaseLegislator Create()
     {
         var pieceGroup = CreatePieces();
         var query = CreateQuery(pieceGroup);
         var worker = CreateWorker(pieceGroup);
-        return CreateLegislator(query, worker);
+        var state = new State();
+        return CreateLegislator(query, worker, state);
     }
     protected abstract PieceGroup CreatePieces();
-    protected abstract T CreateLegislator(IQuery query, IWorker worker);
+    protected abstract BaseLegislator CreateLegislator(IQuery query, IWorker worker, IState state);
     protected abstract IQuery CreateQuery(PieceGroup pieceGroup);
     protected abstract IWorker CreateWorker(PieceGroup pieceGroup);
 }

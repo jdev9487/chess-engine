@@ -6,7 +6,7 @@ using Enums;
 using Pieces;
 using Services;
 
-public class StandardLegislatorFactory(IPieceFactory pieceFactory) : BaseLegislatorFactory<Standard>
+public class StandardLegislatorFactory(IPieceFactory pieceFactory) : BaseLegislatorFactory
 {
     protected override PieceGroup CreatePieces()
     {
@@ -59,10 +59,7 @@ public class StandardLegislatorFactory(IPieceFactory pieceFactory) : BaseLegisla
         return new PieceGroup { Pieces = pieces };
     }
 
-    protected override Standard CreateLegislator(IQuery query, IWorker worker)
-    {
-        return new Standard(query, worker);
-    }
+    protected override Standard CreateLegislator(IQuery query, IWorker worker, IState state) => new(query, worker, state);
 
     protected override IQuery CreateQuery(PieceGroup pieceGroup) => new Query(pieceGroup);
 

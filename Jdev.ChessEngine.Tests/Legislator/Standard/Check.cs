@@ -12,12 +12,12 @@ public class Check : StandardLegislatorBase
     public void ShouldRejectDueToMovingIntoCheck()
     {
         QueryMock
-            .Setup(x => x.WouldRequestResultInCheck(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.WouldRequestResultInCheck(Request.Destination, PieceToMove))
             .Returns(true);
         QueryMock
             .Setup(x => x.IsDestinationIntrinsic(It.IsAny<ISquare>(), It.IsAny<IPiece>()))
             .Returns(true);
-        Act();
+        EnactMove();
         Assert.Multiple(() =>
         {
             Assert.That(Response.Success, Is.False);
@@ -29,15 +29,15 @@ public class Check : StandardLegislatorBase
     public void ShouldAcceptDueToResolvedCheck()
     {
         QueryMock
-            .Setup(x => x.IsInCheck(Request.PieceToMove.Colour))
+            .Setup(x => x.IsInCheck(PieceToMove.Colour))
             .Returns(true);
         QueryMock
-            .Setup(x => x.WouldRequestResultInCheck(Request.Destination, Request.PieceToMove))
+            .Setup(x => x.WouldRequestResultInCheck(Request.Destination, PieceToMove))
             .Returns(false);
         QueryMock
             .Setup(x => x.IsDestinationIntrinsic(It.IsAny<ISquare>(), It.IsAny<IPiece>()))
             .Returns(true);
-        Act();
+        EnactMove();
         Assert.Multiple(() =>
         {
             Assert.That(Response.Success, Is.True);
