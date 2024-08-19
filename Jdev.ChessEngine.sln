@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jdev.ChessEngine", "Jdev.Ch
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jdev.ChessEngine.Tests", "Jdev.ChessEngine.Tests\Jdev.ChessEngine.Tests.csproj", "{5137F0AA-08CD-4BA6-BF22-1215F97107A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{5534D9BD-A1A5-4A4B-9DCA-9925F823A56A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{5137F0AA-08CD-4BA6-BF22-1215F97107A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5137F0AA-08CD-4BA6-BF22-1215F97107A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5137F0AA-08CD-4BA6-BF22-1215F97107A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5534D9BD-A1A5-4A4B-9DCA-9925F823A56A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5534D9BD-A1A5-4A4B-9DCA-9925F823A56A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5534D9BD-A1A5-4A4B-9DCA-9925F823A56A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5534D9BD-A1A5-4A4B-9DCA-9925F823A56A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -15,4 +15,5 @@ public interface IQuery
     bool CanKingCastle(IKing castlingKing, ISquare destination);
     MoveType GetMoveType(ISquare destination, IPiece pieceToMove);
     IPiece? PieceAt(ISquare location);
+    IPieceGroup PieceGroup { get; }
 }

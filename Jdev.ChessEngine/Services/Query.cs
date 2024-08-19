@@ -88,4 +88,6 @@ public class Query(IPieceGroup pieceGroup) : IQuery
     {
         return pieceGroup.PieceAt(location.File, location.Rank);
     }
+
+    public IPieceGroup PieceGroup => pieceGroup;
 }

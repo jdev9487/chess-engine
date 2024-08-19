@@ -5,9 +5,11 @@ using Services;
 
 public abstract class BaseLegislator()
 {
-    public IQuery Query { get; }
-    public IWorker Worker { get; }
-    public BaseLegislator(IQuery query, IWorker worker) : this()
+    protected IQuery Query { get; } = default!;
+    protected IWorker Worker { get; } = default!;
+    public IPieceGroup PieceGroup => Query.PieceGroup;
+
+    protected BaseLegislator(IQuery query, IWorker worker) : this()
     {
         Query = query;
         Worker = worker;
