@@ -6,20 +6,23 @@ using Services;
 
 public class Standard(IQuery query, IWorker worker) : BaseLegislator(query, worker)
 {
+    private bool _expectingPromotion;
+    
     public override MoveResponse EnactMove(MoveRequest request)
     {
+        if (_expectingPromotion) return new StandardResponse(RejectionReason.PromotionExpected);
         var pieceToMove = PieceGroup.PieceAt(request.Origin);
-        if (pieceToMove is null) return new MoveResponse(RejectionReason.NoPieceAtOrigin);
+        if (pieceToMove is null) return new StandardResponse(RejectionReason.NoPieceAtOrigin);
         if (!Query.IsDestinationIntrinsic(request.Destination, pieceToMove))
-            return new MoveResponse(RejectionReason.MoveNotIntrinsic);
+            return new StandardResponse(RejectionReason.MoveNotIntrinsic);
 
         if (Query.WouldRequestResultInCheck(request.Destination, pieceToMove))
-            return new MoveResponse(RejectionReason.MoveResultsInCheck);
+            return new StandardResponse(RejectionReason.MoveResultsInCheck);
 
         if (Query.IsDestinationOccupied(request.Destination))
         {
             if (Query.IsPieceBlockedForCapture(request.Destination, pieceToMove))
-                return new MoveResponse(RejectionReason.MoveBlocked);
+                return new StandardResponse(RejectionReason.MoveBlocked);
             switch (Query.GetMoveType(request.Destination, pieceToMove))
             {
                 case MoveType.Standard:
@@ -27,9 +30,10 @@ public class Standard(IQuery query, IWorker worker) : BaseLegislator(query, work
                     Worker.RelocatePiece(pieceToMove, request.Destination);
                     break;
                 case MoveType.Promotion:
+                    _expectingPromotion = true;
                     return new PromotionResponse(request, relocation: false);
                 case MoveType.Castle:
-                    return new MoveResponse(RejectionReason.IllegalCastleAttempt);
+                    return new StandardResponse(RejectionReason.IllegalCastleAttempt);
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -37,36 +41,39 @@ public class Standard(IQuery query, IWorker worker) : BaseLegislator(query, work
         else
         {
             if (Query.IsPieceBlockedForRelocation(request.Destination, pieceToMove))
-                return new MoveResponse(RejectionReason.MoveBlocked);
+                return new StandardResponse(RejectionReason.MoveBlocked);
             switch (Query.GetMoveType(request.Destination, pieceToMove))
             {
                 case MoveType.Standard:
                     Worker.RelocatePiece(pieceToMove, request.Destination);
                     break;
                 case MoveType.Promotion:
+                    _expectingPromotion = true;
                     return new PromotionResponse(request, relocation: true);
                 case MoveType.Castle:
                     if (Query.CanKingCastle((IKing)pieceToMove, request.Destination))
                         Worker.Castle((IKing)pieceToMove, request.Destination);
-                    else return new MoveResponse(RejectionReason.IllegalCastleAttempt);
+                    else return new StandardResponse(RejectionReason.IllegalCastleAttempt);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
         
-        return new MoveResponse(null);
+        return new StandardResponse(null);
     }
 
-    public override MoveResponse Promote<T>(PromotionRequest<T> request)
+    public override StandardResponse Promote<T>(PromotionRequest request)
     {
+        if (!_expectingPromotion) return new StandardResponse(RejectionReason.PromotionNotExpected);
         var pieceToMove = PieceGroup.PieceAt(request.Origin);
-        if (pieceToMove is null) return new MoveResponse(RejectionReason.NoPieceAtOrigin);
+        if (pieceToMove is null) return new StandardResponse(RejectionReason.NoPieceAtOrigin);
         if (request.Relocation)
             Worker.KillPiece(Query.PieceAt(request.Destination));
         Worker.KillPiece(pieceToMove);
         Worker.SpawnPiece<T>(request.Destination, pieceToMove.Colour);
-        
-        return new MoveResponse(null);
+
+        _expectingPromotion = false;
+        return new StandardResponse(null);
     }
 }

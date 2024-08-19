@@ -15,5 +15,5 @@ public abstract class BaseLegislator()
         Worker = worker;
     }
     public abstract MoveResponse EnactMove(MoveRequest request);
-    public abstract MoveResponse Promote<T>(PromotionRequest<T> request) where T : IPiece, new();
+    public abstract MoveResponse Promote<T>(PromotionRequest request) where T : IPiece, new();
 }

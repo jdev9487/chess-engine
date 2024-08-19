@@ -124,11 +124,11 @@ standard.EnactMove(new MoveRequest
     Origin = Square.At(File.C, Rank.Eight),
     Destination = Square.At(File.C, Rank.Seven)
 });
-var res = (PromotionResponse)standard.EnactMove(new MoveRequest
+var res = standard.EnactMove(new MoveRequest
 {
     Origin = Square.At(File.B, Rank.Seven),
     Destination = Square.At(File.B, Rank.Eight)
 });
-standard.Promote(res.CreateSubsequentRequest<Queen>(PieceType.Queen));
+standard.Promote<Queen>(res.CreateSubsequentRequest());
 
 var x = 1;
