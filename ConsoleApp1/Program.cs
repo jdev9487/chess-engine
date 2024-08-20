@@ -131,5 +131,20 @@ var res = standard.EnactMove(new MoveRequest
 });
 var promotionRequest = res.CreateSubsequentRequest();
 if (promotionRequest is not null) standard.Promote<Queen>(promotionRequest);
+standard.EnactMove(new MoveRequest
+{
+    Origin = Square.At(File.D, Rank.Eight),
+    Destination = Square.At(File.B, Rank.Eight)
+});
+standard.EnactMove(new MoveRequest
+{
+    Origin = Square.At(File.D, Rank.Two),
+    Destination = Square.At(File.D, Rank.Four)
+});
+standard.EnactMove(new MoveRequest
+{
+    Origin = Square.At(File.C, Rank.Four),
+    Destination = Square.At(File.D, Rank.Three)
+});
 
 Console.WriteLine();

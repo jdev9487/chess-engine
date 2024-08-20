@@ -79,6 +79,21 @@ public class Query(IPieceGroup pieceGroup) : IQuery
             case King { Colour: Colour.Black, HasMoved: false }
                 when destination == Square.At(File.G, Rank.Eight) || destination == Square.At(File.C, Rank.Eight):
                 return MoveType.Castle;
+            case Pawn when pieceToMove.Colour == Colour.White && 
+                           pieceToMove.Position.Rank == Rank.Five && 
+                           destination.Rank == Rank.Six &&
+                           (destination.File == pieceToMove.Position.File + 1 || destination.File == pieceToMove.Position.File - 1) &&
+                           PieceAt(destination) is not null &&
+                           PieceAt(destination) is IPawn &&
+                           ((IPawn)PieceAt(destination)).OpenToEnPassant:
+            case Pawn when pieceToMove.Colour == Colour.Black && 
+                           pieceToMove.Position.Rank == Rank.Four && 
+                           destination.Rank == Rank.Three &&
+                           (destination.File == pieceToMove.Position.File + 1 || destination.File == pieceToMove.Position.File - 1) &&
+                           PieceAt(destination.File, destination.Rank + 1) is not null &&
+                           PieceAt(destination.File, destination.Rank + 1) is IPawn &&
+                           ((IPawn)PieceAt(destination.File, destination.Rank + 1)).OpenToEnPassant:
+                return MoveType.EnPassant;
             default:
                 return MoveType.Standard;
         }
@@ -90,4 +105,6 @@ public class Query(IPieceGroup pieceGroup) : IQuery
     }
 
     public IPieceGroup PieceGroup => pieceGroup;
+
+    private IPiece? PieceAt(File file, Rank rank) => pieceGroup.PieceAt(file, rank);
 }

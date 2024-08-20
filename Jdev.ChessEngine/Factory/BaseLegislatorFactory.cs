@@ -11,7 +11,7 @@ public abstract class BaseLegislatorFactory
         var pieceGroup = CreatePieces();
         var query = CreateQuery(pieceGroup);
         var worker = CreateWorker(pieceGroup);
-        var state = new State();
+        var state = new State(pieceGroup);
         return CreateLegislator(query, worker, state);
     }
     protected abstract PieceGroup CreatePieces();

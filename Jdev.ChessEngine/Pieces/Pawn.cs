@@ -85,4 +85,5 @@ public class Pawn : BasePiece, IPawn
     };
 
     public bool HasMoved { get; set; }
+    public bool OpenToEnPassant { get; set; }
 }
