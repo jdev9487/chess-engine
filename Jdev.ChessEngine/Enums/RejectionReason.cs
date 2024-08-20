@@ -2,6 +2,7 @@ namespace Jdev.ChessEngine.Enums;
 
 public enum RejectionReason
 {
+    IncorrectColour,
     MoveNotIntrinsic,
     MoveResultsInCheck,
     MoveBlocked,

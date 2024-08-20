@@ -12,6 +12,7 @@ public class Standard(IQuery query, IWorker worker, IState state) : BaseLegislat
         if (state.ExpectingPromotion) return new StandardResponse(RejectionReason.PromotionExpected);
         var pieceToMove = PieceGroup.PieceAt(request.Origin);
         if (pieceToMove is null) return new StandardResponse(RejectionReason.NoPieceAtOrigin);
+        if (pieceToMove.Colour != state.ColourToMove) return new StandardResponse(RejectionReason.IncorrectColour);
         if (!Query.IsDestinationIntrinsic(request.Destination, pieceToMove))
             return new StandardResponse(RejectionReason.MoveNotIntrinsic);
 
@@ -71,6 +72,7 @@ public class Standard(IQuery query, IWorker worker, IState state) : BaseLegislat
         }
         
         state.UpdateEnPassantStatus();
+        state.FlipColourToMove();
         
         return new StandardResponse(null);
     }
