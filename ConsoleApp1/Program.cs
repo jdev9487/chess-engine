@@ -1,18 +1,62 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using Jdev.ChessEngine.Board;
-using Jdev.ChessEngine.Enums;
+﻿using Jdev.ChessEngine.Board;
 using Jdev.ChessEngine.Factory;
 using Jdev.ChessEngine.Legislation;
 using Jdev.ChessEngine.Pieces;
 using File = Jdev.ChessEngine.Board.File;
 
-Console.WriteLine("Hello, World!");
-
 var slf = new StandardLegislatorFactory(new PieceFactory());
 var standard = slf.Create();
 
 var pieces = standard.PieceGroup;
+Console.BackgroundColor = ConsoleColor.DarkYellow;
+Console.ForegroundColor = ConsoleColor.Black;
+Console.WriteLine(pieces);
+
+while (true)
+{
+    var move = Console.ReadLine();
+    var response = standard.EnactMove(new MoveRequest
+    {
+        Origin = Square.At(GetFile(move[0]), GetRank(move[1])),
+        Destination = Square.At(GetFile(move[2]), GetRank(move[3]))
+    });
+    if (response.PromotionNecessary)
+    {
+        var promRequest = response.CreateSubsequentRequest();
+        standard.Promote<Queen>(promRequest);
+    }
+    Console.Clear();
+    Console.WriteLine(pieces);
+}
+
+File GetFile(char file)
+{
+    return file.ToString().ToLower() switch
+    {
+        "a" => File.A,
+        "b" => File.B,
+        "c" => File.C,
+        "d" => File.D,
+        "e" => File.E,
+        "f" => File.F,
+        "g" => File.G,
+        "h" => File.H,
+    };
+}
+Rank GetRank(char rank)
+{
+    return rank.ToString() switch
+    {
+        "1" => Rank.One,
+        "2" => Rank.Two,
+        "3" => Rank.Three,
+        "4" => Rank.Four,
+        "5" => Rank.Five,
+        "6" => Rank.Six,
+        "7" => Rank.Seven,
+        "8" => Rank.Eight
+    };
+}
 
 standard.EnactMove(new MoveRequest
 {
