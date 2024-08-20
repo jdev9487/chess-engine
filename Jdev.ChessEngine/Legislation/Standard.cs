@@ -1,5 +1,6 @@
 namespace Jdev.ChessEngine.Legislation;
 
+using Board;
 using Enums;
 using Pieces;
 using Services;
@@ -32,6 +33,8 @@ public class Standard(IQuery query, IWorker worker, IState state) : BaseLegislat
                     return new PromotionResponse(request, relocation: false);
                 case MoveType.Castle:
                     return new StandardResponse(RejectionReason.IllegalCastleAttempt);
+                case MoveType.EnPassant:
+                    return new StandardResponse(RejectionReason.IllegalEnPassantAttempt);
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -53,10 +56,21 @@ public class Standard(IQuery query, IWorker worker, IState state) : BaseLegislat
                         Worker.Castle((IKing)pieceToMove, request.Destination);
                     else return new StandardResponse(RejectionReason.IllegalCastleAttempt);
                     break;
+                case MoveType.EnPassant:
+                    Worker.RelocatePiece(pieceToMove, request.Destination);
+                    Worker.KillPiece(Query.PieceAt(pieceToMove.Colour switch
+                    {
+                        Colour.White => Square.At(request.Destination.File, request.Destination.Rank - 1),
+                        Colour.Black => Square.At(request.Destination.File, request.Destination.Rank + 1),
+                        _ => throw new ArgumentOutOfRangeException()
+                    }));
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
+        
+        state.UpdateEnPassantStatus();
         
         return new StandardResponse(null);
     }

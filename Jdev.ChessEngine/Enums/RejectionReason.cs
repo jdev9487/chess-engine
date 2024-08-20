@@ -6,6 +6,7 @@ public enum RejectionReason
     MoveResultsInCheck,
     MoveBlocked,
     IllegalCastleAttempt,
+    IllegalEnPassantAttempt,
     NoPieceAtOrigin,
     PromotionExpected,
     PromotionNotExpected
