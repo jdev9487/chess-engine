@@ -2,8 +2,7 @@ namespace Jdev.ChessEngine.Pieces;
 
 using Board;
 
-public interface IRook : IPiece
+public interface IRook : IPiece, IHasMoved
 {
-    bool HasMoved { get; set; }
     ISquare CastlingLocation { get; init; }
 }
