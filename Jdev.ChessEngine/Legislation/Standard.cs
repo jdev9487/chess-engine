@@ -88,6 +88,7 @@ public class Standard(IQuery query, IWorker worker, IState state) : BaseLegislat
         Worker.SpawnPiece<T>(request.Destination, pieceToMove.Colour);
 
         state.ExpectingPromotion = false;
+        state.FlipColourToMove();
         return new StandardResponse(null);
     }
 }
