@@ -3,7 +3,6 @@ namespace Jdev.ChessEngine.Tests.Legislator.Standard;
 using Board;
 using ChessEngine.Pieces;
 using Enums;
-using Legislation;
 using Moq;
 
 [TestFixture]
