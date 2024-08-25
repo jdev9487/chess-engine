@@ -6,11 +6,6 @@ using Pieces;
 public class State(PieceGroup pieceGroup) : IState
 {
     public bool ExpectingPromotion { get; set; }
-    public void UpdateEnPassantStatus()
-    {
-        var pawns = pieceGroup.Pieces.Where(x => x is IPawn).Cast<IPawn>();
-        foreach (var pawn in pawns) pawn.OpenToEnPassant = true;
-    }
 
     public void FlipColourToMove()
     {

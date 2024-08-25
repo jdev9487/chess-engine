@@ -20,6 +20,8 @@ public class Worker(IPieceGroup pieceGroup, IPieceFactory pieceFactory) : IWorke
 
     public void RelocatePiece(IPiece piece, ISquare destination)
     {
+        if (piece is IPawn pawn && Rank.Distance(pawn.Position.Rank, destination.Rank) == 2)
+            pawn.OpenToEnPassant = true;
         piece.Position = destination;
         if (piece is IHasMoved hasMovedAblePiece) UpdateHasMoved(hasMovedAblePiece);
     }
@@ -31,6 +33,14 @@ public class Worker(IPieceGroup pieceGroup, IPieceFactory pieceFactory) : IWorke
         king.Position = destination;
         UpdateHasMoved(castlingRook);
         UpdateHasMoved(king);
+    }
+    
+    public void UpdateEnPassantStatus(Colour colour)
+    {
+        var pawns = pieceGroup.Pieces
+            .Where(x => x.Colour == colour)
+            .Where(x => x is IPawn).Cast<IPawn>();
+        foreach (var pawn in pawns) pawn.OpenToEnPassant = false;
     }
 
     private static void UpdateHasMoved(IHasMoved piece) => piece.HasMoved = true;
