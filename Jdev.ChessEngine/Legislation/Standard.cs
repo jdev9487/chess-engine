@@ -58,6 +58,9 @@ public class Standard(IQuery query, IWorker worker, IState state) : BaseLegislat
                     else return new StandardResponse(RejectionReason.IllegalCastleAttempt);
                     break;
                 case MoveType.EnPassant:
+                    var pawnToBeCaptured = Query.GetPawnToBeCapturedByEnPassant(pieceToMove, request.Destination);
+                    if (!pawnToBeCaptured.OpenToEnPassant)
+                        return new StandardResponse(RejectionReason.IllegalEnPassantAttempt);
                     Worker.RelocatePiece(pieceToMove, request.Destination);
                     Worker.KillPiece(Query.PieceAt(pieceToMove.Colour switch
                     {
@@ -71,7 +74,7 @@ public class Standard(IQuery query, IWorker worker, IState state) : BaseLegislat
             }
         }
         
-        state.UpdateEnPassantStatus();
+        worker.UpdateEnPassantStatus(state.ColourToMove.Not());
         state.FlipColourToMove();
         
         return new StandardResponse(null);

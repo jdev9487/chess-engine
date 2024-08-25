@@ -83,16 +83,16 @@ public class Query(IPieceGroup pieceGroup) : IQuery
                            pieceToMove.Position.Rank == Rank.Five && 
                            destination.Rank == Rank.Six &&
                            (destination.File == pieceToMove.Position.File + 1 || destination.File == pieceToMove.Position.File - 1) &&
-                           PieceAt(destination) is not null &&
-                           PieceAt(destination) is IPawn &&
-                           ((IPawn)PieceAt(destination)).OpenToEnPassant:
+                           PieceAt(destination.File, destination.Rank - 1) is not null &&
+                           PieceAt(destination.File, destination.Rank - 1) is IPawn: //&&
+                           // ((IPawn)PieceAt(destination.File, destination.Rank - 1)).OpenToEnPassant:
             case Pawn when pieceToMove.Colour == Colour.Black && 
                            pieceToMove.Position.Rank == Rank.Four && 
                            destination.Rank == Rank.Three &&
                            (destination.File == pieceToMove.Position.File + 1 || destination.File == pieceToMove.Position.File - 1) &&
                            PieceAt(destination.File, destination.Rank + 1) is not null &&
-                           PieceAt(destination.File, destination.Rank + 1) is IPawn &&
-                           ((IPawn)PieceAt(destination.File, destination.Rank + 1)).OpenToEnPassant:
+                           PieceAt(destination.File, destination.Rank + 1) is IPawn: // &&
+                           // ((IPawn)PieceAt(destination.File, destination.Rank + 1)).OpenToEnPassant:
                 return MoveType.EnPassant;
             default:
                 return MoveType.Standard;
@@ -105,6 +105,14 @@ public class Query(IPieceGroup pieceGroup) : IQuery
     }
 
     public IPieceGroup PieceGroup => pieceGroup;
+    
+    public IPawn GetPawnToBeCapturedByEnPassant(IPiece pieceToMove, ISquare requestDestination) =>
+        pieceToMove.Colour switch
+        {
+            Colour.White => (IPawn)PieceAt(requestDestination.File, requestDestination.Rank - 1),
+            Colour.Black => (IPawn)PieceAt(requestDestination.File, requestDestination.Rank + 1),
+            _ => throw new ArgumentOutOfRangeException()
+        };
 
     private IPiece? PieceAt(File file, Rank rank) => pieceGroup.PieceAt(file, rank);
 }

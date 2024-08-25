@@ -10,4 +10,5 @@ public interface IWorker
     void SpawnPiece<T>(ISquare location, Colour colour) where T : IPiece, new();
     void RelocatePiece(IPiece piece, ISquare destination);
     void Castle(IKing king, ISquare destination);
+    void UpdateEnPassantStatus(Colour colour);
 }

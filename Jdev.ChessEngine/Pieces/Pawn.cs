@@ -55,7 +55,6 @@ public class Pawn : BasePiece, IPawn
 
     public override object Clone() => CloneObject<Pawn>();
 
-
     private bool IsOnPenultimateRank => Colour switch
     {
         Colour.White => Position.Rank == Rank.Seven,
