@@ -1,9 +1,8 @@
 namespace Jdev.ChessEngine.Legislation;
 
 using Enums;
-using Pieces;
 
-public class State(PieceGroup pieceGroup) : IState
+public class State : IState
 {
     public bool ExpectingPromotion { get; set; }
 

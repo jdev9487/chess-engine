@@ -28,8 +28,8 @@ public class ResultInCheck(CheckTestModel model) : QueryBase
     {
         var checkingMock = new Mock<IPiece>();
         checkingMock.SetupGet(x => x.Colour).Returns(model.CheckingColour);
-        checkingMock.Setup(x => x.GetIntrinsicCaptures()).Returns(new List<MoveProposition>
-            { new() { Target = _kingDestination } });
+        checkingMock.Setup(x => x.GetIntrinsicCaptures()).Returns(new List<ISquare>
+            { _kingDestination });
         _kingUnderQuestion = new King { Colour = model.CheckedKingColour, Position = _kingOrigin };
         PieceGroupMock
             .SetupGet(x => x.Pieces)
@@ -47,8 +47,8 @@ public class ResultInCheck(CheckTestModel model) : QueryBase
     {
         var checkingMock = new Mock<IPiece>();
         checkingMock.SetupGet(x => x.Colour).Returns(model.CheckingColour);
-        checkingMock.Setup(x => x.GetIntrinsicCaptures()).Returns(new List<MoveProposition>
-            { new() { Target = _kingNotHere } });
+        checkingMock.Setup(x => x.GetIntrinsicCaptures()).Returns(new List<ISquare>
+            { _kingNotHere });
         _kingUnderQuestion = new King { Colour = model.CheckedKingColour, Position = _kingOrigin };
         PieceGroupMock
             .SetupGet(x => x.Pieces)
@@ -66,8 +66,8 @@ public class ResultInCheck(CheckTestModel model) : QueryBase
     {
         var checkingMock = new Mock<IPiece>();
         checkingMock.SetupGet(x => x.Colour).Returns(model.CheckingColour);
-        checkingMock.Setup(x => x.GetIntrinsicCaptures()).Returns(new List<MoveProposition>
-            { new() { Target = _kingNotHere } });
+        checkingMock.Setup(x => x.GetIntrinsicCaptures()).Returns(new List<ISquare>
+            { _kingNotHere });
         _kingUnderQuestion = new King { Colour = model.CheckedKingColour, Position = _kingOrigin };
         var pawnAtKingDestination = new Pawn { Colour = model.CheckingColour, Position = _kingDestination };
         var pieces = new List<IPiece>

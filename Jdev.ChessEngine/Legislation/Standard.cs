@@ -59,22 +59,17 @@ public class Standard(IQuery query, IWorker worker, IState state) : BaseLegislat
                     break;
                 case MoveType.EnPassant:
                     var pawnToBeCaptured = Query.GetPawnToBeCapturedByEnPassant(pieceToMove, request.Destination);
-                    if (!pawnToBeCaptured.OpenToEnPassant)
+                    if (pawnToBeCaptured is null || !pawnToBeCaptured.OpenToEnPassant)
                         return new StandardResponse(RejectionReason.IllegalEnPassantAttempt);
                     Worker.RelocatePiece(pieceToMove, request.Destination);
-                    Worker.KillPiece(Query.PieceAt(pieceToMove.Colour switch
-                    {
-                        Colour.White => Square.At(request.Destination.File, request.Destination.Rank - 1),
-                        Colour.Black => Square.At(request.Destination.File, request.Destination.Rank + 1),
-                        _ => throw new ArgumentOutOfRangeException()
-                    }));
+                    Worker.KillPiece(pawnToBeCaptured);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
         
-        worker.UpdateEnPassantStatus(state.ColourToMove.Not());
+        Worker.UpdateEnPassantStatus(state.ColourToMove.Not());
         state.FlipColourToMove();
         
         return new StandardResponse(null);

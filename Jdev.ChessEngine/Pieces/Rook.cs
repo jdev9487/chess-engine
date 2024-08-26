@@ -5,20 +5,18 @@ using Enums;
 
 public class Rook : BasePiece, IRook
 {
-    public override IEnumerable<MoveProposition> GetIntrinsicRelocations()
+    public override IEnumerable<ISquare> GetIntrinsicRelocations()
     {
         var availableRankSquares = Rank.Enumerate
             .Where(r => r != Position.Rank)
-            .Select(r => new MoveProposition
-                { Target = Square.At(Position.File, r), SubsequentMove = MoveType.Standard });
+            .Select(r => Square.At(Position.File, r));
         var availableFileSquares = File.Enumerate
             .Where(f => f != Position.File)
-            .Select(f => new MoveProposition
-                { Target = Square.At(f, Position.Rank), SubsequentMove = MoveType.Standard });
+            .Select(f => Square.At(f, Position.Rank));
         return availableFileSquares.Concat(availableRankSquares).AsEnumerable();
     }
 
-    public override IEnumerable<MoveProposition> GetIntrinsicCaptures() => GetIntrinsicRelocations();
+    public override IEnumerable<ISquare> GetIntrinsicCaptures() => GetIntrinsicRelocations();
     public override IEnumerable<ISquare> GetPotentialRelocationBlocks(ISquare destination) =>
         Position.GetStraightsInBetween(destination).Where(s => s != Position);
 
@@ -27,7 +25,7 @@ public class Rook : BasePiece, IRook
     
     public override object Clone() => CloneObject<Rook>();
 
-    public bool HasMoved { get; set; } = false;
+    public bool HasMoved { get; set; }
     public ISquare CastlingLocation { get; init; } = default!;
 
     public override string ToString() => Colour switch

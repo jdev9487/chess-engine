@@ -14,12 +14,8 @@ public class IntrinsicMovesBase<TPiece>(IntrinsicTestModelBase<TPiece> model) wh
     public void SetUp()
     {
         _piece = model.CreatePiece();
-        _intrinsicRelocations = _piece.GetIntrinsicRelocations()
-            .Select(mp => mp.Target)
-            .ToArray();
-        _intrinsicCaptures = _piece.GetIntrinsicCaptures()
-            .Select(mp => mp.Target)
-            .ToArray();
+        _intrinsicRelocations = _piece.GetIntrinsicRelocations().ToArray();
+        _intrinsicCaptures = _piece.GetIntrinsicCaptures().ToArray();
     }
 
     [Test]

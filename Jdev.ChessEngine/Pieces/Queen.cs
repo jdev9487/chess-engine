@@ -5,10 +5,9 @@ using Enums;
 
 public class Queen : BasePiece
 {
-    public override IEnumerable<MoveProposition> GetIntrinsicRelocations() =>
-        GetMoves().Select(s => new MoveProposition { Target = s, SubsequentMove = MoveType.Standard });
+    public override IEnumerable<ISquare> GetIntrinsicRelocations() => GetMoves();
 
-    public override IEnumerable<MoveProposition> GetIntrinsicCaptures() => GetIntrinsicRelocations();
+    public override IEnumerable<ISquare> GetIntrinsicCaptures() => GetIntrinsicRelocations();
     public override IEnumerable<ISquare> GetPotentialRelocationBlocks(ISquare destination) =>
         Position.GetDiagonalsInBetween(destination)
             .Concat(Position.GetStraightsInBetween(destination))

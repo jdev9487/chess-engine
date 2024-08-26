@@ -7,10 +7,7 @@ using Pieces;
 
 public class Worker(IPieceGroup pieceGroup, IPieceFactory pieceFactory) : IWorker
 {
-    public void KillPiece(IPiece piece)
-    {
-        pieceGroup.Pieces.Remove(piece);
-    }
+    public void KillPiece(IPiece piece) => pieceGroup.Pieces.Remove(piece);
 
     public void SpawnPiece<T>(ISquare location, Colour colour) where T : IPiece, new()
     {
@@ -28,7 +25,7 @@ public class Worker(IPieceGroup pieceGroup, IPieceFactory pieceFactory) : IWorke
 
     public void Castle(IKing king, ISquare destination)
     {
-        var castlingRook = king.GetCastlingRook(destination);
+        var castlingRook = king.GetCastlingRook(destination)!;
         castlingRook.Position = castlingRook.CastlingLocation;
         king.Position = destination;
         UpdateHasMoved(castlingRook);

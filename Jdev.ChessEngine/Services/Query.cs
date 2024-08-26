@@ -11,14 +11,14 @@ public class Query(IPieceGroup pieceGroup) : IQuery
         .Any(p =>
         {
             var checkTarget = p.GetIntrinsicCaptures()
-                .SingleOrDefault(mp => mp.Target == pieceGroup.King(colour).Position);
-            return checkTarget is not null && !IsPieceBlockedForCapture(checkTarget.Target, p);
+                .SingleOrDefault(s => s == pieceGroup.King(colour).Position);
+            return checkTarget is not null && !IsPieceBlockedForCapture(checkTarget, p);
         });
 
     public bool IsDestinationIntrinsic(ISquare destination, IPiece pieceToMove)
     {
         var intrinsicMoves = pieceToMove.GetIntrinsicRelocations().Concat(pieceToMove.GetIntrinsicCaptures()).ToArray();
-        return intrinsicMoves.Select(mp => mp.Target).Contains(destination);
+        return intrinsicMoves.Contains(destination);
     }
 
     public bool WouldRequestResultInCheck(ISquare proposedDestination, IPiece pieceToMove)
@@ -32,10 +32,7 @@ public class Query(IPieceGroup pieceGroup) : IQuery
         return new Query(ghostPieceGroup).IsInCheck(pieceToMove.Colour);
     }
 
-    public bool IsDestinationOccupied(ISquare destination)
-    {
-        return pieceGroup.PieceAt(destination) is not null;
-    }
+    public bool IsDestinationOccupied(ISquare destination) => pieceGroup.PieceAt(destination) is not null;
 
     public bool IsPieceBlockedForCapture(ISquare destination, IPiece pieceToMove)
     {
@@ -49,6 +46,8 @@ public class Query(IPieceGroup pieceGroup) : IQuery
 
     public bool IsPieceBlockedForRelocation(ISquare destination, IPiece pieceToMove)
     {
+        if (pieceToMove is IPawn && GetMoveType(destination, pieceToMove) == MoveType.Standard)
+            return pieceToMove.Position.File != destination.File;
         return pieceToMove.GetPotentialRelocationBlocks(destination)
             .Any(s => PieceAt(s) is not null);
     }
@@ -79,40 +78,40 @@ public class Query(IPieceGroup pieceGroup) : IQuery
             case King { Colour: Colour.Black, HasMoved: false }
                 when destination == Square.At(File.G, Rank.Eight) || destination == Square.At(File.C, Rank.Eight):
                 return MoveType.Castle;
-            case Pawn when pieceToMove.Colour == Colour.White && 
-                           pieceToMove.Position.Rank == Rank.Five && 
-                           destination.Rank == Rank.Six &&
-                           (destination.File == pieceToMove.Position.File + 1 || destination.File == pieceToMove.Position.File - 1) &&
-                           PieceAt(destination.File, destination.Rank - 1) is not null &&
-                           PieceAt(destination.File, destination.Rank - 1) is IPawn: //&&
-                           // ((IPawn)PieceAt(destination.File, destination.Rank - 1)).OpenToEnPassant:
-            case Pawn when pieceToMove.Colour == Colour.Black && 
-                           pieceToMove.Position.Rank == Rank.Four && 
-                           destination.Rank == Rank.Three &&
-                           (destination.File == pieceToMove.Position.File + 1 || destination.File == pieceToMove.Position.File - 1) &&
-                           PieceAt(destination.File, destination.Rank + 1) is not null &&
-                           PieceAt(destination.File, destination.Rank + 1) is IPawn: // &&
-                           // ((IPawn)PieceAt(destination.File, destination.Rank + 1)).OpenToEnPassant:
+            case Pawn when AttemptingEnPassant(pieceToMove, destination):
                 return MoveType.EnPassant;
             default:
                 return MoveType.Standard;
         }
     }
 
-    public IPiece? PieceAt(ISquare location)
-    {
-        return pieceGroup.PieceAt(location.File, location.Rank);
-    }
+    public IPiece? PieceAt(ISquare location) => pieceGroup.PieceAt(location.File, location.Rank);
 
     public IPieceGroup PieceGroup => pieceGroup;
     
-    public IPawn GetPawnToBeCapturedByEnPassant(IPiece pieceToMove, ISquare requestDestination) =>
-        pieceToMove.Colour switch
-        {
-            Colour.White => (IPawn)PieceAt(requestDestination.File, requestDestination.Rank - 1),
-            Colour.Black => (IPawn)PieceAt(requestDestination.File, requestDestination.Rank + 1),
-            _ => throw new ArgumentOutOfRangeException()
-        };
+    public IPawn? GetPawnToBeCapturedByEnPassant(IPiece pieceToMove, ISquare requestDestination)
+    {
+        var rank = pieceToMove.Colour == Colour.White
+            ? requestDestination.Rank - 1
+            : requestDestination.Rank + 1;
+        if (rank is null) return null;
+        return (IPawn?)PieceAt(requestDestination.File, rank);
+    }
 
     private IPiece? PieceAt(File file, Rank rank) => pieceGroup.PieceAt(file, rank);
+
+    private bool AttemptingEnPassant(IPiece pieceToMove, ISquare destination)
+    {
+        var fileToRight = pieceToMove.Position.File + 1;
+        var fileToLeft = pieceToMove.Position.File - 1;
+        var captureOriginRank = pieceToMove.Colour == Colour.White ? Rank.Five : Rank.Four;
+        var captureDestinationRank = pieceToMove.Colour == Colour.White ? Rank.Six : Rank.Three;
+        var captiveRank = pieceToMove.Colour == Colour.White ? destination.Rank - 1 : destination.Rank + 1;
+            return pieceToMove.Position.Rank == captureOriginRank &&
+               destination.Rank == captureDestinationRank &&
+               (destination.File == fileToRight || destination.File == fileToLeft) &&
+               captiveRank is not null &&
+               PieceAt(destination.File, captiveRank) is not null &&
+               PieceAt(destination.File, captiveRank) is IPawn;
+    }
 }

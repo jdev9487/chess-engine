@@ -16,5 +16,5 @@ public interface IQuery
     MoveType GetMoveType(ISquare destination, IPiece pieceToMove);
     IPiece? PieceAt(ISquare location);
     IPieceGroup PieceGroup { get; }
-    IPawn GetPawnToBeCapturedByEnPassant(IPiece pieceToMove, ISquare requestDestination);
+    IPawn? GetPawnToBeCapturedByEnPassant(IPiece pieceToMove, ISquare requestDestination);
 }
