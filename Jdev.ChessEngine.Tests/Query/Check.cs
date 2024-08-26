@@ -28,7 +28,7 @@ public class Check(CheckTestModel model) : QueryBase
         queenMock.SetupGet(x => x.Colour).Returns(model.CheckingColour);
         queenMock
             .Setup(x => x.GetIntrinsicCaptures())
-            .Returns(new List<MoveProposition> { new() { Target = _checkedKing.Position } });
+            .Returns(new List<ISquare> { _checkedKing.Position });
         PieceGroupMock
             .SetupGet(x => x.Pieces)
             .Returns(new List<IPiece>

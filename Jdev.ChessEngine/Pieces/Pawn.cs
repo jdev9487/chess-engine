@@ -5,34 +5,28 @@ using Enums;
 
 public class Pawn : BasePiece, IPawn
 {
-    public override IEnumerable<MoveProposition> GetIntrinsicRelocations()
+    public override IEnumerable<ISquare> GetIntrinsicRelocations()
     {
         return IsOnPenultimateRank
-            ? [new MoveProposition { Target = GetStandardForwardRelocate, SubsequentMove = MoveType.Promotion }]
+            ? [GetStandardForwardRelocate]
             : HasMoved
-                ? [new MoveProposition { Target = GetStandardForwardRelocate, SubsequentMove = MoveType.Standard }]
+                ? [GetStandardForwardRelocate]
                 :
                 [
-                    new MoveProposition { Target = GetStandardForwardRelocate, SubsequentMove = MoveType.Standard },
-                    new MoveProposition { Target = GetInitialExtendedRelocate, SubsequentMove = MoveType.Standard }
+                    GetStandardForwardRelocate,
+                    GetInitialExtendedRelocate
                 ];
     }
 
-    public override IEnumerable<MoveProposition> GetIntrinsicCaptures()
+    public override IEnumerable<ISquare> GetIntrinsicCaptures()
     {
-        var captures = new List<MoveProposition>();
+        var captures = new List<ISquare>();
         var fileToLeft = Position.File - 1;
         var fileToRight = Position.File + 1;
-        if (fileToLeft is not null) captures.Add(new MoveProposition
-        {
-            Target = Square.At(fileToLeft, (Colour == Colour.White ? Position.Rank + 1 : Position.Rank - 1)!),
-            SubsequentMove = IsOnPenultimateRank ? MoveType.Promotion : MoveType.Standard
-        });
-        if (fileToRight is not null) captures.Add(new MoveProposition
-        {
-            Target = Square.At(fileToRight, (Colour == Colour.White ? Position.Rank + 1 : Position.Rank - 1)!),
-            SubsequentMove = IsOnPenultimateRank ? MoveType.Promotion : MoveType.Standard
-        });
+        if (fileToLeft is not null)
+            captures.Add(Square.At(fileToLeft, (Colour == Colour.White ? Position.Rank + 1 : Position.Rank - 1)!));
+        if (fileToRight is not null)
+            captures.Add(Square.At(fileToRight, (Colour == Colour.White ? Position.Rank + 1 : Position.Rank - 1)!));
         return captures;
     }
 
@@ -50,7 +44,6 @@ public class Pawn : BasePiece, IPawn
     }
 
     public override IEnumerable<ISquare> GetPotentialCaptureBlocks(ISquare destination) => GetIntrinsicCaptures()
-        .Select(mp => mp.Target)
         .Where(s => s == destination);
 
     public override object Clone() => CloneObject<Pawn>();
@@ -83,6 +76,6 @@ public class Pawn : BasePiece, IPawn
         _ => throw new ArgumentOutOfRangeException()
     };
 
-    public bool HasMoved { get; set; }
+    public bool HasMoved { get; init; }
     public bool OpenToEnPassant { get; set; }
 }

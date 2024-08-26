@@ -48,7 +48,12 @@ public abstract class Axis<TAxis> where TAxis : Axis<TAxis>, new()
     public static bool operator <=(Axis<TAxis> a, Axis<TAxis> b) => a.Coordinate <= b.Coordinate;
     public static bool operator >(Axis<TAxis> a, Axis<TAxis> b) => a.Coordinate > b.Coordinate;
     public static bool operator >=(Axis<TAxis> a, Axis<TAxis> b) => a.Coordinate >= b.Coordinate;
-    public static bool operator ==(Axis<TAxis> a, Axis<TAxis> b) => a.Coordinate == b.Coordinate;
+    public static bool operator ==(Axis<TAxis> a, Axis<TAxis>? b)
+    {
+        if (b is null) return false;
+        return a.Coordinate == b.Coordinate;
+    }
+
     public static bool operator !=(Axis<TAxis> a, Axis<TAxis> b) => a.Coordinate != b.Coordinate;
     public static TAxis Min(Axis<TAxis> a, Axis<TAxis> b) => a <= b ? GetAxis(a.Coordinate) : GetAxis(b.Coordinate);
     public static TAxis Max(Axis<TAxis> a, Axis<TAxis> b) => a >= b ? GetAxis(a.Coordinate) : GetAxis(b.Coordinate);

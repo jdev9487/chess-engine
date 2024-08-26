@@ -5,28 +5,26 @@ using Enums;
 
 public class King : BasePiece, IKing
 {
-    public override IEnumerable<MoveProposition> GetIntrinsicRelocations()
+    public override IEnumerable<ISquare> GetIntrinsicRelocations()
     {
-        var standardMoves = GetMoves().Select(s => new MoveProposition
-            { Target = s, SubsequentMove = MoveType.Standard });
+        var standardMoves = GetMoves();
         var castlingMoves = HasMoved
-            ? Array.Empty<MoveProposition>()
+            ? Array.Empty<ISquare>()
             : Colour == Colour.White
                 ?
                 [
-                    new MoveProposition { Target = Square.At(File.G, Rank.One), SubsequentMove = MoveType.Castle },
-                    new MoveProposition { Target = Square.At(File.C, Rank.One), SubsequentMove = MoveType.Castle }
+                    Square.At(File.G, Rank.One),
+                    Square.At(File.C, Rank.One)
                 ]
                 :
                 [
-                    new MoveProposition { Target = Square.At(File.G, Rank.Eight), SubsequentMove = MoveType.Castle },
-                    new MoveProposition { Target = Square.At(File.C, Rank.Eight), SubsequentMove = MoveType.Castle }
+                    Square.At(File.G, Rank.Eight),
+                    Square.At(File.C, Rank.Eight)
                 ];
         return standardMoves.Concat(castlingMoves);
     }
 
-    public override IEnumerable<MoveProposition> GetIntrinsicCaptures() =>
-        GetMoves().Select(s => new MoveProposition { Target = s, SubsequentMove = MoveType.Standard });
+    public override IEnumerable<ISquare> GetIntrinsicCaptures() => GetMoves();
 
     public override IEnumerable<ISquare> GetPotentialRelocationBlocks(ISquare destination)
     {
@@ -61,7 +59,7 @@ public class King : BasePiece, IKing
 
     public Rook KingsideRook { private get; init; } = default!;
     public Rook QueensideRook { private get; init; } = default!;
-    public bool HasMoved { get; set; } = false;
+    public bool HasMoved { get; set; }
     
     private IEnumerable<ISquare> GetMoves() =>
         Enumerable.Range(Position.File.Dec, Position.File.Inc - Position.File.Dec + 1)

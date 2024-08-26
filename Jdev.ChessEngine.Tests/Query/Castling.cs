@@ -89,10 +89,7 @@ public class Castling : QueryBase
         checkingMock.SetupGet(x => x.Colour).Returns(Colour.Black);
         checkingMock
             .Setup(x => x.GetIntrinsicCaptures())
-            .Returns(new List<MoveProposition>
-            {
-                new() { Target = intermediaryCheck }
-            });
+            .Returns(new List<ISquare> { intermediaryCheck });
         PieceGroupMock
             .SetupGet(x => x.Pieces)
             .Returns(new List<IPiece>
@@ -200,10 +197,7 @@ public class Castling : QueryBase
         checkingMock.SetupGet(x => x.Colour).Returns(Colour.Black);
         checkingMock
             .Setup(x => x.GetIntrinsicCaptures())
-            .Returns(new List<MoveProposition>
-            {
-                new() { Target = intermediaryCheck }
-            });
+            .Returns(new List<ISquare> { intermediaryCheck });
         PieceGroupMock
             .SetupGet(x => x.Pieces)
             .Returns(new List<IPiece>
@@ -311,10 +305,7 @@ public class Castling : QueryBase
         checkingMock.SetupGet(x => x.Colour).Returns(Colour.White);
         checkingMock
             .Setup(x => x.GetIntrinsicCaptures())
-            .Returns(new List<MoveProposition>
-            {
-                new() { Target = intermediaryCheck }
-            });
+            .Returns(new List<ISquare> { intermediaryCheck });
         PieceGroupMock
             .SetupGet(x => x.Pieces)
             .Returns(new List<IPiece>
@@ -422,10 +413,7 @@ public class Castling : QueryBase
         checkingMock.SetupGet(x => x.Colour).Returns(Colour.White);
         checkingMock
             .Setup(x => x.GetIntrinsicCaptures())
-            .Returns(new List<MoveProposition>
-            {
-                new() { Target = intermediaryCheck }
-            });
+            .Returns(new List<ISquare> { intermediaryCheck });
         PieceGroupMock
             .SetupGet(x => x.Pieces)
             .Returns(new List<IPiece>
